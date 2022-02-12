@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "620549024260",
+    "project_id": "mymedication-352fc",
+    "storage_bucket": "mymedication-352fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620549024260:android:070ece410e6c79f2cbe351",
+        "android_client_info": {
+          "package_name": "com.example.mymedcine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620549024260-ru8qmauhs86sq2rlak3ldeg2ihdh8hoo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDom-wFiMbpMFRKuTSkp_nHN6mQa7WJXnY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620549024260-ru8qmauhs86sq2rlak3ldeg2ihdh8hoo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
