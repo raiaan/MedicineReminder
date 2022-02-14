@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/border_bg.xml" value="0.168" />
         <entry key="app/src/main/res/drawable/circle_background.xml" value="0.1" />
@@ -14,6 +15,12 @@
         <entry key="app/src/main/res/layout/drug_deatils_info_block.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_display_drug_details.xml" value="0.335" />
         <entry key="app/src/main/res/layout/last_taken_section.xml" value="0.3098958333333333" />
+=======
+        <entry key="..\:/MedicineReminder/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2235" />
+        <entry key="..\:/MedicineReminder/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2235" />
+        <entry key="..\:/MedicineReminder/app/src/main/res/drawable/ic_reshot_icon_tablet_pill_7b4j3ys5dg.xml" value="0.2235" />
+        <entry key="..\:/MedicineReminder/app/src/main/res/layout/activity_splash_screen.xml" value="0.2" />
+>>>>>>> fe68dc915f79c8fa7e53ebfa2dce23001673371c
       </map>
     </option>
   </component>
