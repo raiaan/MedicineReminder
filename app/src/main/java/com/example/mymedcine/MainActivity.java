@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
         LastTime lastTime = new LastTime("20:13:00 PM","taken","ahmed");
         ArrayList<String> instruction = new ArrayList<>();
         instruction.add("after dinner");
-        drug = new Drug("Pandol Extra","pill","gm","500","active",lastTime,remindingTimes,instruction,"hair falls","3");
+        ArrayList<String> left= new ArrayList<>();
+        left.add("3");
+        drug = new Drug("Pandol Extra","pill","gm","500","active",lastTime,remindingTimes,instruction,"hair falls",left);
     }
     @Override
     public void onAttachFragment(@NonNull Fragment fragment) {

@@ -31,6 +31,8 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
     ImageView iconType;
     Button suspendBTN;
     TextView occurence,reminders;
+    TextView instructions , reasons;
+    TextView refills;
     public DisplayDrugDetailsFragment() {
         // Required empty public constructor
     }
@@ -62,6 +64,9 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
         suspendBTN = view.findViewById(R.id.display_drug_details_change);
         occurence = view.findViewById(R.id.display_drug_details_occurence);
         reminders = view.findViewById(R.id.display_drug_details_reminding_hours);
+        instructions = view.findViewById(R.id.display_drug_details_instruct);
+        reasons = view.findViewById(R.id.display_drug_details_reasons);
+        refills = view.findViewById(R.id.display_drug_details_refills);
     }
 
     @Override
@@ -78,6 +83,9 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
             lastTaken.setText(drug.getLastTime().toString());
             occurence.setText(drug.getRemindingTimes().occurrence);
             reminders.setText(drug.getRemindingTimes().getHours());
+            instructions.setText(drug.getInstructions());
+            reasons.setText(drug.getReasons());
+            refills.setText(drug.getLeft());
         }
     }
 }

@@ -5,4 +5,8 @@
     <string name="lastTakenLabel">Last taken</string>
     <string name="remindersLabel">Reminders</string>
     <string name="suspendbtn">Suspend</string>
+    <string name="instructions_label">How to use</string>
+    <string name="reasons_label">Reason</string>
+    <string name="add_dose_button">ADD DOSE</string>
+    <string name="refills_label">Prescription Refills</string>
 </resources>
