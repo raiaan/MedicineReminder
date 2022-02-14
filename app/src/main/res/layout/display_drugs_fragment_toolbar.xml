@@ -46,5 +46,23 @@
             android:text="50 mg"
             android:layout_marginLeft="24dp"
             android:textSize="@dimen/page_title"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete_outline_black_24dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/display_drug_details_delete"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32dp"
+            android:layout_marginLeft="24dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_border_color_black_24dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/display_drug_details_delete"
+            android:id="@+id/display_drug_edit"
+            android:layout_marginLeft="24dp"/>
     </RelativeLayout>
 </androidx.appcompat.widget.Toolbar>

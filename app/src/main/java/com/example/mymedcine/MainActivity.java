@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.mymedcine.drugdetails.view.DisplayDrugDetailsFragment;
 import com.example.mymedcine.drugdetails.view.DrugDisplayer;
@@ -33,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         instruction.add("after dinner");
         ArrayList<String> left= new ArrayList<>();
         left.add("3");
+        left.add("refill at 3 pm");
         drug = new Drug("Pandol Extra","pill","gm","500","active",lastTime,remindingTimes,instruction,"hair falls",left);
     }
     @Override

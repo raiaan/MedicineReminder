@@ -9,4 +9,5 @@
     <string name="reasons_label">Reason</string>
     <string name="add_dose_button">ADD DOSE</string>
     <string name="refills_label">Prescription Refills</string>
+    <string name="refillsBTN">Refill</string>
 </resources>

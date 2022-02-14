@@ -117,6 +117,15 @@
                 android:textColor="@color/black"
                 android:id="@+id/display_drug_details_refills_label"
                 />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="@string/refillsBTN"
+                android:textColor="@color/black"
+                android:background="@drawable/border_bg"
+                app:layout_constraintTop_toBottomOf="@id/display_drug_details_reasons"
+                android:layout_marginTop="32dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
