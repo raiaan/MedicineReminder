@@ -1,8 +1,18 @@
 package com.example.mymedcine.model;
 
+
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+
 public class User {
+
     public String name;
+
     public String email;
+
     public String password;
 
     public User() {

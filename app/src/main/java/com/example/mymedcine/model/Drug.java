@@ -1,17 +1,37 @@
 package com.example.mymedcine.model;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
+@Entity(tableName = "userTable")
 public class Drug {
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "name")
     public String name;
+    @ColumnInfo(name = "type")
     public String type;
+    @ColumnInfo(name = "strongValue")
     public String strongValue;
+    @ColumnInfo(name = "strongUnit")
     public String strongUnit;
+    @ColumnInfo(name = "state")
     public String state;
+    @ColumnInfo(name = "lastTime")
     public String lastTime;
+    @ColumnInfo(name = "remindingTimes")
+    @Ignore
     public ArrayList<RemindingTime> remindingTimes;
+    @ColumnInfo(name = "instructions")
+    @Ignore
     public ArrayList<String> instructions;
+    @ColumnInfo(name = "reasons")
     public String reasons;
+    @ColumnInfo(name = "left")
     public String left;
 
     public Drug() {
