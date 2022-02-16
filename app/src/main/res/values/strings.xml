@@ -6,6 +6,9 @@
     <string name="password">password</string>
     <string name="email">Email</string>
     <string name="last_name">Last name</string>
-    <string name="first_name">First name</string>
+    <string name="full_name">Full name</string>
     <string name="add_health_taker">Add health taker</string>
+    <string name="lastTakenLabel">Last taken</string>
+    <string name="remindersLabel">Reminders</string>
+    <string name="suspendbtn">Suspend</string>
 </resources>

@@ -7,10 +7,6 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.mymedcine.model.Drug;
-import com.example.mymedcine.model.Prescription;
-import com.example.mymedcine.model.RemindingTime;
-import com.example.mymedcine.model.Root;
-import com.example.mymedcine.model.User;
 
 @Database(entities = {Drug.class},
         version = 1, exportSchema = false)

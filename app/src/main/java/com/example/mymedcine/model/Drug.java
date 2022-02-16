@@ -21,14 +21,16 @@ public class Drug {
     public String strongUnit;
     @ColumnInfo(name = "state")
     public String state;
-    @ColumnInfo(name = "lastTime")
-    public String lastTime;
     @ColumnInfo(name = "remindingTimes")
     @Ignore
-    public ArrayList<RemindingTime> remindingTimes;
+    public RemindingTimes remindingTimes;
     @ColumnInfo(name = "instructions")
     @Ignore
     public ArrayList<String> instructions;
+    @ColumnInfo(name = "lastTime")
+    @Ignore
+    public LastTime lastTime;
+
     @ColumnInfo(name = "reasons")
     public String reasons;
     @ColumnInfo(name = "left")
@@ -37,7 +39,7 @@ public class Drug {
     public Drug() {
     }
 
-    public Drug(String name, String type, String strongValue, String strongUnit, String state, String lastTime, ArrayList<RemindingTime> remindingTimes, ArrayList<String> instructions, String reasons, String left) {
+    public Drug(String name, String type, String strongValue, String strongUnit, String state, LastTime lastTime, RemindingTimes remindingTimes, ArrayList<String> instructions, String reasons, String left) {
         this.name = name;
         this.type = type;
         this.strongValue = strongValue;
@@ -90,19 +92,19 @@ public class Drug {
         this.state = state;
     }
 
-    public String getLastTime() {
+    public LastTime getLastTime() {
         return lastTime;
     }
 
-    public void setLastTime(String lastTime) {
+    public void setLastTime(LastTime lastTime) {
         this.lastTime = lastTime;
     }
 
-    public ArrayList<RemindingTime> getRemindingTimes() {
+    public RemindingTimes getRemindingTimes() {
         return remindingTimes;
     }
 
-    public void setRemindingTimes(ArrayList<RemindingTime> remindingTimes) {
+    public void setRemindingTimes(RemindingTimes remindingTimes) {
         this.remindingTimes = remindingTimes;
     }
 
