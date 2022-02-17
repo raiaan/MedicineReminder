@@ -6,11 +6,14 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.mymedcine.database.AppDataBase;
 import com.example.mymedcine.drugdetails.view.DisplayDrugDetailsFragment;
 import com.example.mymedcine.drugdetails.view.DrugDisplayer;
 import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.LastTime;
+import com.example.mymedcine.model.Prescription;
 import com.example.mymedcine.model.RemindingTimes;
 
 import java.util.ArrayList;

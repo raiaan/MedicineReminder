@@ -7,7 +7,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
-@Entity(tableName = "userTable")
+@Entity(tableName = "drugTable")
 public class Drug {
     @PrimaryKey
     @NonNull

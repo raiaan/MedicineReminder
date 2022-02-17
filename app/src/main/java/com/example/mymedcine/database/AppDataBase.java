@@ -7,12 +7,14 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.mymedcine.model.Drug;
+import com.example.mymedcine.model.Prescription;
 
-@Database(entities = {Drug.class},
+@Database(entities = {Drug.class, Prescription.class},
         version = 1, exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
 
     private static AppDataBase instance = null;
+    public abstract MedDAO medDao();
 
     public static synchronized AppDataBase getInstance(Context context) {
         if (instance == null) {
@@ -23,5 +25,5 @@ public abstract class AppDataBase extends RoomDatabase {
         return instance;
     }
 
-    public abstract MedDAO medDao();
+
 }

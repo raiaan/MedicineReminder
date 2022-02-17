@@ -37,21 +37,6 @@
             android:layout_marginStart="12dp"
             android:textStyle="bold"
             />
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/first_name_layout"
-            android:layout_marginTop="8dp"
-            android:hint="@string/full_name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/edtFirstName"
-                android:inputType="text"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -65,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/edtEmail"
-                android:inputType="numberDecimal"
+                android:inputType="textEmailAddress"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,21 +61,14 @@
             android:layout_marginTop="8dp"
             android:hint="@string/password"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/edtPassword"
-                android:inputType="number"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+            />
 
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:id="@+id/signup_btn_register"
-            android:text="@string/save"
+            android:text="@string/send"
             android:layout_gravity="center"
             android:layout_marginTop="12dp"
             android:textSize="20sp"

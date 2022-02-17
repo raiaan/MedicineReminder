@@ -19,11 +19,6 @@ import com.example.mymedcine.utils.IconsFactory;
 
 import org.w3c.dom.Text;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DisplayDrugDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplayer{
 
     TextView drugName ,drugState;
