@@ -3,6 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/border_bg.xml" value="0.168" />
+        <entry key="app/src/main/res/drawable/circle_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/grediant_background.xml" value="0.168" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/display_drugs_fragment_toolbar.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/display_fragment_toolbar.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/drug_deatils_info_block.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_display_drug_details.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/last_taken_section.xml" value="0.3098958333333333" />
+=======
         <entry key="..\:/MedicineReminder/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2235" />
         <entry key="..\:/MedicineReminder/app/src/main/res/drawable/border_bg.xml" value="0.1265" />
         <entry key="..\:/MedicineReminder/app/src/main/res/drawable/circle_background.xml" value="0.1" />
@@ -15,8 +28,12 @@
         <entry key="..\:/MedicineReminder/app/src/main/res/layout/activity_registeration.xml" value="0.23854166666666668" />
         <entry key="..\:/MedicineReminder/app/src/main/res/layout/activity_singup.xml" value="0.536" />
         <entry key="..\:/MedicineReminder/app/src/main/res/layout/activity_splash_screen.xml" value="0.2" />
+<<<<<<< HEAD
         <entry key="..\:/MedicineReminder/app/src/main/res/layout/display_drugs_fragment_toolbar.xml" value="0.21875" />
         <entry key="..\:/MedicineReminder/app/src/main/res/layout/fragment_display_drug_details.xml" value="0.21875" />
+=======
+>>>>>>> fe68dc915f79c8fa7e53ebfa2dce23001673371c
+>>>>>>> f712156c6ea1187b25ad40adb255126d502f57fe
       </map>
     </option>
   </component>
