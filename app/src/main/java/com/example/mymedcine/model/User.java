@@ -1,9 +1,9 @@
 package com.example.mymedcine.model;
 
 public class User {
-    public String name;
-    public String email;
-    public String password;
+    private String name;
+    private String email;
+    private String password;
 
     public User() {
     }

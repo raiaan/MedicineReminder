@@ -9,6 +9,7 @@ import android.os.Looper;
 
 import com.example.mymedcine.MainActivity;
 import com.example.mymedcine.R;
+import com.example.mymedcine.login.view.LoginActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -17,7 +18,6 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        getSupportActionBar().hide();
         Handler handler = new Handler(Looper.myLooper());
         handler.postDelayed(new MyRunnable(),3000);
 
@@ -27,7 +27,7 @@ public class SplashScreen extends AppCompatActivity {
 
         @Override
         public void run() {
-            Intent intent = new Intent(SplashScreen.this,MainActivity.class);
+            Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
             startActivity(intent);
             finish();
         }

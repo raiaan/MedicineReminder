@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">MyMedcine</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="noAccount">You don\'t have account yet?</string>
+    <string name="createAccount">Create a new account</string>
+    <string name="registeration">Sign Up</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lastTakenLabel">Last taken</string>
+    <string name="remindersLabel">Reminders</string>
+    <string name="suspendbtn">Suspend</string>
+    <string name="username">User Name</string>
+    <string name="emptyPasswordError">password is required</string>
+    <string name="emptyNameError">name is required</string>
+    <string name="emptyEmailError">email is required</string>
+    <string name="shortPasswordError">password must contain at least 6 character</string>
+    <string name="invalidEmailError">provide valid Email</string>
+
 </resources>
