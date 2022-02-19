@@ -12,12 +12,12 @@ public class Drug {
     public RemindingTimes remindingTimes;
     public ArrayList<String> instructions;
     public String reasons;
-    public String left;
+    public ArrayList<String> left;
 
     public Drug() {
     }
 
-    public Drug(String name, String type, String strongValue, String strongUnit, String state, LastTime lastTime, RemindingTimes remindingTimes, ArrayList<String> instructions, String reasons, String left) {
+    public Drug(String name, String type, String strongValue, String strongUnit, String state, LastTime lastTime, RemindingTimes remindingTimes, ArrayList<String> instructions, String reasons, ArrayList<String> left) {
         this.name = name;
         this.type = type;
         this.strongValue = strongValue;
@@ -86,8 +86,14 @@ public class Drug {
         this.remindingTimes = remindingTimes;
     }
 
-    public ArrayList<String> getInstructions() {
-        return instructions;
+    public String getInstructions() {
+        String result = null;
+        for (String temp: instructions){
+            if (result ==null){
+                result=temp;
+            }else result+= "\n"+temp;
+        }
+        return result;
     }
 
     public void setInstructions(ArrayList<String> instructions) {
@@ -103,10 +109,16 @@ public class Drug {
     }
 
     public String getLeft() {
-        return left;
+        String result = null;
+        for(String temp: left){
+            if (result ==null){
+                result = temp;
+            }else result+= "\n"+temp;
+        }
+        return result;
     }
 
-    public void setLeft(String left) {
+    public void setLeft(ArrayList<String> left) {
         this.left = left;
     }
 }

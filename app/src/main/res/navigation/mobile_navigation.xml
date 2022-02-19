@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/display_drug_details_fragment">
+
+    <fragment
+        android:id="@+id/display_drug_details_fragment"
+        android:name="com.example.mymedcine.drugdetails.view.DisplayDrugDetailsFragment"
+        tools:layout="@layout/fragment_display_drug_details" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_slideshow"
+            app:destination="@id/display_drug_details_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/edit_drug_details_fragment"
+        android:name="com.example.mymedcine.edit_drug.EditDrugFramgent"
+        tools:layout="@layout/fragment_edit_drug_framgent" />
+</navigation>
