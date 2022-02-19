@@ -16,4 +16,8 @@
     <string name="emptyEmailError">يجب إدخال البريد الالكتروني</string>
     <string name="shortPasswordError">يجب ألا تقل كلمة المرور عن 6 أحرف</string>
     <string name="invalidEmailError">أدخل بريد الكتروني صحيح</string>
+    <string name="timeSample">الثامنة صباحا</string>
+    <string name="homePage">الرئيسية</string>
+    <string name="medicinePage">الأدوية</string>
+    <string name="takerPage">Taker</string>
 </resources>

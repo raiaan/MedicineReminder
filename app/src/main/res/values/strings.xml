@@ -16,5 +16,8 @@
     <string name="emptyEmailError">email is required</string>
     <string name="shortPasswordError">password must contain at least 6 character</string>
     <string name="invalidEmailError">provide valid Email</string>
-
+    <string name="timeSample">8:00 am</string>
+    <string name="homePage">Home</string>
+    <string name="medicinePage">Medicine</string>
+    <string name="takerPage">Taker</string>
 </resources>
