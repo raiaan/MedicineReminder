@@ -7,9 +7,10 @@
     tools:context=".drugdetails.view.DisplayDrugDetailsFragment"
     android:background="@color/light_gray">
     <include layout="@layout/display_drugs_fragment_toolbar"/>
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/display_drug_details_scroll"
         android:layout_marginTop="144dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -134,13 +135,14 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:textColor="#676767"
                 android:inputType="textMultiLine"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add_dose_button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
+    </ScrollView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_dose_button"
+        android:id="@+id/display_drug_add_dose"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
