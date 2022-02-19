@@ -88,9 +88,9 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
             lastTaken.setText(drug.getLastTime().toString());
             occurence.setText(drug.getRemindingTimes().occurrence);
             reminders.setText(drug.getRemindingTimes().getHours());
-            instructions.setText(drug.getInstructions());
+            //instructions.setText(drug.getInstructions());
             reasons.setText(drug.getReasons());
-            refills.setText(drug.getLeft());
+            //refills.setText(drug.getLeft());
             editItem.setOnClickListener(view -> {
                 Log.v("edit click listener","true");
                 communator.sendMessage(prescription);

@@ -7,18 +7,20 @@
         <entry key="..\:/MedicineReminder/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2235" />
         <entry key="..\:/MedicineReminder/app/src/main/res/drawable/ic_reshot_icon_tablet_pill_7b4j3ys5dg.xml" value="0.2235" />
         <entry key="..\:/MedicineReminder/app/src/main/res/layout/activity_splash_screen.xml" value="0.2" />
+        <entry key="..\:/NativeMobile(ITI)/Android/The project/Medecine reminder/MedicineReminder/app/src/main/res/drawable/ic_delete_outline_black_24dp.xml" value="0.124" />
         <entry key="..\:/NativeMobile(ITI)/Android/The project/Medecine reminder/MedicineReminder/app/src/main/res/drawable/taker_layout_round_shape.xml" value="0.1415" />
         <entry key="..\:/NativeMobile(ITI)/Android/The project/Medecine reminder/MedicineReminder/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/NativeMobile(ITI)/Android/The project/Medecine reminder/MedicineReminder/app/src/main/res/layout/activity_splash_screen.xml" value="0.22826086956521738" />
         <entry key="..\:/NativeMobile(ITI)/Android/The project/Medecine reminder/MedicineReminder/app/src/main/res/layout/display_drugs_fragment_toolbar.xml" value="0.22826086956521738" />
         <entry key="..\:/NativeMobile(ITI)/Android/The project/Medecine reminder/MedicineReminder/app/src/main/res/layout/fragment_add_health_taker.xml" value="0.264" />
         <entry key="..\:/NativeMobile(ITI)/Android/The project/Medecine reminder/MedicineReminder/app/src/main/res/layout/fragment_display_drug_details.xml" value="0.22826086956521738" />
+        <entry key="..\:/NativeMobile(ITI)/Android/The project/Medecine reminder/MedicineReminder/app/src/main/res/layout/fragment_edit_drug_framgent.xml" value="0.22826086956521738" />
         <entry key="..\:/NativeMobile(ITI)/Android/The project/Medecine reminder/MedicineReminder/app/src/main/res/layout/fragment_mediction.xml" value="0.2" />
-        <entry key="..\:/NativeMobile(ITI)/Android/The project/Medecine reminder/MedicineReminder/app/src/main/res/layout/medication_row.xml" value="0.4" />
+        <entry key="..\:/NativeMobile(ITI)/Android/The project/Medecine reminder/MedicineReminder/app/src/main/res/layout/medication_row.xml" value="0.176" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

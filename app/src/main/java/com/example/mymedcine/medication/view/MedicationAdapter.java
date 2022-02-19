@@ -1,6 +1,7 @@
 package com.example.mymedcine.medication.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +32,10 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup recycleview, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.medication_row,recycleview,false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        //View view = LayoutInflater.from(context).inflate(R.layout.medication_row,recycleview,false);
+        LayoutInflater layoutInflater = LayoutInflater.from(recycleview.getContext());
+        View v = layoutInflater.inflate(R.layout.medication_row, recycleview, false);
+        ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
 
@@ -42,24 +45,30 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Vi
         holder.txtMedDetail.setText(drug.getReasons());
         holder.txtMedName.setText(drug.getName());
         holder.txtMedDosage.setText(drug.getStrongUnit());
+        if (drug.getState()=="active"){
+            holder.imgOnline.setColorFilter(Color.RED);
+        }
+        holder.imgOnline.setImageResource(R.drawable.ic_online);
         holder.imgMed.setImageResource(R.drawable.nurse);
+        //Glide.with(context).load(movieModel.getImage()).override(120,120).into(holder.img);
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                medicationInterface.onMedecineClickListener();
+                medicationInterface.onMedecineClickListener(view);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return drugList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ConstraintLayout layout;
         ImageView imgMed;
+        ImageView imgOnline;
         TextView txtMedName;
         TextView txtMedDosage;
         TextView txtMedDetail;
@@ -69,6 +78,7 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Vi
 
             layout = itemView.findViewById(R.id.layoutRowMedication);
             imgMed = itemView.findViewById(R.id.imgMedicationIcon);
+            imgOnline = itemView.findViewById(R.id.imgOnlineIcon);
             txtMedName = itemView.findViewById(R.id.txtMedName);
             txtMedDosage = itemView.findViewById(R.id.txtDosage);
             txtMedDetail = itemView.findViewById(R.id.txtDetails);

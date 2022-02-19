@@ -3,19 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/display_drug_details_fragment">
-
-    <fragment
-        android:id="@+id/display_drug_details_fragment"
-        android:name="com.example.mymedcine.drugdetails.view.DisplayDrugDetailsFragment"
-        tools:layout="@layout/fragment_display_drug_details" >
-        <action
-            android:id="@+id/action_nav_home_to_nav_slideshow"
-            app:destination="@id/display_drug_details_fragment" />
-    </fragment>
+    app:startDestination="@id/medictionFragment">
 
     <fragment
         android:id="@+id/edit_drug_details_fragment"
         android:name="com.example.mymedcine.edit_drug.EditDrugFramgent"
         tools:layout="@layout/fragment_edit_drug_framgent" />
+    <fragment
+        android:id="@+id/displayDrugDetailsFragment"
+        android:name="com.example.mymedcine.drugdetails.view.DisplayDrugDetailsFragment"
+        android:label="fragment_display_drug_details"
+        tools:layout="@layout/fragment_display_drug_details" />
+    <fragment
+        android:id="@+id/addHealthTakerFragment"
+        android:name="com.example.mymedcine.AddHealthTakerFragment"
+        android:label="AddHealthTakerFragment" />
+    <fragment
+        android:id="@+id/medictionFragment"
+        android:name="com.example.mymedcine.medication.view.MedictionFragment"
+        android:label="MedictionFragment" >
+        <action
+            android:id="@+id/action_medictionFragment_to_addHealthTakerFragment"
+            app:destination="@id/addHealthTakerFragment" />
+    </fragment>
 </navigation>

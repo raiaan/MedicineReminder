@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity implements Communator {
         ArrayList<String> left= new ArrayList<>();
         left.add("3");
         left.add("refill at 3 pm");
-        drug = new Drug("Pandol Extra","pill","gm","500","active",lastTime,remindingTimes,instruction,"hair falls",left);
+        //drug = new Drug("Pandol Extra","pill","gm","500","active",lastTime,remindingTimes,instruction,"hair falls",left);
         ArrayList<Drug> drugs = new ArrayList<>();
         drugs.add(drug);
         ArrayList<String>healthTaker = new ArrayList<>();
         healthTaker.add("heba");
         prescription = new Prescription("r@gmail.com","x min nas",healthTaker,drugs);
-        navController= Navigation.findNavController(this, R.id.fragmentContainerView);
+       // navController= Navigation.findNavController(this, R.id.fragmentContainerView);
     }
     @Override
     public void onAttachFragment(@NonNull Fragment fragment) {
@@ -59,13 +59,12 @@ public class MainActivity extends AppCompatActivity implements Communator {
         }
     }
 
-    @Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
-        if (drugDisplayer!=null)
-            drugDisplayer.displayDrugDetails(prescription,0);
-    }
-
+//    @Override
+//    protected void onResumeFragments() {
+//        super.onResumeFragments();
+//        if (drugDisplayer!=null)
+//            drugDisplayer.displayDrugDetails(prescription,0);
+//    }
     @Override
     public void sendMessage(Prescription prescription) {
         Log.v("main activity","true");

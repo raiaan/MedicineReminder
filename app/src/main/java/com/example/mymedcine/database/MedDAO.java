@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.Prescription;
@@ -33,6 +34,12 @@ public interface MedDAO {
 
     @Delete
     void delete(Prescription prescription);
+
+    @Update
+    void update(Drug drug);
+
+    @Update
+    void update(Prescription prescription);
 
 }
 

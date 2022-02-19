@@ -1,5 +1,13 @@
 package com.example.mymedcine.medication.view;
 
+import android.view.View;
+
+import com.example.mymedcine.model.Drug;
+
+import java.util.List;
+
 public interface OnMedecationInterface {
-    void onMedecineClickListener();
+    void showData(List<Drug> drugs);
+    void onMedecineClickListener(View view);
+    void addMed(Drug drug);
 }
