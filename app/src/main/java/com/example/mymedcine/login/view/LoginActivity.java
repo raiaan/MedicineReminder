@@ -5,6 +5,7 @@ import static android.view.View.VISIBLE;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -25,6 +26,10 @@ import com.example.mymedcine.signup.view.SignupActivity;
 public class LoginActivity extends AppCompatActivity implements LoginViewInterface{
 
     LoginPresenterInterface loginPresenterInterface;
+
+    SharedPreferences sharedPreferences;
+    final String FILE_NAME = "sharedPreferences";
+
     String email, password;
     TextView txtRegister;
     EditText edtxtEmail, edtxtPassword;
@@ -36,8 +41,9 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        sharedPreferences = getSharedPreferences(FILE_NAME, MODE_PRIVATE);
 
-        loginPresenterInterface = new LoginPresenter(this);
+        loginPresenterInterface = new LoginPresenter(this, sharedPreferences);
 
         edtxtEmail = findViewById(R.id.edtxtEmail);
         edtxtPassword = findViewById(R.id.edtxtPassword);
@@ -48,6 +54,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+                finish();
             }
         });
 
@@ -59,7 +66,6 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
             }
         });
     }
-
 
     @Override
     public void login() {
@@ -73,6 +79,12 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
     public void showSuccessfulLogin() {
         loginPB.setVisibility(View.GONE);
         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+        Toast.makeText(this, sharedPreferences.getString("email", "000"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, sharedPreferences.getString("password", "1111"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + sharedPreferences.getBoolean("login",false), Toast.LENGTH_SHORT).show();
+        System.out.println();
+        System.out.println();
+        finish();
     }
 
     @Override

@@ -1,7 +1,10 @@
 package com.example.mymedcine.login.presenter;
 
+import android.content.SharedPreferences;
+
 import androidx.annotation.NonNull;
 
+import com.example.mymedcine.R;
 import com.example.mymedcine.login.view.LoginViewInterface;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -12,11 +15,15 @@ public class LoginPresenter implements  LoginPresenterInterface{
 
 
     LoginViewInterface loginViewInterface;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     FirebaseAuth mAuth;
 
-    public LoginPresenter(LoginViewInterface loginViewInterface){
+    public LoginPresenter(LoginViewInterface loginViewInterface , SharedPreferences sharedPreferences){
         this.loginViewInterface = loginViewInterface;
         mAuth = FirebaseAuth.getInstance();
+        this.sharedPreferences = sharedPreferences;
+        editor = sharedPreferences.edit();
     }
 
     @Override
@@ -25,6 +32,7 @@ public class LoginPresenter implements  LoginPresenterInterface{
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+                    saveUserIntoSharedPreferences(email, password);
                     loginViewInterface.showSuccessfulLogin();
                 }else{
                     loginViewInterface.showFailedLogin();
@@ -33,4 +41,13 @@ public class LoginPresenter implements  LoginPresenterInterface{
         });
 
     }
+
+    @Override
+    public void saveUserIntoSharedPreferences(String email, String password) {
+        editor.putString("email",email );
+        editor.putString("password", password);
+        editor.putBoolean("login", true);
+        editor.commit();
+    }
+
 }

@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/medicineIconFragment"
-        android:name="com.example.mymedcine.MedicineFragment"
+        android:name="com.example.mymedcine.homescreen.medicineFrgment.view.MedicineFragment"
         tools:layout="@layout/fragment_medicine"
         android:label="fragment_medicine_icon" />
     <fragment
         android:id="@+id/homeIconFragment"
-        android:name="com.example.mymedcine.HomeFragment"
+        android:name="com.example.mymedcine.homescreen.homeFragment.view.HomeFragment"
         tools:layout="@layout/fragment_home"
         android:label="fragment_home_icon" />
     <fragment
         android:id="@+id/takerIconFragment"
-        android:name="com.example.mymedcine.TakerFragment"
+        android:name="com.example.mymedcine.homescreen.takerFragment.view.TakerFragment"
         tools:layout="@layout/fragment_taker"
         android:label="fragment_taker_icon" />
     <fragment
         android:id="@+id/moreIconFragment"
-        android:name="com.example.mymedcine.MoreFragment"
+        android:name="com.example.mymedcine.homescreen.moreFragment.view.MoreFragment"
         tools:layout="@layout/fragment_more"
         android:label="fragment_more_icon" />
 </navigation>

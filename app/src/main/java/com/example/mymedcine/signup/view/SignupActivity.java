@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.mymedcine.MainActivity;
 import com.example.mymedcine.R;
+import com.example.mymedcine.homescreen.HomeActivity;
 import com.example.mymedcine.signup.Presenter.SignupPresenter;
 import com.example.mymedcine.signup.Presenter.SignupPresenterInterface;
 
@@ -31,8 +32,11 @@ public class SignupActivity extends AppCompatActivity implements SignupViewInter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.activity_singup);
+
+        edtxtEmail = findViewById(R.id.edtxtEmail);
+        edtxtPassword = findViewById(R.id.edtxtPassword);
+        edtxtUserName = findViewById(R.id.edtxtPassword);
 
         signupPresenter = new SignupPresenter(this);
         singinPB = findViewById(R.id.singinPB);
@@ -58,9 +62,9 @@ public class SignupActivity extends AppCompatActivity implements SignupViewInter
     @Override
     public void showSuccessfulSignup() {
         singinPB.setVisibility(View.GONE);
-        Toast.makeText(this, "You have signed up successfully", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+        Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override
