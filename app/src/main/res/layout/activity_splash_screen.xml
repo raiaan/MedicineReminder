@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_reshot_icon_tablet_pill_7b4j3ys5dg"
+    android:background="@drawable/medicine_icon"
     tools:context=".splashScreen.SplashScreen">
 </androidx.constraintlayout.widget.ConstraintLayout>
