@@ -2,19 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/home_fragment"
+        android:id="@+id/homeIconFragment"
         android:enabled="true"
         android:icon="@drawable/home_icon"
         android:title="@string/homePage"/>
     <item
-        android:id="@+id/taker_fragment"
+        android:id="@+id/takerIconFragment"
         android:enabled="true"
         android:icon="@drawable/taker_icon"
         android:title="@string/takerPage"/>
+
     <item
-        android:id="@+id/medicine_fragment"
+        android:id="@+id/medicineIconFragment"
         android:enabled="true"
         android:icon="@drawable/medicine_icon"
+        android:title="@string/medicinePage"/>
+
+    <item
+        android:id="@+id/moreIconFragment"
+        android:enabled="true"
+        android:icon="@drawable/more_icon"
         android:title="@string/medicinePage"/>
 
 </menu>

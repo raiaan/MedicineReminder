@@ -20,4 +20,10 @@
     <string name="homePage">Home</string>
     <string name="medicinePage">Medicine</string>
     <string name="takerPage">Taker</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="noAccount">You do not have an account yet?</string>
+    <string name="createAccount">create a new one</string>
+    <string name="login">Login</string>
+    <string name="registeration">Sign up</string>
 </resources>
