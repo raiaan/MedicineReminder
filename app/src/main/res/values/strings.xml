@@ -47,6 +47,11 @@
     <string name="refill_amount">Refill amount</string>
     <string name="Fillingtheprescription">Filling the Prescription</string>
     <string name="drug_instructions">should this medicine be taken while eating</string>
+    <string name="add_health_taker">Add health taker</string>
+    <string name="email">Email</string>
+    <string name="password">password</string>
+    <string name="send">send invitation</string>
+    <string name="add_med">Add med</string>
     <string-array name="units">
         <item>@string/unit_g</item>
         <item>@string/unit_mc_ml</item>

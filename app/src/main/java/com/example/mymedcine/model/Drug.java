@@ -1,23 +1,45 @@
 package com.example.mymedcine.model;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
+@Entity(tableName = "drugTable")
 public class Drug {
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "name")
     public String name;
+    @ColumnInfo(name = "type")
     public String type;
+    @ColumnInfo(name = "strongValue")
     public String strongValue;
+    @ColumnInfo(name = "strongUnit")
     public String strongUnit;
+    @ColumnInfo(name = "state")
     public String state;
-    public LastTime lastTime;
+    @ColumnInfo(name = "remindingTimes")
+    @Ignore
     public RemindingTimes remindingTimes;
+    @ColumnInfo(name = "instructions")
+    @Ignore
     public ArrayList<String> instructions;
+    @ColumnInfo(name = "lastTime")
+    @Ignore
+    public LastTime lastTime;
+
+    @ColumnInfo(name = "reasons")
     public String reasons;
-    public ArrayList<String> left;
+    @ColumnInfo(name = "left")
+    public String left;
 
     public Drug() {
     }
 
-    public Drug(String name, String type, String strongValue, String strongUnit, String state, LastTime lastTime, RemindingTimes remindingTimes, ArrayList<String> instructions, String reasons, ArrayList<String> left) {
+    public Drug(String name, String type, String strongValue, String strongUnit, String state, LastTime lastTime, RemindingTimes remindingTimes, ArrayList<String> instructions, String reasons, String left) {
         this.name = name;
         this.type = type;
         this.strongValue = strongValue;
@@ -28,6 +50,14 @@ public class Drug {
         this.instructions = instructions;
         this.reasons = reasons;
         this.left = left;
+    }
+
+    public Drug(@NonNull String name, String type, String strongValue, String strongUnit, String state) {
+        this.name = name;
+        this.type = type;
+        this.strongValue = strongValue;
+        this.strongUnit = strongUnit;
+        this.state = state;
     }
 
     public String getName() {
@@ -87,11 +117,11 @@ public class Drug {
     }
 
     public String getInstructions() {
-        String result = null;
-        for (String temp: instructions){
-            if (result ==null){
-                result=temp;
-            }else result+= "\n"+temp;
+        String result= null;
+        for (String instruct : instructions){
+            if (instruct == null){
+                result = instruct;
+            }else result +="\n" + instruct;
         }
         return result;
     }
@@ -109,16 +139,10 @@ public class Drug {
     }
 
     public String getLeft() {
-        String result = null;
-        for(String temp: left){
-            if (result ==null){
-                result = temp;
-            }else result+= "\n"+temp;
-        }
-        return result;
+        return left;
     }
 
-    public void setLeft(ArrayList<String> left) {
+    public void setLeft(String left) {
         this.left = left;
     }
 }

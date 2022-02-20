@@ -18,7 +18,7 @@ public class Dialoug {
     FloatingActionButton increaseBtn;
     FloatingActionButton decreaseBtn;
     TextView counter;
-    DialogClassListener listener;
+    //DialogClassListener listener;
     int count;
 //    @NonNull
 //    @Override
