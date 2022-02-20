@@ -3,19 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/display_drug_details_fragment">
+    app:startDestination="@+id/add_drug_fragment">
 
     <fragment
         android:id="@+id/display_drug_details_fragment"
         android:name="com.example.mymedcine.drugdetails.view.DisplayDrugDetailsFragment"
         tools:layout="@layout/fragment_display_drug_details" >
         <action
-            android:id="@+id/action_nav_home_to_nav_slideshow"
-            app:destination="@id/display_drug_details_fragment" />
+            android:id="@+id/action_display_drug_details_fragment_to_edit_drug_details_fragment"
+            app:destination="@id/edit_drug_details_fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/edit_drug_details_fragment"
         android:name="com.example.mymedcine.edit_drug.EditDrugFramgent"
-        tools:layout="@layout/fragment_edit_drug_framgent" />
+        tools:layout="@layout/fragment_edit_drug_framgent" >
+        <argument
+            android:name="drug_name"
+            app:argType="string" />
+        <argument
+            android:name="patient_name"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/add_drug_fragment"
+        android:name="com.example.mymedcine.edit_drug.EditDrugFramgent"
+        tools:layout="@layout/fragment_edit_drug_framgent" >
+    </fragment>
 </navigation>
