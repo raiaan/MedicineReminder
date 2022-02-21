@@ -42,7 +42,7 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Drug drug = drugList.get(position);
-        holder.txtMedDetail.setText(drug.getReasons());
+        holder.txtMedDetail.setText(drug.getType());
         holder.txtMedName.setText(drug.getName());
         holder.txtMedDosage.setText(drug.getStrongUnit());
         if (drug.getState()=="active"){

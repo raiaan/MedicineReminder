@@ -12,6 +12,7 @@ public class RemindingTimes {
     }
 
     public RemindingTimes() {
+
     }
 
     public String getOccurrence() {

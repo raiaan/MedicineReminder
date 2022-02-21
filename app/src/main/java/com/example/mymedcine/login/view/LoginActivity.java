@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.mymedcine.MainActivity;
 import com.example.mymedcine.R;
 
+import com.example.mymedcine.homescreen.HomeActivity;
 import com.example.mymedcine.login.presenter.LoginPresenter;
 import com.example.mymedcine.login.presenter.LoginPresenterInterface;
 import com.example.mymedcine.signup.view.SignupActivity;
@@ -71,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
     @Override
     public void showSuccessfulLogin() {
         loginPB.setVisibility(View.GONE);
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
     }
 
     @Override

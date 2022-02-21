@@ -63,4 +63,9 @@ public class ConcreteLocalSource implements LocalSourceInterface{
     public LiveData<List<Drug>> getAllStoredDrugs() {
         return storedDrugs;
     }
+
+    @Override
+    public LiveData<Drug> getDrugData(String drugName) {
+        return medDAO.getDrugData(drugName);
+    }
 }

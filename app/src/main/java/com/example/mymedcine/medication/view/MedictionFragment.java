@@ -35,7 +35,8 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
     MaterialButton btnAddMed;
     MedecationInterface presenter;
     List<Drug> drugss;
-    Drug drug = new Drug("lll","aaa","eee","ooo");
+
+    Drug drug = new Drug("lll","aaa","200","g","ooo");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,8 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
         btnAddMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_medictionFragment_to_addHealthTakerFragment);
+                Navigation.findNavController(view).navigate(R.id.action_medictionFragment_to_displayDrugDetailsFragment);
+
             }
         });
         recyclerView.setHasFixedSize(true);
@@ -76,11 +78,12 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
 
     @Override
     public void showData(List<Drug> drugs) {
-        drugss = Arrays.asList(new Drug("conge", "bard", "1g", "taken"),
-                new Drug("conge", "bard", "1g", "active"),
-                new Drug("biad", "bard", "1g", "denied"),
-                new Drug("npoh", "bard", "2g", "active"),
-                new Drug("vvvv", "bard", "1g", "denied"));
+        drugss = Arrays.asList(new Drug("conge", "bard", "200","g", "taken"),
+                new Drug("conge", "bard","200","g", "active"),
+                new Drug("biad", "bard","200","g", "denied"),
+                new Drug("npoh", "bard", "200","g", "active"),
+                new Drug("vvvv", "bard","200","g", "denied"));
+
         adapter = new MedicationAdapter(drugss, getContext(), this);
         recyclerView.setAdapter(adapter);
         Log.i(TAG, "showData: " + drugss.size());

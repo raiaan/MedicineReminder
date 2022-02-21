@@ -23,6 +23,9 @@ public interface MedDAO {
     @Query("SELECT * FROM PrescriptionTable")
     LiveData<List<Prescription>> getAllPrescription();
 
+    @Query("SELECT * FROM drugTable where name = :name ")
+    LiveData<Drug> getDrugData(String name);
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void add(Drug drug);
 

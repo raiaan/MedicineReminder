@@ -52,6 +52,14 @@ public class Drug {
         this.left = left;
     }
 
+    public Drug(@NonNull String name, String type, String strongValue, String strongUnit, String state) {
+        this.name = name;
+        this.type = type;
+        this.strongValue = strongValue;
+        this.strongUnit = strongUnit;
+        this.state = state;
+    }
+
     public String getName() {
         return name;
     }
@@ -108,13 +116,22 @@ public class Drug {
         this.remindingTimes = remindingTimes;
     }
 
-    public ArrayList<String> getInstructions() {
-        return instructions;
+
+    public String getInstructions() {
+        String result= null;
+        for (String instruct : instructions){
+            if (instruct == null){
+                result = instruct;
+            }else result +="\n" + instruct;
+        }
+        return result;
+
     }
 
     public void setInstructions(ArrayList<String> instructions) {
         this.instructions = instructions;
     }
+
 
     public String getReasons() {
         return reasons;
