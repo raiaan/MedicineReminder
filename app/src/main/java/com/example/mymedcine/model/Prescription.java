@@ -1,12 +1,30 @@
 package com.example.mymedcine.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.example.mymedcine.database.Converter;
+
 import java.util.ArrayList;
 
+@Entity(tableName = "PrescriptionTable")
+@TypeConverters(Converter.class)
 public class Prescription {
-    public String admin_mail;
+
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "patient")
     public String patient;
-    public ArrayList<String> healthTaker_mail;
+    @ColumnInfo(name = "admin_mail")
+    public String admin_mail;
+    @ColumnInfo(name = "drugs")
     public ArrayList<Drug> drugs;
+    @ColumnInfo(name = "healthTaker_mail")
+    public ArrayList<String> healthTaker_mail;
+
 
     public Prescription(String admin_mail, String patient, ArrayList<String> healthTaker_mail, ArrayList<Drug> drugs) {
         this.admin_mail = admin_mail;
@@ -49,4 +67,16 @@ public class Prescription {
     public void setDrugs(ArrayList<Drug> drugs) {
         this.drugs = drugs;
     }
+
+    @Override
+    public String toString() {
+        return "Prescription{" +
+                "patient='" + patient + '\'' +
+                ", admin_mail='" + admin_mail + '\'' +
+                ", drugs=" + drugs +
+                ", healthTaker_mail=" + healthTaker_mail +
+                '}';
+    }
+
+
 }

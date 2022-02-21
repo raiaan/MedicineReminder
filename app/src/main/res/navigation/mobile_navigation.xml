@@ -3,19 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/display_drug_details_fragment">
+    app:startDestination="@id/homeIconFragment">
 
     <fragment
-        android:id="@+id/display_drug_details_fragment"
+        android:id="@+id/displayDrugDetailsFragment"
         android:name="com.example.mymedcine.drugdetails.view.DisplayDrugDetailsFragment"
-        tools:layout="@layout/fragment_display_drug_details" >
-        <action
-            android:id="@+id/action_nav_home_to_nav_slideshow"
-            app:destination="@id/display_drug_details_fragment" />
-    </fragment>
-
+        android:label="fragment_display_drug_details"
+        tools:layout="@layout/fragment_display_drug_details" />
     <fragment
-        android:id="@+id/edit_drug_details_fragment"
-        android:name="com.example.mymedcine.edit_drug.EditDrugFramgent"
-        tools:layout="@layout/fragment_edit_drug_framgent" />
+        android:id="@+id/takerIconFragment"
+        android:name="com.example.mymedcine.AddHealthTakerFragment"
+        android:label="fragment_taker_icon" />
+    <fragment
+        android:id="@+id/medictionFragment"
+        android:name="com.example.mymedcine.medication.view.MedictionFragment"
+        android:label="fragment_medicine_icon">
+        <action
+            android:id="@+id/action_medictionFragment_to_displayDrugDetailsFragment"
+            app:destination="@id/displayDrugDetailsFragment" />
+    </fragment><![CDATA[
+=======
+    android:id="@+id/home_page_navigation_file"
+    app:startDestination="@id/edit_drug_Fragment">
+
+    ]]>
+    <fragment
+        android:id="@+id/homeIconFragment"
+        android:name="com.example.mymedcine.HomeFragment"
+        tools:layout="@layout/fragment_home"
+        android:label="fragment_home_icon" />
+    <fragment
+        android:id="@+id/moreIconFragment"
+        android:name="com.example.mymedcine.MoreFragment"
+        tools:layout="@layout/fragment_more"
+        android:label="fragment_more_icon" />
+>>>>>>> 62a3fea4c7c92399974853dab7691c81c780f4b5
 </navigation>

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">MyMedcine</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lastTakenLabel">Last taken</string>
     <string name="remindersLabel">Reminders</string>
@@ -10,6 +9,59 @@
     <string name="add_dose_button">ADD DOSE</string>
     <string name="refills_label">Prescription Refills</string>
     <string name="refillsBTN">Refill</string>
+    <string name="edit_medicine_drug_name_label">Drug Name</string>
+    <string name="edit_medicine_drug_reminder_label">Reminding Times</string>
+    <string name="edit_medicine_drug_type_label">Type</string>
+    <string name="pill">Pill</string>
+    <string name="injection">Injection</string>
+    <string name="powder">Powder</string>
+    <string name="drops">Drops</string>
+    <string name="inhaler">Inhaler</string>
+    <string name="nextBtn">Next</string>
+    <string name="drugQty">Quantity</string>
+    <string name="unit_g">g</string>
+    <string name="unit_mcg">mcg</string>
+    <string name="unit_meq">mEq</string>
+    <string name="unit_mc_ml">mc/ml</string>
+    <string name="unit_mcg_ml">mcg/ml</string>
+    <string name="drug_scheduling">scheduling</string>
+    <string name="drug_starting_date">Starting Date</string>
+    <string name="select_drug_date">Select Date</string>
+    <string name="drug_symbol">Drug Icons</string>
+    <string name="more_opitions_Btn">other</string>
+    <string name="strength">Strength</string>
+    <string name="severityofmedication">Severity Of Drug</string>
+    <string name="Presstoadjust">press_to_adjust</string>
+    <string name="beforeating">before_eating</string>
+    <string name="whileeating">While Eating</string>
+    <string name="aftereating">After eating</string>
+    <string name="doesnotmatter">does not matter</string>
+    <string name="select_drug_Time">Select Drug Time</string>
+    <string name="at_any_time">At any Time</string>
+    <string name="select_drug_amaount">select_drug_amount</string>
+    <string name="WhenIhaveleft">when i have left</string>
+    <string name="Aremindertofillthemedicine">Filling the prescription</string>
+    <string name="drug_amount">drug amount</string>
+    <string name="refill_amount">Refill amount</string>
+    <string name="Fillingtheprescription">Filling the Prescription</string>
+    <string name="drug_instructions">should this medicine be taken while eating</string>
+    <string name="add_health_taker">Add health taker</string>
+    <string name="send">send invitation</string>
+    <string name="add_med">Add med</string>
+    <string-array name="units">
+        <item>@string/unit_g</item>
+        <item>@string/unit_mc_ml</item>
+        <item>@string/unit_mcg</item>
+        <item>@string/unit_meq</item>
+        <item>@string/unit_mcg_ml</item>
+    </string-array>
+    <string-array name="types">
+        <item>@string/pill</item>
+        <item>@string/injection</item>
+        <item>@string/inhaler</item>
+        <item>@string/drops</item>
+        <item>@string/powder</item>
+    </string-array>
     <string name="username">User Name</string>
     <string name="emptyPasswordError">password is required</string>
     <string name="emptyNameError">name is required</string>
@@ -26,4 +78,12 @@
     <string name="createAccount">create a new one</string>
     <string name="login">Login</string>
     <string name="registeration">Sign up</string>
+    <string name="save">Save</string>
+    <string name="edit_medicine_drug_schdule_label">Schedul</string>
+    <string name="edit_medicine_drug_med_icon_label">Med Icon</string>
+    <string name="edit_medicine_drug_condition_label">Condition</string>
+    <string name="edit_medicine_drug_med_strength_label">Strength</string>
+    <string name="edit_medicine_drug_instruction_label">Instruction</string>
+    <string name="edit_medicine_drug_refill_label">Refill Reminder</string>
+    <string name="edit_drug_current_amount">Amount of meds</string>
 </resources>
