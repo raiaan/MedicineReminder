@@ -35,6 +35,7 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
     MaterialButton btnAddMed;
     MedecationInterface presenter;
     List<Drug> drugss;
+
     Drug drug = new Drug("lll","aaa","200","g","ooo");
 
     @Override
@@ -57,7 +58,8 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
         btnAddMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Navigation.findNavController(view).navigate(R.id.action_medictionFragment_to_addHealthTakerFragment);
+                Navigation.findNavController(view).navigate(R.id.action_medictionFragment_to_displayDrugDetailsFragment);
+
             }
         });
         recyclerView.setHasFixedSize(true);
@@ -81,6 +83,7 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
                 new Drug("biad", "bard","200","g", "denied"),
                 new Drug("npoh", "bard", "200","g", "active"),
                 new Drug("vvvv", "bard","200","g", "denied"));
+
         adapter = new MedicationAdapter(drugss, getContext(), this);
         recyclerView.setAdapter(adapter);
         Log.i(TAG, "showData: " + drugss.size());

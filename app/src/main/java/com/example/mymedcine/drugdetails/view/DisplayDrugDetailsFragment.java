@@ -26,11 +26,6 @@ import com.example.mymedcine.utils.IconsFactory;
 
 import org.w3c.dom.Text;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DisplayDrugDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplayer{
 
     TextView drugName ,drugState;
@@ -95,9 +90,16 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
             lastTaken.setText(drug.getLastTime().toString());
             occurence.setText(drug.getRemindingTimes().occurrence);
             reminders.setText(drug.getRemindingTimes().getHours());
-            instructions.setText(drug.getInstructions());
+            //instructions.setText(drug.getInstructions());
             reasons.setText(drug.getReasons());
+            //refills.setText(drug.getLeft());
+            editItem.setOnClickListener(view -> {
+                Log.v("edit click listener","true");
+               // communator.sendMessage(prescription);
+            });
+
             refills.setText(drug.getLeft());
+
         }
     }
 }

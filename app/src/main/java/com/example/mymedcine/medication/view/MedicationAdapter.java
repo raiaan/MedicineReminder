@@ -42,13 +42,13 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Drug drug = drugList.get(position);
-        holder.txtMedDetail.setText(drug.getReasons());
+        holder.txtMedDetail.setText(drug.getType());
         holder.txtMedName.setText(drug.getName());
         holder.txtMedDosage.setText(drug.getStrongUnit());
         if (drug.getState()=="active"){
             holder.imgOnline.setColorFilter(Color.RED);
         }
-        holder.imgOnline.setImageResource(R.drawable.nurse);
+        holder.imgOnline.setImageResource(R.drawable.ic_online);
         holder.imgMed.setImageResource(R.drawable.nurse);
         //Glide.with(context).load(movieModel.getImage()).override(120,120).into(holder.img);
         holder.layout.setOnClickListener(new View.OnClickListener() {

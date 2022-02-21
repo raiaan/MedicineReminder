@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#00BCD4"
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
-    tools:context=".MainActivity">
+    tools:context=".homescreen.HomeActivity">
 
 
 

@@ -41,6 +41,7 @@ public class Repository implements RepositoryInterface {
     @Override
     public ArrayList<Drug> getAllDrugs() {
         ArrayList<Drug> drugs = new ArrayList<>();
+
         drugs.add(new Drug("cong","pill","200","g","taken"));
         drugs.add(new Drug("cong","pill","200","g","taken"));
         drugs.add(new Drug("cong","pill","200","g","taken"));
@@ -48,6 +49,7 @@ public class Repository implements RepositoryInterface {
         drugs.add(new Drug("cong","pill","200","g","taken"));
         drugs.add(new Drug("cong","pill","200","g","taken"));
         drugs.add(new Drug("cong","pill","200","g","taken"));
+
         return drugs;
     }
 

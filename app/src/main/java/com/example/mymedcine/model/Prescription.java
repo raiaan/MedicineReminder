@@ -77,4 +77,6 @@ public class Prescription {
                 ", healthTaker_mail=" + healthTaker_mail +
                 '}';
     }
+
+
 }

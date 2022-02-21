@@ -116,6 +116,7 @@ public class Drug {
         this.remindingTimes = remindingTimes;
     }
 
+
     public String getInstructions() {
         String result= null;
         for (String instruct : instructions){
@@ -124,11 +125,13 @@ public class Drug {
             }else result +="\n" + instruct;
         }
         return result;
+
     }
 
     public void setInstructions(ArrayList<String> instructions) {
         this.instructions = instructions;
     }
+
 
     public String getReasons() {
         return reasons;
