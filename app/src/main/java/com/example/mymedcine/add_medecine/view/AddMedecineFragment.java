@@ -27,7 +27,7 @@ import java.util.Date;
  * Use the {@link AddMedecineFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddMedecineFragment extends Fragment {
+public class AddMedecineFragment extends Fragment implements AddMedecineInterface{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -183,6 +183,11 @@ public class AddMedecineFragment extends Fragment {
         timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         timePickerDialog.updateTime(timerHour,timerMinute);
         timePickerDialog.show();
+    }
+
+    @Override
+    public void DrugAdded() {
+        //to navigate to drug list
     }
 //    public void openNumberPicker(){
 //        DialougClass dialougClass=new DialougClass();

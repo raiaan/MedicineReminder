@@ -7,9 +7,29 @@
 
     <fragment
         android:id="@+id/medicineIconFragment"
-        android:name="com.example.mymedcine.MedicineFragment"
+        android:name="com.example.mymedcine.medication.view.MedictionFragment"
         tools:layout="@layout/fragment_medicine"
-        android:label="fragment_medicine_icon" />
+        android:label="fragment_medicine_icon" >
+        <action
+            android:id="@+id/action_medicineIconFragment_to_drug_details_Fragment"
+            app:destination="@id/drug_details_Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/drug_details_Fragment"
+        android:name="com.example.mymedcine.drugdetails.view.DisplayDrugDetailsFragment"
+        tools:layout="@layout/fragment_medicine" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/edit_drug_Fragment"
+        android:name="com.example.mymedcine.edit_drug.view.EditDrugFramgent"
+        tools:layout="@layout/fragment_medicine" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/homeIconFragment"
         android:name="com.example.mymedcine.HomeFragment"

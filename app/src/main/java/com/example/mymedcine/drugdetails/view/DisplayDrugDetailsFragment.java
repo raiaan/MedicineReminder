@@ -15,10 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mymedcine.R;
+import com.example.mymedcine.database.ConcreteLocalSource;
 import com.example.mymedcine.drugdetails.presenter.DisplayDrugPresentable;
 import com.example.mymedcine.drugdetails.presenter.DisplayDrugPresenter;
 import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.Prescription;
+import com.example.mymedcine.model.Repository;
 import com.example.mymedcine.utils.Communator;
 import com.example.mymedcine.utils.IconsFactory;
 
@@ -44,7 +46,7 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
         // Required empty public constructor
     }
 
-    public static DisplayDrugDetailsFragment newInstance(Drug drug) {
+    public static DisplayDrugDetailsFragment newInstance(String name) {
         DisplayDrugDetailsFragment fragment = new DisplayDrugDetailsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -61,7 +63,8 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_display_drug_details, container, false);
-        communator = (Communator)getActivity();
+        presentable = new DisplayDrugPresenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(getContext())
+                , getContext()));
         return view;
     }
     void initUI(View view){
@@ -84,8 +87,7 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
     }
 
     @Override
-    public void displayDrugDetails(Prescription prescription, int position) {
-        Drug drug = prescription.getDrugs().get(position);
+    public void displayDrugDetails(Drug drug) {
         if(drugName !=null){
             drugName.setText(drug.getName());
             drugState.setText(" ("+drug.getState()+")");
@@ -96,10 +98,6 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
             instructions.setText(drug.getInstructions());
             reasons.setText(drug.getReasons());
             refills.setText(drug.getLeft());
-            editItem.setOnClickListener(view -> {
-                Log.v("edit click listener","true");
-                communator.sendMessage(prescription);
-            });
         }
     }
 }

@@ -65,4 +65,14 @@ public class Repository implements RepositoryInterface {
     public LiveData<List<Drug>> getStoredDrugs() {
         return localSource.getAllStoredDrugs();
     }
+
+    @Override
+    public LiveData<Drug> getDrug(String name) {
+        return localSource.getDrugData(name);
+    }
+
+    @Override
+    public void updateData(Drug drug) {
+        localSource.update(drug);
+    }
 }
