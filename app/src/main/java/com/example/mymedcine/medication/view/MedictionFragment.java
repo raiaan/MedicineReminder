@@ -58,7 +58,7 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
         btnAddMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_medictionFragment_to_displayDrugDetailsFragment);
+                Navigation.findNavController(view).navigate(R.id.action_medictionFragment_to_addMedecineFragment);
 
             }
         });

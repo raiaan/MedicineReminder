@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/homeIconFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/displayDrugDetailsFragment"
         android:name="com.example.mymedcine.drugdetails.view.DisplayDrugDetailsFragment"
         android:label="fragment_display_drug_details"
-        tools:layout="@layout/fragment_display_drug_details" />
+        tools:layout="@layout/fragment_display_drug_details" >
+        <action
+            android:id="@+id/action_displayDrugDetailsFragment_to_editDrugFramgent"
+            app:destination="@id/editDrugFramgent" />
+    </fragment>
     <fragment
         android:id="@+id/takerIconFragment"
         android:name="com.example.mymedcine.AddHealthTakerFragment"
@@ -19,17 +23,24 @@
         android:name="com.example.mymedcine.medication.view.MedictionFragment"
         android:label="fragment_medicine_icon">
         <action
-            android:id="@+id/action_medictionFragment_to_displayDrugDetailsFragment"
-            app:destination="@id/displayDrugDetailsFragment" />
+            android:id="@+id/action_medictionFragment_to_addMedecineFragment"
+            app:destination="@id/addMedecineFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/homeIconFragment"
-        android:name="com.example.mymedcine.HomeFragment"
-        tools:layout="@layout/fragment_home"
-        android:label="fragment_home_icon" />
     <fragment
         android:id="@+id/moreIconFragment"
         android:name="com.example.mymedcine.MoreFragment"
         tools:layout="@layout/fragment_more"
         android:label="fragment_more_icon" />
+    <fragment
+        android:id="@+id/editDrugFramgent"
+        android:name="com.example.mymedcine.edit_drug.view.EditDrugFramgent"
+        android:label="EditDrugFramgent" />
+    <fragment
+        android:id="@+id/addMedecineFragment"
+        android:name="com.example.mymedcine.add_medecine.view.AddMedecineFragment"
+        android:label="AddMedecineFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.mymedcine.homescreen.homeFragment.view.HomeFragment"
+        android:label="HomeFragment" />
 </navigation>

@@ -8,7 +8,7 @@ public class AddDrugPresenter implements DrugAdder{
     RepositoryInterface repo;
     AddMedecineInterface addMedecine;
 
-    public AddDrugPresenter(RepositoryInterface repo, AddMedecineInterface addMedecine) {
+    public AddDrugPresenter(AddMedecineInterface addMedecine ,RepositoryInterface repo) {
         this.repo = repo;
         this.addMedecine = addMedecine;
     }

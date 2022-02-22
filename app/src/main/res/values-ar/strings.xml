@@ -73,4 +73,27 @@
     <string name="edit_medicine_drug_instruction_label">Instruction</string>
     <string name="edit_medicine_drug_refill_label">Refill Reminder</string>
     <string name="edit_drug_current_amount">Amount of meds</string>
+
+    <string name="every_day">Every Day</string>
+    <string name="certain_days_of_the_week">specific days of the week</string>
+    <string name="as_needed">only as needed</string>
+    <string name="instructions_mini_text">Should this be taken with food?</string>
+    <string name="edit_drug_before_eating">Before eating</string>
+    <string name="edit_drug_while_eating">While eating</string>
+    <string name="edit_drug_after_eating">After eating</string>
+    <string name="edit_drug_instruct_doesnt_matter">Doesn\'t Matter</string>
+    <string name="edit_drug_instruct_other">Any other instructions</string>
+    <string name="edit_medicin_reason">type the reason of taking this drug</string>
+
+    <string name="once">once a day</string>
+    <string name="twice">twice a day</string>
+    <string name="Saturday">Saturday</string>
+    <string name="Sunday">Sunday</string>
+    <string name="Monday">Monday</string>
+    <string name="Tuesday">Tuesday</string>
+    <string name="Wednesday">Wednesday</string>
+    <string name="Thursday">Thursday</string>
+    <string name="Friday">Friday</string>
+    <string name="edit_medicine_select_hours">hours_reminders</string>
+    <string name="three_times">three times a day</string>
 </resources>

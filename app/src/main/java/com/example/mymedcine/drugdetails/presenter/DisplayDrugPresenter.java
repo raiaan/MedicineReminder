@@ -18,6 +18,7 @@ public class DisplayDrugPresenter implements DisplayDrugPresentable{
     @Override
     public void deleteDrug(Drug drug) {
         repository.deleteDrug(drug);
+        drugDisplayer.deleteDrugSuccess();
     }
 
 
