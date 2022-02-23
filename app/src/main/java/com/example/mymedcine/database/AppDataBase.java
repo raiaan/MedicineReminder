@@ -10,7 +10,7 @@ import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.Prescription;
 
 @Database(entities = {Drug.class, Prescription.class},
-        version = 1, exportSchema = false)
+        version = 2, exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
 
     private static AppDataBase instance = null;
@@ -19,7 +19,8 @@ public abstract class AppDataBase extends RoomDatabase {
     public static synchronized AppDataBase getInstance(Context context) {
         if (instance == null) {
 
-            instance = Room.databaseBuilder(context.getApplicationContext(), AppDataBase.class, "medicine").build();
+            instance = Room.databaseBuilder(context.getApplicationContext(), AppDataBase.class, "medicine")
+                    .fallbackToDestructiveMigration().build();
         }
 
         return instance;

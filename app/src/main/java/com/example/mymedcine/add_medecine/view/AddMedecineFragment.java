@@ -113,10 +113,19 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
         hoursInDaySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i ==1)
+                if (i ==1) {
                     parentView.findViewById(R.id.hours_picker_2).setVisibility(View.VISIBLE);
-                if (i==2)
+                    parentView.findViewById(R.id.hours_picker_3).setVisibility(View.GONE);
+                }
+                else if (i==2){
                     parentView.findViewById(R.id.hours_picker_3).setVisibility(View.VISIBLE);
+                    parentView.findViewById(R.id.hours_picker_2).setVisibility(View.VISIBLE);
+                }
+                else if(i==0){
+                    parentView.findViewById(R.id.hours_picker_2).setVisibility(View.GONE);
+                    parentView.findViewById(R.id.hours_picker_3).setVisibility(View.GONE);
+                }
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {

@@ -105,8 +105,6 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
         Drug drugClick = drugList.get(position);
         Bundle outcomeBundle = new Bundle();
         outcomeBundle.putSerializable("abc", drugClick);
-       // Toast.makeText(getContext(), position+" : kkk", Toast.LENGTH_SHORT).show();
-
         Navigation.findNavController(view).navigate(R.id.action_medictionFragment_to_displayDrugDetailsFragment, outcomeBundle);
     }
 
