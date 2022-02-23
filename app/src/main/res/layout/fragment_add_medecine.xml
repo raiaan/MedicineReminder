@@ -7,7 +7,7 @@
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -15,62 +15,117 @@
             android:padding="8dp"
             android:layout_marginBottom="16dp"
             android:id="@+id/edit_drug_name_caontainer"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:elevation="8dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/edit_medicine_drug_name_label"
                 android:textSize="16sp"
                 android:textFontWeight="600"/>
+
             <EditText
+                android:id="@+id/edit_drug_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_drug_name" />
+                android:minHeight="48dp" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp"
+            android:id="@+id/edit_drug_med_Type_caontainer"
+            android:orientation="vertical"
+            android:elevation="8dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/edit_medicine_drug_type_label"
+                android:textSize="16sp"
+                android:textFontWeight="600"/>
 
+            <Spinner
+                android:id="@+id/edit_drug_types"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:padding="16dp" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:layout_marginBottom="16dp"
             android:id="@+id/edit_drug_reminder_times_caontainer"
-            android:orientation="vertical">
-            <TextView
+            android:orientation="vertical"
+            android:elevation="8dp">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/edit_medicine_drug_reminder_label"
-                android:textSize="16sp"
-                android:textFontWeight="600"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:layout_marginBottom="16dp"
-            android:id="@+id/edit_drug_med_schdule_caontainer"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/edit_medicine_drug_schdule_label"
-                android:textSize="16sp"
-                android:textFontWeight="600"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:layout_marginBottom="16dp"
-            android:id="@+id/edit_drug_med_icon_caontainer"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/edit_medicine_drug_med_icon_label"
-                android:textSize="16sp"
-                android:textFontWeight="600"/>
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_medicine_drug_reminder_label"
+                    android:textSize="16sp"
+                    android:textFontWeight="600"
+                    android:layout_alignParentLeft="true"
+                    android:id="@+id/edit_drug_reminder_label"/>
 
+                <Switch
+                    android:id="@+id/edit_drug_chronic_disease"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="@string/chronic_disease"
+                    android:textAlignment="viewEnd" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_drug_end_date"
+                    android:textSize="16dp"
+                    android:id="@+id/edit_drug_end_date_label"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_drug_end_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/edit_drug_end_date"
+                    android:minHeight="48dp" />
+                <Spinner
+                    android:id="@+id/edit_drug_reminding_hours_per_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/drug_end_date"/>
+                <TimePicker
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:timePickerMode="spinner"
+                    android:id="@+id/hours_picker_1"/>
+                <TimePicker
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:timePickerMode="spinner"
+                    android:id="@+id/hours_picker_2"
+                    android:visibility="gone"/>
+                <TimePicker
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:timePickerMode="spinner"
+                    android:id="@+id/hours_picker_3"
+                    android:visibility="gone"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_drug_hours_txt"
+                    android:inputType="textMultiLine"
+                    />
+            </LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,6 +139,14 @@
                 android:text="@string/edit_medicine_drug_condition_label"
                 android:textSize="16sp"
                 android:textFontWeight="600"/>
+
+            <EditText
+                android:id="@+id/edit_drug_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_medicin_reason"
+                android:minHeight="48dp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -114,6 +177,55 @@
                 android:text="@string/edit_medicine_drug_instruction_label"
                 android:textSize="16sp"
                 android:textFontWeight="600"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instructions_mini_text"
+                android:textSize="16sp"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp">
+
+                <RadioButton
+                    android:id="@+id/edit_drug_before_eating"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="@string/edit_drug_before_eating"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/edit_drug_while_eating"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="@string/edit_drug_while_eating"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/edit_drug_after_eating"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="@string/edit_drug_after_eating"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_drug_instruct_doesnt_matter"
+                    android:text="@string/edit_drug_instruct_doesnt_matter"
+                    android:textSize="16sp"/>
+            </RadioGroup>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_drug_instruct_other"
+                android:hint="@string/edit_drug_instruct_other"
+                android:textSize="16sp"
+                android:padding="16dp"
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout

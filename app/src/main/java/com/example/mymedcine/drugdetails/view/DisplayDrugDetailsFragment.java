@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,7 +37,6 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
     TextView instructions , reasons;
     TextView refills;
     DisplayDrugPresentable presentable;
-    Communator communator;
     public DisplayDrugDetailsFragment() {
         // Required empty public constructor
     }
@@ -74,11 +74,15 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
         reasons = view.findViewById(R.id.display_drug_details_reasons);
         refills = view.findViewById(R.id.display_drug_details_refills);
         editItem = view.findViewById(R.id.display_drug_edit);
+        removeItem = view.findViewById(R.id.display_drug_details_delete);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         initUI(view);
+        if(getArguments() != null){
+            displayDrugDetails( (Drug) getArguments().getSerializable("drug"));
+        }
     }
 
     @Override
@@ -90,16 +94,24 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
             lastTaken.setText(drug.getLastTime().toString());
             occurence.setText(drug.getRemindingTimes().occurrence);
             reminders.setText(drug.getRemindingTimes().getHours());
-            //instructions.setText(drug.getInstructions());
+            instructions.setText(drug.getInstructions());
             reasons.setText(drug.getReasons());
-            //refills.setText(drug.getLeft());
-            editItem.setOnClickListener(view -> {
-                Log.v("edit click listener","true");
-               // communator.sendMessage(prescription);
-            });
-
             refills.setText(drug.getLeft());
-
+            editItem.setOnClickListener(view -> {
+                navigateToEditDrug();
+            });
+            refills.setText(drug.getLeft());
+            removeItem.setOnClickListener(view -> presentable.deleteDrug(drug));
         }
+    }
+
+    @Override
+    public void deleteDrugSuccess() {
+        Navigation.findNavController(this.getView()).popBackStack();
+    }
+
+    @Override
+    public void navigateToEditDrug() {
+        Navigation.findNavController(this.getView()).navigate(R.id.action_displayDrugDetailsFragment_to_editDrugFramgent);
     }
 }

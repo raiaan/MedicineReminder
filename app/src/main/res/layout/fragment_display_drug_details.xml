@@ -8,15 +8,6 @@
     tools:context=".drugdetails.view.DisplayDrugDetailsFragment">
 
     <include layout="@layout/display_drugs_fragment_toolbar" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/light_gray"
-        tools:context=".drugdetails.view.DisplayDrugDetailsFragment"/>
-
-    <include layout="@layout/display_drugs_fragment_toolbar" />
-
     <ScrollView
 
         android:id="@+id/display_drug_details_scroll"

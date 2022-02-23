@@ -10,7 +10,7 @@ public class IconsFactory {
         Drawable icon = null;
         switch (type){
             case "pill":
-                icon = context.getResources().getDrawable(R.drawable.pill_icon);
+                icon = context.getResources().getDrawable(R.drawable.ic_pills);
                 break;
             case "vaccine":
                 icon = context.getResources().getDrawable(R.drawable.vaccine);

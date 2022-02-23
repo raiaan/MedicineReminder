@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface OnMedecationInterface {
     void showData(List<Drug> drugs);
-    void onMedecineClickListener(View view);
+    void onMedecineClickListener(View view, int position);
     void addMed(Drug drug);
 }
