@@ -50,8 +50,8 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    Spinner recurrencySpinner, typesSpinner, hoursInDaySpinner;
-    ArrayAdapter<CharSequence> recurrencyAdapter ,hoursInDayAdapter;
+    Spinner typesSpinner, hoursInDaySpinner;
+    ArrayAdapter<CharSequence> hoursInDayAdapter;
     Button addToDB;
     SimpleSpinnerAdapter typesAdapter;
     DrugAdder drugAdder;
@@ -80,6 +80,7 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
+        showDatePicker(view);
     }
 
     private void initView(View parentView){
@@ -133,19 +134,9 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
             }
         });
     }
-    private void voidShowHoursDatePicker(int counter){
-       // do {
-            final Calendar c = Calendar.getInstance();
-            int mHour = c.get(Calendar.HOUR_OF_DAY);
-            int mMinute = c.get(Calendar.MINUTE);
-
-            // Launch Time Picker Dialog
-            TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
-                (view, hourOfDay, minute) -> {
-                    //txtTime.setText(hourOfDay + ":" + minute);
-                }, mHour, mMinute, false);
-            timePickerDialog.show();
-            counter--;
-        //}while (counter <= 0);
+    private void showDatePicker(View parentView){
+        parentView.findViewById(R.id.edit_drug_end_date).setOnClickListener(view1 -> {
+            parentView.findViewById(R.id.edit_drug_end_date_picker_date).setVisibility(View.VISIBLE);
+        });
     }
 }

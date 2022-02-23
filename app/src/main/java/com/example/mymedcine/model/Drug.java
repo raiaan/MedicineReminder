@@ -38,6 +38,51 @@ public class Drug implements Serializable {
     public String left;
     @ColumnInfo(name = "is_chronic")
     public boolean isChoronic;
+    @ColumnInfo(name="occurrence")
+    public String occurrence;
+    @ColumnInfo(name ="hours")
+    public ArrayList<String> hours;
+    @ColumnInfo(name ="endDate")
+    public String endDate;
+    @ColumnInfo(name = "startDate")
+    public String startDate;
+
+    public boolean isChoronic() {
+        return isChoronic;
+    }
+
+    public String getOccurrence() {
+        return occurrence;
+    }
+
+    public void setOccurrence(String occurrence) {
+        this.occurrence = occurrence;
+    }
+
+    public ArrayList<String> getHours() {
+        return hours;
+    }
+
+    public void setHours(ArrayList<String> hours) {
+        this.hours = hours;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
     public Drug() {
     }
 
