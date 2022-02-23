@@ -10,7 +10,7 @@ import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.Prescription;
 
 @Database(entities = {Drug.class, Prescription.class},
-        version = 2, exportSchema = false)
+        version = 4, exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
 
     private static AppDataBase instance = null;

@@ -40,8 +40,8 @@ public class Drug implements Serializable {
     public boolean isChoronic;
     @ColumnInfo(name="occurrence")
     public String occurrence;
-    @ColumnInfo(name ="hours")
-    public ArrayList<String> hours;
+    @Ignore
+    public ArrayList<Long> hours;
     @ColumnInfo(name ="endDate")
     public String endDate;
     @ColumnInfo(name = "startDate")
@@ -59,11 +59,11 @@ public class Drug implements Serializable {
         this.occurrence = occurrence;
     }
 
-    public ArrayList<String> getHours() {
+    public ArrayList<Long> getHours() {
         return hours;
     }
 
-    public void setHours(ArrayList<String> hours) {
+    public void setHours(ArrayList<Long> hours) {
         this.hours = hours;
     }
 

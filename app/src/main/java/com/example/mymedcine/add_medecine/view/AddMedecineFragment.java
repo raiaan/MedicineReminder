@@ -1,8 +1,5 @@
 package com.example.mymedcine.add_medecine.view;
 
-import android.app.TimePickerDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,41 +7,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.TimePicker;
-
-import com.example.mymedcine.MainActivity;
 import com.example.mymedcine.R;
 import com.example.mymedcine.add_medecine.presenter.AddDrugPresenter;
 import com.example.mymedcine.add_medecine.presenter.DrugAdder;
 import com.example.mymedcine.database.ConcreteLocalSource;
-import com.example.mymedcine.drugdetails.presenter.DisplayDrugPresenter;
-import com.example.mymedcine.model.Drug;
-import com.example.mymedcine.model.LastTime;
-import com.example.mymedcine.model.RemindingTimes;
 import com.example.mymedcine.model.Repository;
 import com.example.mymedcine.utils.IconsFactory;
 import com.example.mymedcine.utils.SimpleSpinnerAdapter;
 import com.example.mymedcine.utils.ViewDrugConvertor;
-import com.google.android.material.navigation.NavigationBarView;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 
 public class AddMedecineFragment extends Fragment implements AddMedecineInterface{
     private static final String ARG_PARAM1 = "param1";
@@ -64,7 +43,6 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_medecine, container, false);
         drugAdder = new AddDrugPresenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(getContext())
                 , getContext()));
