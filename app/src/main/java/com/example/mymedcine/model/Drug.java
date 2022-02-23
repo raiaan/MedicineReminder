@@ -40,8 +40,17 @@ public class Drug implements Serializable {
     public String reasons;
     @ColumnInfo(name = "left")
     public String left;
-
+    @ColumnInfo(name = "is_chronic")
+    public boolean isChoronic;
     public Drug() {
+    }
+
+    public boolean getIsChoronic() {
+        return isChoronic;
+    }
+
+    public void setChoronic(boolean choronic) {
+        isChoronic = choronic;
     }
 
     public Drug(String name, String type, String strongValue, String strongUnit, String state, LastTime lastTime, RemindingTimes remindingTimes, ArrayList<String> instructions, String reasons, String left) {
