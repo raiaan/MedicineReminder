@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_medictionFragment_to_addMedecineFragment"
             app:destination="@id/addMedecineFragment" />
+        <action
+            android:id="@+id/action_medictionFragment_to_displayDrugDetailsFragment"
+            app:destination="@id/displayDrugDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/moreIconFragment"
