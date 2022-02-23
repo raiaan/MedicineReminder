@@ -70,5 +70,8 @@ public class ConcreteLocalSource implements LocalSourceInterface{
     public LiveData<List<Drug>> getAllDrugsOfTheDay(String day) {
         return medDAO.getAllDrugsOfTheDay(day); }
 
+    public LiveData<Drug> getDrugData(String drugName) {
+        return medDAO.getDrugData(drugName);
+    }
 
 }

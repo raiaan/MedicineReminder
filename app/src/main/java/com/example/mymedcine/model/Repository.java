@@ -55,6 +55,7 @@ public class Repository implements RepositoryInterface {
     @Override
     public ArrayList<Drug> getAllDrugs() {
         ArrayList<Drug> drugs = new ArrayList<>();
+
         drugs.add(new Drug("cong","pill","200","g","taken"));
         drugs.add(new Drug("cong","pill","200","g","taken"));
         drugs.add(new Drug("cong","pill","200","g","taken"));
@@ -62,6 +63,7 @@ public class Repository implements RepositoryInterface {
         drugs.add(new Drug("cong","pill","200","g","taken"));
         drugs.add(new Drug("cong","pill","200","g","taken"));
         drugs.add(new Drug("cong","pill","200","g","taken"));
+
         return drugs;
     }
 
@@ -103,5 +105,14 @@ public class Repository implements RepositoryInterface {
     @Override
     public boolean isUserSignedUp() {
         return fireBaseConnection.isUserSignIn();
+    }
+
+    public LiveData<Drug> getDrug(String name) {
+        return localSource.getDrugData(name);
+    }
+
+    @Override
+    public void updateData(Drug drug) {
+        localSource.update(drug);
     }
 }

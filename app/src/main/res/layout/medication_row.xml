@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layoutRowMedication"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/light_gray"
+    android:elevation="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="16dp">
 
     <ImageView
         android:id="@+id/imgOnlineIcon"
@@ -13,7 +18,9 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="32dp"
-        android:src="@drawable/nurse" />
+        android:src="@drawable/ic_online" />
+
+
 
     <ImageView
         android:id="@+id/imgMedicationIcon"
@@ -32,7 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Congestal"
+        android:textSize="16sp"
+        android:textFontWeight="600"
         app:layout_constraintBottom_toBottomOf="@id/imgMedicationIcon"
         app:layout_constraintStart_toEndOf="@id/imgMedicationIcon"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +51,8 @@
         app:layout_constraintBottom_toBottomOf="@id/txtMedName"
         app:layout_constraintStart_toEndOf="@id/txtMedName"
         android:layout_marginStart="8dp"
-        android:text="1g"
+        android:textSize="16sp"
+        android:textFontWeight="600"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -52,7 +61,7 @@
         app:layout_constraintStart_toStartOf="@id/txtMedName"
         app:layout_constraintTop_toBottomOf="@id/txtMedName"
         android:layout_marginTop="8dp"
-        android:text="this med had letf"
+        android:textSize="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

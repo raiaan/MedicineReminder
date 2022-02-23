@@ -9,14 +9,13 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.mymedcine.R;
 import com.example.mymedcine.database.ConcreteLocalSource;
+import com.example.mymedcine.homescreen.HomeActivity;
 import com.example.mymedcine.medication.presenter.MedecationInterface;
 import com.example.mymedcine.medication.presenter.MedecationPresenter;
 import com.example.mymedcine.model.Drug;
@@ -35,8 +34,16 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
     MedicationAdapter adapter;
     MaterialButton btnAddMed;
     MedecationInterface presenter;
-    List<Drug> drugss;
-    Drug drug = new Drug("lll","aaa","200","g","ooo");
+    List<Drug> drugList;
+
+    Drug drug = new Drug("l9l", "aaaz", "200", "g", "oeoo");
+    Drug drug2 = new Drug("w8w", "aaaa", "200", "g14", "ooor");
+    Drug drug3 = new Drug("llel", "11da", "200", "3g", "oooe");
+    Drug drug4 = new Drug("l3lq", "adaa", "200", "3g", "oood");
+    Drug drug5 = new Drug("lllx", "aaac", "200", "2g", "oooc");
+    Drug drug6 = new Drug("555x", "wewe", "200", "2g", "active");
+    Drug drug7 = new Drug("999x", "aaac", "200", "2g", "active");
+    Drug drug8 = new Drug("koko", "aaac", "200", "2g", "active");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,7 +65,7 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
         btnAddMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Navigation.findNavController(view).navigate(R.id.action_medictionFragment_to_addHealthTakerFragment);
+                Navigation.findNavController(view).navigate(R.id.action_medictionFragment_to_addMedecineFragment);
             }
         });
         recyclerView.setHasFixedSize(true);
@@ -70,34 +77,43 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
         presenter = new MedecationPresenter(getContext(), Repository.getInstance(FireBaseConnection.getInstance(),ConcreteLocalSource.getInstance(getContext()),getContext())
                 ,this);
 
-        presenter.getMeds();
+        presenter.getMedsToSendIt(this);
         showData(null);
         addMed(drug);
+        addMed(drug2);
+        addMed(drug3);
+        addMed(drug4);
+        addMed(drug5);
+        addMed(drug6);
+        addMed(drug7);
+        addMed(drug8);
     }
 
     @Override
     public void showData(List<Drug> drugs) {
-        drugss = Arrays.asList(new Drug("conge", "bard", "200","g", "taken"),
-                new Drug("conge", "bard","200","g", "active"),
-                new Drug("biad", "bard","200","g", "denied"),
-                new Drug("npoh", "bard", "200","g", "active"),
-                new Drug("vvvv", "bard","200","g", "denied"));
-        adapter = new MedicationAdapter(drugss, getContext(), this);
+        this.drugList = drugs;
+
+        adapter = new MedicationAdapter(drugs, getContext(), this);
         recyclerView.setAdapter(adapter);
-        Log.i(TAG, "showData: " + drugss.size());
-        //adapter.notifyDataSetChanged();
+//        Log.i(TAG, "showData: " + drugs.size());
+        adapter.notifyDataSetChanged();
 
     }
 
     @Override
-    public void onMedecineClickListener(View view) {
-        Toast.makeText(getContext(), "777", Toast.LENGTH_SHORT).show();
+    public void onMedecineClickListener(View view, int position) {
+
+        Drug drugClick = drugList.get(position);
+        Bundle outcomeBundle = new Bundle();
+        outcomeBundle.putSerializable("abc", drugClick);
+       // Toast.makeText(getContext(), position+" : kkk", Toast.LENGTH_SHORT).show();
+
+        Navigation.findNavController(view).navigate(R.id.action_medictionFragment_to_displayDrugDetailsFragment, outcomeBundle);
     }
 
     @Override
     public void addMed(Drug drug) {
-        presenter.addMed(drug);
+        presenter.addMedToSendIt(drug);
     }
-
 
 }

@@ -18,4 +18,6 @@ public interface RepositoryInterface {
     void login(User user, FirebaseConnectionDelegated delegated);
     boolean resetPassword(String email, FirebaseConnectionDelegated delegated);
     boolean isUserSignedUp();
+    LiveData<Drug> getDrug(String name);
+    void updateData(Drug drug);
 }

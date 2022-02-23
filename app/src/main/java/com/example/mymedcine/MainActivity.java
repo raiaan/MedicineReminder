@@ -10,7 +10,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.mymedcine.database.AppDataBase;
 import com.example.mymedcine.drugdetails.view.DisplayDrugDetailsFragment;
 import com.example.mymedcine.drugdetails.view.DrugDisplayer;
 import com.example.mymedcine.model.Drug;
@@ -26,31 +28,11 @@ public class MainActivity extends AppCompatActivity implements Communator {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        ArrayList<String> hours = new ArrayList<>();
-//        hours.add("4:25:7 PM");
-//        hours.add("4:25:7 PM");
-//        hours.add("4:25:7 PM");
-//        RemindingTimes remindingTimes = new RemindingTimes("every Day",hours);
-//        LastTime lastTime = new LastTime("20:13:00 PM","taken","ahmed");
-//        ArrayList<String> instruction = new ArrayList<>();
-//        instruction.add("after dinner");
-//        ArrayList<String> left= new ArrayList<>();
-//        left.add("3");
-//        left.add("refill at 3 pm");
-//        drug = new Drug("Pandol Extra","pill","gm","500","active",lastTime,remindingTimes,instruction,"hair falls",left);
-//        ArrayList<Drug> drugs = new ArrayList<>();
-//        drugs.add(drug);
-//        ArrayList<String>healthTaker = new ArrayList<>();
-//        healthTaker.add("heba");
-//        prescription = new Prescription("r@gmail.com","x min nas",healthTaker,drugs);
+
     }
+
     @Override
     public void sendMessage(Prescription prescription) {
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 }

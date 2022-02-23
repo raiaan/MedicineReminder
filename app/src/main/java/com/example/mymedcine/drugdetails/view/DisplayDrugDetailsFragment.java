@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,20 +16,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mymedcine.R;
+import com.example.mymedcine.database.ConcreteLocalSource;
 import com.example.mymedcine.drugdetails.presenter.DisplayDrugPresentable;
 import com.example.mymedcine.drugdetails.presenter.DisplayDrugPresenter;
 import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.Prescription;
+import com.example.mymedcine.model.Repository;
 import com.example.mymedcine.utils.Communator;
 import com.example.mymedcine.utils.IconsFactory;
 
 import org.w3c.dom.Text;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DisplayDrugDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplayer{
 
     TextView drugName ,drugState;
@@ -39,12 +37,11 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
     TextView instructions , reasons;
     TextView refills;
     DisplayDrugPresentable presentable;
-    Communator communator;
     public DisplayDrugDetailsFragment() {
         // Required empty public constructor
     }
 
-    public static DisplayDrugDetailsFragment newInstance(Drug drug) {
+    public static DisplayDrugDetailsFragment newInstance(String name) {
         DisplayDrugDetailsFragment fragment = new DisplayDrugDetailsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -61,7 +58,8 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_display_drug_details, container, false);
-        communator = (Communator)getActivity();
+        presentable = new DisplayDrugPresenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(getContext())
+                , getContext()));
         return view;
     }
     void initUI(View view){
@@ -76,16 +74,19 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
         reasons = view.findViewById(R.id.display_drug_details_reasons);
         refills = view.findViewById(R.id.display_drug_details_refills);
         editItem = view.findViewById(R.id.display_drug_edit);
+        removeItem = view.findViewById(R.id.display_drug_details_delete);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         initUI(view);
+        if(getArguments() != null){
+            displayDrugDetails( (Drug) getArguments().getSerializable("drug"));
+        }
     }
 
     @Override
-    public void displayDrugDetails(Prescription prescription, int position) {
-        Drug drug = prescription.getDrugs().get(position);
+    public void displayDrugDetails(Drug drug) {
         if(drugName !=null){
             drugName.setText(drug.getName());
             drugState.setText(" ("+drug.getState()+")");
@@ -97,9 +98,20 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
             reasons.setText(drug.getReasons());
             refills.setText(drug.getLeft());
             editItem.setOnClickListener(view -> {
-                Log.v("edit click listener","true");
-                communator.sendMessage(prescription);
+                navigateToEditDrug();
             });
+            refills.setText(drug.getLeft());
+            removeItem.setOnClickListener(view -> presentable.deleteDrug(drug));
         }
+    }
+
+    @Override
+    public void deleteDrugSuccess() {
+        Navigation.findNavController(this.getView()).popBackStack();
+    }
+
+    @Override
+    public void navigateToEditDrug() {
+        Navigation.findNavController(this.getView()).navigate(R.id.action_displayDrugDetailsFragment_to_editDrugFramgent);
     }
 }

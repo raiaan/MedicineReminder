@@ -13,7 +13,7 @@
         android:title="@string/takerPage"/>
 
     <item
-        android:id="@+id/medicineIconFragment"
+        android:id="@+id/medictionFragment"
         android:enabled="true"
         android:icon="@drawable/medicine_icon"
         android:title="@string/medicinePage"/>
