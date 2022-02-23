@@ -6,9 +6,11 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+
 @Entity(tableName = "drugTable")
-public class Drug {
+public class Drug implements Serializable {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "name")
@@ -30,7 +32,6 @@ public class Drug {
     @ColumnInfo(name = "lastTime")
     @Ignore
     public LastTime lastTime;
-
     @ColumnInfo(name = "reasons")
     public String reasons;
     @ColumnInfo(name = "left")

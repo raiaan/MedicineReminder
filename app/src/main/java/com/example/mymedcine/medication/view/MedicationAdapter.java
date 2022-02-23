@@ -54,14 +54,14 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Vi
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                medicationInterface.onMedecineClickListener(view);
+                medicationInterface.onMedecineClickListener(view,holder.getAdapterPosition());
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return drugList.size();
+        return drugList==null? 0 :drugList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
