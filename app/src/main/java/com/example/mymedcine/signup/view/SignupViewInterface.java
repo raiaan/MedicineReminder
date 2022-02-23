@@ -1,11 +1,7 @@
 package com.example.mymedcine.signup.view;
 
-public interface SignupViewInterface {
+import com.example.mymedcine.network.FirebaseConnectionDelegated;
+
+public interface SignupViewInterface extends FirebaseConnectionDelegated {
     void signup();
-
-    void showSuccessfulSignup();
-
-    void ShowFiledSignup();
-
-    void showTryAgain();
 }

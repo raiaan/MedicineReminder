@@ -41,5 +41,8 @@ public interface MedDAO {
     @Update
     void update(Prescription prescription);
 
+    @Query("SELECT * FROM drugTable WHERE isDaily LIKE 1 OR days LIKE '%'|| :day || '%' ")
+    LiveData<List<Drug>> getAllDrugsOfTheDay(String day);
+
 }
 

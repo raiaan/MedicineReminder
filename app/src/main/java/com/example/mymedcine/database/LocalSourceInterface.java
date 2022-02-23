@@ -11,4 +11,5 @@ public interface LocalSourceInterface {
     void  delete(Drug drug);
     void  update(Drug drug);
     LiveData<List<Drug>> getAllStoredDrugs();
+    LiveData<List<Drug>> getAllDrugsOfTheDay(String day);
 }

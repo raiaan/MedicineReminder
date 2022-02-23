@@ -65,4 +65,5 @@
     <string name="add_health_taker">Add health taker</string>
     <string name="send">send invitation</string>
     <string name="add_med">Add med</string>
+    <string name="resetPassword">هل نسيت كلمة المرور</string>
 </resources>

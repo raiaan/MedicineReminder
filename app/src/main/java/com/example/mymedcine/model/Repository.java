@@ -1,5 +1,6 @@
 package com.example.mymedcine.model;
 
+import android.app.Activity;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
@@ -7,32 +8,45 @@ import androidx.lifecycle.LiveData;
 import com.example.mymedcine.database.AppDataBase;
 import com.example.mymedcine.database.LocalSourceInterface;
 import com.example.mymedcine.database.MedDAO;
+import com.example.mymedcine.network.FireBaseConnection;
+import com.example.mymedcine.network.FireBaseConnectionInterface;
+import com.example.mymedcine.network.FirebaseConnectionDelegated;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Repository implements RepositoryInterface {
 
+    Context context;
     LocalSourceInterface localSource;
+    FireBaseConnectionInterface fireBaseConnection;
     private static Repository repository = null;
-    private Context context;
+
+    private Repository(Context context, LocalSourceInterface localSource, FireBaseConnectionInterface fireBaseConnection) {
+        this.context = context;
+        this.localSource = localSource;
+        this.fireBaseConnection = fireBaseConnection;
+    }
+
     static MedDAO medDAO;
 
     public Repository(Context context) {
         this.context = context;
-        AppDataBase medData = AppDataBase.getInstance(context.getApplicationContext());
+   }
+/*
+    public Repository(Activity activity) {
+        AppDataBase medData = AppDataBase.getInstance(activity.getApplicationContext());
+        fireBaseConnection = FireBaseConnection.getInstance();
         medDAO = medData.medDao();
-    }
+    }*/
 
-    private Repository(LocalSourceInterface localSource, Context context) {
-        this.localSource = localSource;
-        this.context = context;
-    }
 
-    public static Repository getInstance(LocalSourceInterface localSource, Context context) {
+
+
+
+    public static Repository getInstance(FireBaseConnectionInterface fireBaseConnection,LocalSourceInterface localSource, Context context) {
         if (repository == null) {
-            repository = new Repository(localSource, context);
-
+            repository = new Repository(context, localSource,fireBaseConnection);
         }
         return repository;
     }
@@ -64,5 +78,30 @@ public class Repository implements RepositoryInterface {
     @Override
     public LiveData<List<Drug>> getStoredDrugs() {
         return localSource.getAllStoredDrugs();
+    }
+
+    @Override
+    public LiveData<List<Drug>> getAllDrugsForTheDay(String day) {
+        return localSource.getAllDrugsOfTheDay(day);
+    }
+
+    @Override
+    public void signup(User user, FirebaseConnectionDelegated delegated) {
+        fireBaseConnection.signup(user, delegated);
+    }
+
+    @Override
+    public void login(User user, FirebaseConnectionDelegated delegated) {
+        fireBaseConnection.login(user, delegated);
+    }
+
+    @Override
+    public boolean resetPassword(String email, FirebaseConnectionDelegated delegated) {
+        return fireBaseConnection.resetPassword(email,delegated);
+    }
+
+    @Override
+    public boolean isUserSignedUp() {
+        return fireBaseConnection.isUserSignIn();
     }
 }

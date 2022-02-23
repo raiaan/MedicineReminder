@@ -21,6 +21,7 @@ import com.example.mymedcine.medication.presenter.MedecationInterface;
 import com.example.mymedcine.medication.presenter.MedecationPresenter;
 import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.Repository;
+import com.example.mymedcine.network.FireBaseConnection;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Arrays;
@@ -66,8 +67,8 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        presenter = new MedecationPresenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(getContext())
-                , getContext()));
+        presenter = new MedecationPresenter(getContext(), Repository.getInstance(FireBaseConnection.getInstance(),ConcreteLocalSource.getInstance(getContext()),getContext())
+                ,this);
 
         presenter.getMeds();
         showData(null);

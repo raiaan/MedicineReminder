@@ -19,21 +19,10 @@ import com.example.mymedcine.utils.SharedPreferencesUtils;
 
 public class SplashScreen extends AppCompatActivity {
 
-    SharedPreferences sharedPreferences;
-    boolean login;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
-        sharedPreferences = getSharedPreferences(SharedPreferencesUtils.FILE_NAME, MODE_PRIVATE);
-
-        if(savedInstanceState != null){
-            login = savedInstanceState.getBoolean(SharedPreferencesUtils.LOGIN_KEY);
-        } else {
-            login = false;
-        }
 
         Handler handler = new Handler(Looper.myLooper());
         handler.postDelayed(new MyRunnable(),3000);
@@ -44,22 +33,9 @@ public class SplashScreen extends AppCompatActivity {
 
         @Override
         public void run() {
-            Intent intent;
-            Toast.makeText(SplashScreen.this, ""+login, Toast.LENGTH_SHORT).show();
-            if (login){
-                intent = new Intent(SplashScreen.this, HomeActivity.class);
-            }else {
-                intent = new Intent(SplashScreen.this, LoginActivity.class);
-            }
+            Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
             startActivity(intent);
             finish();
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(SharedPreferencesUtils.LOGIN_KEY,
-                sharedPreferences.getBoolean(SharedPreferencesUtils.LOGIN_KEY, false));
     }
 }

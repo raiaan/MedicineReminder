@@ -1,17 +1,21 @@
 package com.example.mymedcine.medication.presenter;
 
+import android.content.Context;
+
 import com.example.mymedcine.medication.view.OnMedecationInterface;
 import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.RepositoryInterface;
 
 public class MedecationPresenter implements MedecationInterface{
-
-    OnMedecationInterface view;
+      Context context;
     RepositoryInterface repo;
 
-    public MedecationPresenter(OnMedecationInterface view, RepositoryInterface repo) {
-        this.view = view;
+    OnMedecationInterface view;
+
+    public MedecationPresenter(Context context, RepositoryInterface repo, OnMedecationInterface view) {
+        this.context = context;
         this.repo = repo;
+        this.view = view;
     }
 
     @Override
