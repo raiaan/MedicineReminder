@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
 
         /** end after 1 month from now */
         endDate = Calendar.getInstance();
-        endDate.add(Calendar.WEEK_OF_MONTH, 1);
+        endDate.add(Calendar.WEEK_OF_MONTH, 2);
         /** start now */
         startDate = Calendar.getInstance();
 
@@ -63,9 +63,9 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
         horizontalCalendar = new HorizontalCalendar.Builder(view, R.id.calendarView)
                 .startDate(startDate.getTime())
                 .endDate(endDate.getTime())
-                .datesNumberOnScreen(4)
+                .datesNumberOnScreen(5)
                 .showMonthName(false)
-                .textColor(android.R.color.holo_blue_dark, android.R.color.white )
+                .textColor(R.color.black, R.color.teal_200)
                 .build();
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override

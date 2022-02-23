@@ -52,4 +52,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     // dependencies for signing in with google
     implementation 'com.google.android.gms:play-services-auth:20.1.0'
+    //workManger
+    implementation "androidx.work:work-runtime:2.7.1"
 }

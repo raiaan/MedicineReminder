@@ -65,9 +65,7 @@
     <string name="add_health_taker">Add health taker</string>
     <string name="send">send invitation</string>
     <string name="add_med">Add med</string>
-<<<<<<< HEAD
     <string name="resetPassword">هل نسيت كلمة المرور</string>
-=======
     <string name="save">Save</string>
     <string name="edit_medicine_drug_schdule_label">Schedul</string>
     <string name="edit_medicine_drug_med_icon_label">Med Icon</string>
@@ -99,5 +97,7 @@
     <string name="Friday">Friday</string>
     <string name="edit_medicine_select_hours">hours_reminders</string>
     <string name="three_times">three times a day</string>
->>>>>>> edd51967772c95adaabc754a241d56abed34fb54
+    <string name="chronic_disease">Is chronic disease?</string>
+    <string name="edit_drug_end_date">End Date</string>
+
 </resources>

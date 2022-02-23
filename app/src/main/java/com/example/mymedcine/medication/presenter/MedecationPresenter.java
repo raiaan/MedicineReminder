@@ -1,11 +1,9 @@
 package com.example.mymedcine.medication.presenter;
 
-<<<<<<< HEAD
 import android.content.Context;
-=======
+
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
->>>>>>> edd51967772c95adaabc754a241d56abed34fb54
 
 import com.example.mymedcine.medication.view.OnMedecationInterface;
 import com.example.mymedcine.model.Drug;

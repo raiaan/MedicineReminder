@@ -34,6 +34,7 @@ import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.LastTime;
 import com.example.mymedcine.model.RemindingTimes;
 import com.example.mymedcine.model.Repository;
+import com.example.mymedcine.network.FireBaseConnection;
 import com.example.mymedcine.utils.IconsFactory;
 import com.example.mymedcine.utils.SimpleSpinnerAdapter;
 import com.example.mymedcine.utils.ViewDrugConvertor;
@@ -66,8 +67,7 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_medecine, container, false);
-        drugAdder = new AddDrugPresenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(getContext())
-                , getContext()));
+        drugAdder = new AddDrugPresenter(this, Repository.getInstance(FireBaseConnection.getInstance(),ConcreteLocalSource.getInstance(getContext()), getContext()));
         return view;
     }
 

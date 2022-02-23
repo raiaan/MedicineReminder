@@ -94,9 +94,7 @@
     <string name="createAccount">create a new one</string>
     <string name="login">Login</string>
     <string name="registeration">Sign up</string>
-<<<<<<< HEAD
     <string name="resetPassword">Forget your password?</string>
-=======
     <string name="save">Save</string>
     <string name="edit_medicine_drug_schdule_label">Schedul</string>
     <string name="edit_medicine_drug_med_icon_label">Med Icon</string>
@@ -123,5 +121,4 @@
     <string name="three_times">three times a day</string>
     <string name="chronic_disease">Is chronic disease?</string>
     <string name="edit_drug_end_date">End Date</string>
->>>>>>> edd51967772c95adaabc754a241d56abed34fb54
 </resources>

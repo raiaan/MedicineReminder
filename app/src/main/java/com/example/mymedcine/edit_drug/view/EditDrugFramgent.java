@@ -17,6 +17,7 @@ import com.example.mymedcine.edit_drug.presenter.UpdateDrugPresenter;
 import com.example.mymedcine.edit_drug.presenter.UpdateDrugPresenterInterface;
 import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.Repository;
+import com.example.mymedcine.network.FireBaseConnection;
 import com.example.mymedcine.utils.IconsFactory;
 import com.example.mymedcine.utils.SimpleSpinnerAdapter;
 
@@ -48,8 +49,11 @@ public class EditDrugFramgent extends Fragment implements EditDrugInterface{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenterInterface = new UpdateDrugPresenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(getContext())
-                , getContext()));
+        presenterInterface = new UpdateDrugPresenter(this,
+                Repository.getInstance(
+                        FireBaseConnection.getInstance(),
+                        ConcreteLocalSource.getInstance(getContext())
+                        , getContext()));
     }
 
     @Override
