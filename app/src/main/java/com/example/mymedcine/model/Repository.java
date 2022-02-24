@@ -2,8 +2,13 @@ package com.example.mymedcine.model;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import com.example.mymedcine.database.AppDataBase;
 import com.example.mymedcine.database.LocalSourceInterface;
@@ -11,12 +16,20 @@ import com.example.mymedcine.database.MedDAO;
 import com.example.mymedcine.network.FireBaseConnection;
 import com.example.mymedcine.network.FireBaseConnectionInterface;
 import com.example.mymedcine.network.FirebaseConnectionDelegated;
+import com.example.mymedcine.utils.MyWorker;
 
+import java.sql.SQLOutput;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class Repository implements RepositoryInterface {
 
+    String TAG = "TAG";
     Context context;
     LocalSourceInterface localSource;
     FireBaseConnectionInterface fireBaseConnection;
@@ -69,6 +82,11 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public void insertDrug(Drug drug) {
+        long[] times = {1526400560, 526405060, 612640560};
+        for (int i = 0; i < times.length; i ++){
+            System.out.println("doaa" + calculateDelay(times)[i] );
+        }
+        setDrugAlarms(calculateDelay(times));
         localSource.insert(drug);
     }
 
@@ -114,5 +132,30 @@ public class Repository implements RepositoryInterface {
     @Override
     public void updateData(Drug drug) {
         localSource.update(drug);
+    }
+
+    private long[] calculateDelay(long[] times){
+        long[] delay = new long[times.length];
+        long currentTime = System.currentTimeMillis();
+        // time as milliseconds for date and time
+        for(int i = 0; i < times.length; i ++){
+            Date date = new Date(times[i]);
+            Long time = date.getTime();
+            delay[i] = time - currentTime;
+        }
+        return delay;
+    }
+
+    private void setDrugAlarms(long[] delays){
+        for(int i = 0; i < delays.length; i ++){
+            PeriodicWorkRequest drugAlarm = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.DAYS)
+                    .addTag(TAG)
+                    .setInitialDelay(Duration.ofMillis(delays[i]))
+                    .build();
+
+            WorkManager workManager = WorkManager.getInstance(context.getApplicationContext());
+            workManager.enqueue(drugAlarm);
+            System.out.println("alarm set");
+        }
     }
 }
