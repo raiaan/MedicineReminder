@@ -33,16 +33,25 @@ public class Converter {
         Type listType = new TypeToken<ArrayList<String>>() {}.getType();
         return new Gson().fromJson(value, listType);
     }
-//
-//    @TypeConverter
-//    public String fromDaysToGson(ArrayList<String> days){
-//        return new Gson().toJson(days);
-//    }
-//
-//    @TypeConverter
-//    public static ArrayList<String> fromGsonToDays(String value) {
-//        Type listType = new TypeToken<ArrayList<String>>() {}.getType();
-//        return new Gson().fromJson(value, listType);
-//    }
+    @TypeConverter
+    public static ArrayList<Long> fromGsonToHours(String value) {
+        Type listType = new TypeToken<ArrayList<Long>>() {}.getType();
+        return new Gson().fromJson(value, listType);
+    }
+    @TypeConverter
+    public static String fromHoursToGson(ArrayList<Long> value) {
+        return new Gson().toJson(value);
+    }
+
+    /*@TypeConverter
+    public String fromDaysToGson(ArrayList<String> days){
+        return new Gson().toJson(days);
+    }
+
+    @TypeConverter
+    public static ArrayList<String> fromGsonToDays(String value) {
+        Type listType = new TypeToken<ArrayList<String>>() {}.getType();
+        return new Gson().fromJson(value, listType);
+    }*/
 
 }

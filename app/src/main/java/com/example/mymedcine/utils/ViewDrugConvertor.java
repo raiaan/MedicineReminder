@@ -2,6 +2,7 @@ package com.example.mymedcine.utils;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -17,6 +18,8 @@ import com.example.mymedcine.model.RemindingTimes;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ViewDrugConvertor {
     private static String drugName;
@@ -25,13 +28,50 @@ public class ViewDrugConvertor {
     private static String condition;
     private static String instructions;
     public static Drug convertToDrug(View view){
-        int instructionID;
         Drug drug = new Drug();
         drugName= ((TextView) view.findViewById(R.id.edit_drug_name)).getText().toString();
         type= ((Spinner) view.findViewById(R.id.edit_drug_types)).getSelectedItem().toString();
         chronicDisease = ((Switch)view.findViewById(R.id.edit_drug_chronic_disease)).isChecked();
         condition = ((TextView)view.findViewById(R.id.edit_drug_condition)).getText().toString();
-        instructionID = ((RadioGroup)view.findViewById(R.id.edit_drug_instruction_radio_group)).getCheckedRadioButtonId();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        ArrayList<String> left= new ArrayList<>();
+        left.add("3");
+        left.add("refill at 3 pm");
+        drug.setName(drugName);
+        drug.setType(type);
+        drug.setChoronic(chronicDisease);
+        drug.setReasons(condition);
+        drug.setHours(getCompleteTimes(view));
+        drug.setOccurrence("daily");
+        drug.setStartDate(dtf.format(now));
+        drug.setEndDate(""+convertDateToString(view));
+        drug.setInstructions(new ArrayList<>(getInstructions(view)));
+        drug.setState("active");
+        drug.setStrongUnit("500");
+        drug.setStrongValue("g");
+        return drug;
+    }
+    private static ArrayList<Long> getCompleteTimes(View view){
+        String hours_repeat = ( (Spinner)view.findViewById(R.id.edit_drug_reminding_hours_per_day) )
+                .getSelectedItem().toString();
+        ArrayList<Long> hours = new ArrayList<>();
+        if (hours_repeat.equals("once a day")){
+            hours.add(getCalender(view, R.id.hours_picker_1));
+        }
+        else if (hours_repeat.equals("twice a day")){
+            hours.add(getCalender(view,R.id.hours_picker_2));
+            hours.add( getCalender(view, R.id.hours_picker_2) );
+        }
+        else if (hours_repeat.equals("three times a day")){
+            hours.add( getCalender(view, R.id.hours_picker_1));
+            hours.add(getCalender(view, R.id.hours_picker_2));
+            hours.add(getCalender(view, R.id.hours_picker_3));
+        }
+        return hours;
+    }
+    private static ArrayList<String> getInstructions(View view){
+        int instructionID = ((RadioGroup)view.findViewById(R.id.edit_drug_instruction_radio_group)).getCheckedRadioButtonId();
         ArrayList<String> instruction = new ArrayList<>();
         switch (instructionID){
             case R.id.edit_drug_before_eating:
@@ -52,61 +92,23 @@ public class ViewDrugConvertor {
         if (!tempmore.isEmpty() && tempmore != null) {
             instruction.add(tempmore);
         }
-
-        RemindingTimes remindingTimes = new RemindingTimes("daily",getCompleteTimes(view));
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        remindingTimes.setStartDate(dtf.format(now));
-        ArrayList<String> left= new ArrayList<>();
-        left.add("3");
-        left.add("refill at 3 pm");
-        drug.setName(drugName);
-        drug.setType(type);
-        drug.setChoronic(chronicDisease);
-        drug.setReasons(condition);
-        drug.setRemindingTimes(remindingTimes);
-        drug.setInstructions(new ArrayList<>(instruction));
-        drug.setState("active");
-        drug.setStrongUnit("500");
-        drug.setStrongValue("g");
-        return drug;
+        return instruction;
     }
-    private static ArrayList<String> getCompleteTimes(View view){
-        String hours_repeat = ( (Spinner)view.findViewById(R.id.edit_drug_reminding_hours_per_day) )
-                .getSelectedItem().toString();
-        ArrayList<String> hours = new ArrayList<>();
-        if (hours_repeat.equals("once a day")){
-            hours.add(
-                   ((TimePicker)view.findViewById(R.id.hours_picker_1)).getHour()+":"+
-                           ((TimePicker)view.findViewById(R.id.hours_picker_1)).getMinute()+" "
-            );
-        }
-        else if (hours_repeat.equals("twice a day")){
-            hours.add(
-                    ((TimePicker)view.findViewById(R.id.hours_picker_1)).getHour()+":"+
-                            ((TimePicker)view.findViewById(R.id.hours_picker_1)).getMinute()+" "
-            );
-            hours.add(
-
-                    ((TimePicker)view.findViewById(R.id.hours_picker_2)).getHour()+":"+
-                            ((TimePicker)view.findViewById(R.id.hours_picker_2)).getMinute()+" "
-            );
-        }
-        else if (hours_repeat.equals("")){
-            hours.add(
-                    ((TimePicker)view.findViewById(R.id.hours_picker_1)).getHour()+":"+
-                            ((TimePicker)view.findViewById(R.id.hours_picker_1)).getMinute()+" "
-            );
-            hours.add(
-
-                    ((TimePicker)view.findViewById(R.id.hours_picker_2)).getHour()+":"+
-                            ((TimePicker)view.findViewById(R.id.hours_picker_2)).getMinute()+" "
-            );
-            hours.add(
-                    ((TimePicker)view.findViewById(R.id.hours_picker_3)).getHour()+":"+
-                            ((TimePicker)view.findViewById(R.id.hours_picker_3)).getMinute()+" "
-            );
-        }
-        return hours;
+    public static long convertDateToString(View parentView){
+        int year =  ( (DatePicker)parentView.findViewById(R.id.edit_drug_end_date_picker_date) ).getYear();
+        int month = ( (DatePicker)parentView.findViewById(R.id.edit_drug_end_date_picker_date) ).getMonth();
+        int day = ( (DatePicker)parentView.findViewById(R.id.edit_drug_end_date_picker_date) ).getDayOfMonth();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        return calendar.getTimeInMillis();
+    }
+    private static Long getCalender(View view, int id){
+        Calendar calendar = Calendar.getInstance();
+        TimePicker timePicker = (TimePicker)view.findViewById(id);
+        calendar.set(Calendar.HOUR_OF_DAY,timePicker.getCurrentHour());
+        calendar.set(Calendar.MINUTE,timePicker.getCurrentMinute());
+        return calendar.getTimeInMillis();
     }
 }

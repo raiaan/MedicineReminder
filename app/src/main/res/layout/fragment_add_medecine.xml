@@ -94,6 +94,10 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/edit_drug_end_date"
                     android:minHeight="48dp" />
+                <DatePicker android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_drug_end_date_picker_date"
+                    android:visibility="gone"/>
                 <Spinner
                     android:id="@+id/edit_drug_reminding_hours_per_day"
                     android:layout_width="match_parent"
