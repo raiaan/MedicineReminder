@@ -6,5 +6,5 @@ import com.example.mymedcine.model.Prescription;
 public interface DrugDisplayer {
     void displayDrugDetails(Drug drug);
     void deleteDrugSuccess();
-    void navigateToEditDrug();
+    void navigateToEditDrug(Drug drug);
 }

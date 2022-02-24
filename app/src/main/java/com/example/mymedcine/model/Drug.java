@@ -5,6 +5,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
+
+import com.example.mymedcine.database.Converter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,7 +30,6 @@ public class Drug implements Serializable {
     @Ignore
     public RemindingTimes remindingTimes;
     @ColumnInfo(name = "instructions")
-    @Ignore
     public ArrayList<String> instructions;
     @ColumnInfo(name = "lastTime")
     @Ignore
@@ -40,7 +42,6 @@ public class Drug implements Serializable {
     public boolean isChoronic;
     @ColumnInfo(name="occurrence")
     public String occurrence;
-    @Ignore
     public ArrayList<Long> hours;
     @ColumnInfo(name ="endDate")
     public String endDate;
@@ -62,7 +63,17 @@ public class Drug implements Serializable {
     public ArrayList<Long> getHours() {
         return hours;
     }
-
+    public String getStringHours(){
+        String result = null;
+        if(hours != null){
+            for (Long hour : hours){
+                if(result == null){
+                    result = String.valueOf(hour);
+                }else result +="\n"+ hour;
+            }
+        }
+        return result == null? "No Reminding Hours Added": result;
+    }
     public void setHours(ArrayList<Long> hours) {
         this.hours = hours;
     }
@@ -174,10 +185,12 @@ public class Drug implements Serializable {
 
     public String getInstructions() {
         String result= null;
-        for (String instruct : instructions){
-            if (instruct == null){
-                result = instruct;
-            }else result +="\n" + instruct;
+        if (instructions!=null){
+            for (String instruct : instructions){
+                if (instruct == null){
+                    result = instruct;
+                }else result +="\n" + instruct;
+            }
         }
         return result;
 

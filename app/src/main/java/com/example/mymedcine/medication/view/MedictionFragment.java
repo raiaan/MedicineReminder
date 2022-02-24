@@ -77,15 +77,7 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
                 , getContext()));
 
         presenter.getMedsToSendIt(this);
-        showData(null);
-        addMed(drug);
-        addMed(drug2);
-        addMed(drug3);
-        addMed(drug4);
-        addMed(drug5);
-        addMed(drug6);
-        addMed(drug7);
-        addMed(drug8);
+
     }
 
     @Override
@@ -104,7 +96,7 @@ public class MedictionFragment extends Fragment implements OnMedecationInterface
 
         Drug drugClick = drugList.get(position);
         Bundle outcomeBundle = new Bundle();
-        outcomeBundle.putSerializable("abc", drugClick);
+        outcomeBundle.putSerializable("drug", drugClick);
         Navigation.findNavController(view).navigate(R.id.action_medictionFragment_to_displayDrugDetailsFragment, outcomeBundle);
     }
 
