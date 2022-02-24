@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/medicine_icon"
+    android:background="#E8E8E8"
     tools:context=".splashScreen.SplashScreen">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/medicine_icon"
+        android:id="@+id/splash_icom"
+        android:layout_marginHorizontal="32dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
