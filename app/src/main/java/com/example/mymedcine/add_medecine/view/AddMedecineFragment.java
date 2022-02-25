@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import com.example.mymedcine.R;
@@ -25,17 +26,22 @@ import com.example.mymedcine.network.FireBaseConnection;
 import com.example.mymedcine.utils.IconsFactory;
 import com.example.mymedcine.utils.SimpleSpinnerAdapter;
 import com.example.mymedcine.utils.ViewDrugConvertor;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+
 import java.util.Arrays;
+import java.util.Random;
 
 public class AddMedecineFragment extends Fragment implements AddMedecineInterface{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    Spinner typesSpinner, hoursInDaySpinner;
-    ArrayAdapter<CharSequence> hoursInDayAdapter;
-    Button addToDB;
+    Spinner typesSpinner, hoursInDaySpinner,strengthUnitSpinner;
+    ArrayAdapter<CharSequence> hoursInDayAdapter,strengthUnitAdapter;
+    MaterialButton addToDB;
     SimpleSpinnerAdapter typesAdapter;
     DrugAdder drugAdder;
+    ImageView closeBtn;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +73,7 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
         initTypeSpinner(parentView);
         addToDB = parentView.findViewById(R.id.save_drug);
         addToDB.setOnClickListener(view -> drugAdder.addDrug(ViewDrugConvertor.convertToDrug(parentView)));
-        ( (Switch)parentView.findViewById(R.id.edit_drug_chronic_disease) )
+        ( (SwitchMaterial)parentView.findViewById(R.id.edit_drug_chronic_disease) )
                 .setOnCheckedChangeListener((compoundButton, b) -> {
                     if (b){
                         parentView.findViewById(R.id.edit_drug_end_date).setVisibility(View.GONE);
@@ -78,6 +84,9 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
                     }
                 });
         inithoursInDaySpinner(parentView);
+        closeBtn = parentView.findViewById(R.id.add_drug_close_btn);
+        closeBtn.setOnClickListener(view -> Navigation.findNavController(parentView).popBackStack());
+        initStrengthUnitSpinner(parentView);
     }
 
     private void initTypeSpinner(View view){
@@ -120,7 +129,7 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
         });
     }
     private void toggleRefillContainers(View parentView){
-        ( (Switch)parentView.findViewById(R.id.edit_drug_refill_reminder_switch))
+        ( (SwitchMaterial)parentView.findViewById(R.id.edit_drug_refill_reminder_switch))
                 .setOnCheckedChangeListener((compoundButton, b) -> {
                     if (b){
                         showHideRefillView(parentView , View.VISIBLE);
@@ -134,5 +143,10 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
         view.findViewById(R.id.edit_drug_refill_reminder_notify).setVisibility(visibiltiy);
         view.findViewById(R.id.edit_drug_current_amount_label).setVisibility(visibiltiy);
         view.findViewById(R.id.edit_drug_refill_reminder_notify_label).setVisibility(visibiltiy);
+    }
+    private void initStrengthUnitSpinner(View parentView){
+        strengthUnitSpinner= parentView.findViewById(R.id.edit_drug_strength_unit);
+        strengthUnitAdapter = ArrayAdapter.createFromResource(this.getContext(),R.array.units, android.R.layout.simple_spinner_item);
+        strengthUnitSpinner.setAdapter(strengthUnitAdapter);
     }
 }

@@ -100,10 +100,9 @@
     <string name="edit_medicine_drug_med_icon_label">Med Icon</string>
     <string name="edit_medicine_drug_condition_label">Condition</string>
     <string name="edit_medicine_drug_med_strength_label">Strength</string>
-    <string name="edit_medicine_drug_instruction_label">Instruction</string>
+    <string name="edit_medicine_drug_instruction_label">Instruction \nShould this be taken with food?</string>
     <string name="edit_medicine_drug_refill_label">Refill Reminder</string>
     <string name="edit_drug_current_amount">Amount of meds</string>
-    <string name="instructions_mini_text">Should this be taken with food?</string>
     <string name="edit_drug_before_eating">Before eating</string>
     <string name="edit_drug_while_eating">While eating</string>
     <string name="edit_drug_after_eating">After eating</string>
@@ -123,4 +122,5 @@
     <string name="edit_drug_end_date">End Date</string>
     <string name="edit_drug_refill_reminder_switch">Drug Refill Reminder</string>
     <string name="edit_drug_refill_reminder_notify">How many meds do you want reminding before you get a refill Reminder</string>
+    <string name="add_drug_toolbar_Title">Add Medecine</string>
 </resources>

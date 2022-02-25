@@ -7,9 +7,6 @@
     android:background="@color/white"
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
     tools:context=".homescreen.HomeActivity">
-
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMedication"
         android:layout_width="0dp"

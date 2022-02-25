@@ -40,8 +40,11 @@ public class Drug implements Serializable {
     public LastTime lastTime;
     @ColumnInfo(name = "reasons")
     public String reasons;
+    public Boolean remindRefill;
+    public int refillRemindCount;
+    public long refillRemindTime;
     @ColumnInfo(name = "left")
-    public String left;
+    public int left;
     @ColumnInfo(name = "is_chronic")
     public boolean isChoronic;
     @ColumnInfo(name="occurrence")
@@ -51,6 +54,30 @@ public class Drug implements Serializable {
     public String endDate;
     @ColumnInfo(name = "startDate")
     public String startDate;
+
+    public Boolean getRemindRefill() {
+        return remindRefill;
+    }
+
+    public void setRemindRefill(Boolean remindRefill) {
+        this.remindRefill = remindRefill;
+    }
+
+    public int getRefillRemindCount() {
+        return refillRemindCount;
+    }
+
+    public void setRefillRemindCount(int refillRemindCount) {
+        this.refillRemindCount = refillRemindCount;
+    }
+
+    public long getRefillRemindTime() {
+        return refillRemindTime;
+    }
+
+    public void setRefillRemindTime(long refillRemindTime) {
+        this.refillRemindTime = refillRemindTime;
+    }
 
     public boolean isChoronic() {
         return isChoronic;
@@ -109,7 +136,7 @@ public class Drug implements Serializable {
         isChoronic = choronic;
     }
 
-    public Drug(String name, String type, String strongValue, String strongUnit, String state, LastTime lastTime, RemindingTimes remindingTimes, ArrayList<String> instructions, String reasons, String left) {
+    public Drug(String name, String type, String strongValue, String strongUnit, String state, LastTime lastTime, RemindingTimes remindingTimes, ArrayList<String> instructions, String reasons, int left) {
         this.name = name;
         this.type = type;
         this.strongValue = strongValue;
@@ -213,11 +240,11 @@ public class Drug implements Serializable {
         this.reasons = reasons;
     }
 
-    public String getLeft() {
+    public int getLeft() {
         return left;
     }
 
-    public void setLeft(String left) {
+    public void setLeft(int left) {
         this.left = left;
     }
 

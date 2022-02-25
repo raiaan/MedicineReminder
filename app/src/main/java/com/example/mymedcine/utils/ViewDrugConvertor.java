@@ -1,8 +1,8 @@
 package com.example.mymedcine.utils;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -12,44 +12,59 @@ import android.widget.TimePicker;
 
 import com.example.mymedcine.R;
 import com.example.mymedcine.model.Drug;
-import com.example.mymedcine.model.LastTime;
-import com.example.mymedcine.model.RemindingTimes;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class ViewDrugConvertor {
-    private static String drugName;
-    private static String type;
-    private static Boolean chronicDisease;
-    private static String condition;
     private static String instructions;
     public static Drug convertToDrug(View view){
         Drug drug = new Drug();
-        drugName= ((TextView) view.findViewById(R.id.edit_drug_name)).getText().toString();
-        type= ((Spinner) view.findViewById(R.id.edit_drug_types)).getSelectedItem().toString();
-        chronicDisease = ((Switch)view.findViewById(R.id.edit_drug_chronic_disease)).isChecked();
-        condition = ((TextView)view.findViewById(R.id.edit_drug_condition)).getText().toString();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
+
         ArrayList<String> left= new ArrayList<>();
         left.add("3");
         left.add("refill at 3 pm");
-        drug.setName(drugName);
-        drug.setType(type);
-        drug.setChoronic(chronicDisease);
-        drug.setReasons(condition);
+        drug.setName(
+                ((TextView) view.findViewById(R.id.edit_drug_name)).getText().toString());
+
+        drug.setType(
+                ((Spinner) view.findViewById(R.id.edit_drug_types)).getSelectedItem().toString() );
+
+        drug.setChoronic(
+                ((SwitchMaterial)view.findViewById(R.id.edit_drug_chronic_disease)).isChecked());
+
+        drug.setReasons(
+                ((TextView)view.findViewById(R.id.edit_drug_condition)).getText().toString());
+
         drug.setHours(getCompleteTimes(view));
         drug.setOccurrence("daily");
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         drug.setStartDate(dtf.format(now));
+
         drug.setEndDate(""+convertDateToString(view));
         drug.setInstructions(new ArrayList<>(getInstructions(view)));
         drug.setState("active");
-        drug.setStrongUnit("500");
-        drug.setStrongValue("g");
+
+        drug.setStrongUnit( ((Spinner)view.findViewById(R.id.edit_drug_strength_unit)).getSelectedItem().toString());
+        drug.setStrongValue(((TextView)view.findViewById(R.id.edit_drug_strength_value)).getText().toString());
+        Boolean refillActive = ((SwitchMaterial)view.findViewById(R.id.edit_drug_refill_reminder_switch)).isChecked();
+        drug.setRemindRefill(refillActive);
+
+        if (refillActive){
+
+            drug.setLeft(Integer.valueOf(
+                    ( (EditText)view.findViewById(R.id.edit_drug_current_number)).getText().toString()
+            ));
+            drug.setRefillRemindCount(Integer.valueOf(
+                    ((EditText)view.findViewById(R.id.edit_drug_refill_reminder_notify)).getText().toString()
+            ));
+        }
+
         return drug;
     }
     private static ArrayList<Long> getCompleteTimes(View view){
