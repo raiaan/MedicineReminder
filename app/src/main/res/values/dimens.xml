@@ -5,4 +5,7 @@
     <dimen name="important_text">16sp</dimen>
     <dimen name="small_margin">8sp</dimen>
     <dimen name="appbar_icon_margin">24</dimen>
+
+
+    <dimen name="elevation_size">8dp</dimen>
 </resources>

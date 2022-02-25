@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,13 +102,12 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
             if (drug.getReasons() != null){
                 reasons.setText(drug.getReasons());
             }
-            if (drug.getLeft() != null){
-                refills.setText(drug.getLeft());
-            }
+            refills.setText(String.valueOf(drug.getLeft()));
+
             editItem.setOnClickListener(view -> {
                 navigateToEditDrug(drug);
             });
-            refills.setText(drug.getLeft());
+            refills.setText(""+drug.getLeft());
             removeItem.setOnClickListener(view -> presentable.deleteDrug(drug));
         }
     }

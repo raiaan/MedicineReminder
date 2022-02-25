@@ -98,4 +98,7 @@
     <string name="three_times">three times a day</string>
     <string name="chronic_disease">Is chronic disease?</string>
     <string name="edit_drug_end_date">End Date</string>
+    <string name="add_drug_toolbar_Title">Add Medecine</string>
+    <string name="edit_drug_refill_reminder_switch">Drug Refill Reminder</string>
+    <string name="edit_drug_refill_reminder_notify">How many meds do you want reminding before you get a refill Reminder</string>
 </resources>
