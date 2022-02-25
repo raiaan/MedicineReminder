@@ -1,29 +1,27 @@
 package com.example.mymedcine.splashScreen;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.Toast;
+import android.view.animation.AnimationUtils;
 
 import com.example.mymedcine.MainActivity;
 import com.example.mymedcine.R;
 import com.example.mymedcine.homescreen.HomeActivity;
 import com.example.mymedcine.login.view.LoginActivity;
-import com.example.mymedcine.utils.SharedPreferencesUtils;
 
 public class SplashScreen extends AppCompatActivity {
-
+    AppCompatImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
+        image = findViewById(R.id.splash_icom);
+        image.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotate) );
         Handler handler = new Handler(Looper.myLooper());
         handler.postDelayed(new MyRunnable(),3000);
 

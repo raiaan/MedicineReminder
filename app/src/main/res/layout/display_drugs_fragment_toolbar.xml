@@ -14,12 +14,12 @@
 
         <ImageView
             android:id="@+id/display_drug_details_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_alignParentLeft="true"
             android:layout_alignBottom="@id/display_drug_details_strength"
             android:background="@drawable/circle_background"
-            android:padding="@dimen/small_margin" />
+            android:padding="4dp"/>
 
         <TextView
             android:id="@+id/display_drug_details_title"

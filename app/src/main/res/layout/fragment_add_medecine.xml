@@ -87,7 +87,6 @@
                     android:textSize="16dp"
                     android:id="@+id/edit_drug_end_date_label"
                     />
-
                 <EditText
                     android:id="@+id/edit_drug_end_date"
                     android:layout_width="match_parent"
@@ -246,13 +245,35 @@
                 android:text="@string/edit_medicine_drug_refill_label"
                 android:textSize="16sp"
                 android:textFontWeight="600"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_drug_refill_reminder_switch"
+                android:id="@+id/edit_drug_refill_reminder_switch"
+                android:layout_gravity="end"
+                android:checked="true"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_drug_current_amount"
+                android:id="@+id/edit_drug_current_amount_label"
+                />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/edit_drug_current_number"
-                android:hint="@string/edit_drug_current_amount"/>
+                android:inputType="number"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_drug_refill_reminder_notify_label"
+                android:text="@string/edit_drug_refill_reminder_notify"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_drug_refill_reminder_notify"
+                android:inputType="number"/>
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

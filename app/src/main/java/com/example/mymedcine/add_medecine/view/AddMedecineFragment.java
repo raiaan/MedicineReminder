@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import com.example.mymedcine.R;
@@ -59,6 +60,7 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
         super.onViewCreated(view, savedInstanceState);
         initView(view);
         showDatePicker(view);
+        toggleRefillContainers(view);
     }
 
     private void initView(View parentView){
@@ -116,5 +118,21 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
         parentView.findViewById(R.id.edit_drug_end_date).setOnClickListener(view1 -> {
             parentView.findViewById(R.id.edit_drug_end_date_picker_date).setVisibility(View.VISIBLE);
         });
+    }
+    private void toggleRefillContainers(View parentView){
+        ( (Switch)parentView.findViewById(R.id.edit_drug_refill_reminder_switch))
+                .setOnCheckedChangeListener((compoundButton, b) -> {
+                    if (b){
+                        showHideRefillView(parentView , View.VISIBLE);
+                    }else{
+                        showHideRefillView(parentView , View.GONE);
+                    }
+                });
+    }
+    private void showHideRefillView(View view ,int visibiltiy){
+        view.findViewById(R.id.edit_drug_current_number).setVisibility(visibiltiy);
+        view.findViewById(R.id.edit_drug_refill_reminder_notify).setVisibility(visibiltiy);
+        view.findViewById(R.id.edit_drug_current_amount_label).setVisibility(visibiltiy);
+        view.findViewById(R.id.edit_drug_refill_reminder_notify_label).setVisibility(visibiltiy);
     }
 }

@@ -92,14 +92,23 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
             drugName.setText(drug.getName());
             drugState.setText(" ("+drug.getState()+")");
             iconType.setImageDrawable(IconsFactory.getIcon(this.getContext() , drug.getType()));
-            lastTaken.setText(drug.getLastTime().toString());
-            occurence.setText(drug.getRemindingTimes().occurrence);
-            reminders.setText(drug.getRemindingTimes().getHours());
-            instructions.setText(drug.getInstructions());
-            reasons.setText(drug.getReasons());
-            refills.setText(drug.getLeft());
+            if (drug.getLastTime() != null){
+                lastTaken.setText(drug.getLastTime().toString());
+            }
+            if (drug.getHours()!= null){
+                reminders.setText(drug.getStringHours());
+            }
+            if (drug.getInstructions()!= null){
+                instructions.setText(drug.getInstructions());
+            }
+            if (drug.getReasons() != null){
+                reasons.setText(drug.getReasons());
+            }
+            if (drug.getLeft() != null){
+                refills.setText(drug.getLeft());
+            }
             editItem.setOnClickListener(view -> {
-                navigateToEditDrug();
+                navigateToEditDrug(drug);
             });
             refills.setText(drug.getLeft());
             removeItem.setOnClickListener(view -> presentable.deleteDrug(drug));
@@ -112,7 +121,9 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
     }
 
     @Override
-    public void navigateToEditDrug() {
-        Navigation.findNavController(this.getView()).navigate(R.id.action_displayDrugDetailsFragment_to_editDrugFramgent);
+    public void navigateToEditDrug(Drug drug) {
+        Bundle outcomeBundle = new Bundle();
+        outcomeBundle.putSerializable("drug", drug);
+        Navigation.findNavController(this.getView()).navigate(R.id.action_displayDrugDetailsFragment_to_editDrugFramgent, outcomeBundle);
     }
 }
