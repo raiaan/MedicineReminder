@@ -29,12 +29,16 @@ public class HomeFragmentPresenter implements HomeFragmentPresenterInterface{
     }
 
     @Override
-    public void getAllDrugsOfTheDay(LifecycleOwner lifecycleOwner, String day) {
-        LiveData dailyDrugs = repository.getAllDrugsForTheDay(day);
+    public void getAllDrugsOfTheDay(LifecycleOwner lifecycleOwner) {
+        LiveData dailyDrugs = repository.getAllDrugsForTheDay();
         dailyDrugs.observe(lifecycleOwner, new Observer<List<Drug>>() {
             @Override
-            public void onChanged(List<Drug> movies) {
-
+            public void onChanged(List<Drug> drugs) {
+                String[] str = new String[drugs.size()];
+                for(int i = 0; i < drugs.size(); i++){
+                    str[i] = drugs.get(i).getName();
+                    System.out.println(str[i]);
+                }
             }
         });
     }

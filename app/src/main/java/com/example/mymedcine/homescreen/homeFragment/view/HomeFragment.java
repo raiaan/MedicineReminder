@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,9 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
     Calendar endDate;
     Calendar startDate;
     HorizontalCalendar horizontalCalendar;
+
+    RecyclerView mainItem;
+
     HomeFragmentPresenterInterface presenter;
     FireBaseConnectionInterface fireBaseConnection;
 
@@ -42,9 +46,10 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
 
         /** end after 1 month from now */
         endDate = Calendar.getInstance();
-        endDate.add(Calendar.WEEK_OF_MONTH, 2);
+        endDate.add(Calendar.MONTH, 1);
         /** start now */
         startDate = Calendar.getInstance();
+        endDate.add(Calendar.MONTH, 1);
 
         presenter = new HomeFragmentPresenter(getContext(),Repository.getInstance(FireBaseConnection.getInstance(), ConcreteLocalSource.getInstance(getContext()),getContext()),this);
 
@@ -72,8 +77,11 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
             public void onDateSelected(Date date, int position) {
                 String day = date.toString().substring(0,3);
                 Toast.makeText(view.getContext(), day, Toast.LENGTH_SHORT).show();
+                presenter.getAllDrugsOfTheDay(HomeFragment.this);
             }
         });
+
+        mainItem = view.findViewById(R.id.mainItemRV);
     }
 
     @Override

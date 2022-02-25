@@ -13,7 +13,7 @@ public interface RepositoryInterface {
     void insertDrug(Drug drug);
     void deleteDrug(Drug drug);
     LiveData<List<Drug>> getStoredDrugs();
-    LiveData<List<Drug>> getAllDrugsForTheDay(String day);
+    LiveData<List<Drug>> getAllDrugsForTheDay();
     void signup(User user, FirebaseConnectionDelegated delegated);
     void login(User user, FirebaseConnectionDelegated delegated);
     boolean resetPassword(String email, FirebaseConnectionDelegated delegated);

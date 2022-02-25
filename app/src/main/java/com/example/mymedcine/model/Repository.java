@@ -83,10 +83,15 @@ public class Repository implements RepositoryInterface {
     @Override
     public void insertDrug(Drug drug) {
         long[] times = {1526400560, 526405060, 612640560};
-        for (int i = 0; i < times.length; i ++){
-            System.out.println("doaa" + calculateDelay(times)[i] );
+      //  ArrayList<Long> times = drug.getHours();
+        if (times!= null){
+        //    for (int i = 0; i < times.size(); i ++){
+            for (int i = 0; i < times.length; i ++){
+                System.out.println(calculateDelay(times));
+               // System.out.println("doaa" + calculateDelay(drug.getHours()) );
+            }
+            setDrugAlarms(calculateDelay(times));
         }
-        setDrugAlarms(calculateDelay(times));
         localSource.insert(drug);
     }
 
@@ -101,8 +106,8 @@ public class Repository implements RepositoryInterface {
     }
 
     @Override
-    public LiveData<List<Drug>> getAllDrugsForTheDay(String day) {
-        return localSource.getAllDrugsOfTheDay(day);
+    public LiveData<List<Drug>> getAllDrugsForTheDay() {
+        return localSource.getAllDrugsOfTheDay();
     }
 
     @Override
@@ -135,15 +140,15 @@ public class Repository implements RepositoryInterface {
     }
 
     private long[] calculateDelay(long[] times){
-        long[] delay = new long[times.length];
+        long[] delays = new long[times.length];
         long currentTime = System.currentTimeMillis();
         // time as milliseconds for date and time
         for(int i = 0; i < times.length; i ++){
             Date date = new Date(times[i]);
             Long time = date.getTime();
-            delay[i] = time - currentTime;
+            delays[i] = time - currentTime;
         }
-        return delay;
+        return delays;
     }
 
     private void setDrugAlarms(long[] delays){
@@ -155,7 +160,7 @@ public class Repository implements RepositoryInterface {
 
             WorkManager workManager = WorkManager.getInstance(context.getApplicationContext());
             workManager.enqueue(drugAlarm);
-            System.out.println("alarm set");
+            System.out.println("alarm set to " + new Date(delays[i]).toString());
         }
     }
 }

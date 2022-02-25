@@ -16,7 +16,7 @@ public class ConcreteLocalSource implements LocalSourceInterface{
         AppDataBase db = AppDataBase.getInstance(context.getApplicationContext());
         this.medDAO = db.medDao();
         this.storedDrugs = medDAO.getAllDrugs();
-        this.dailyDrugs = medDAO.getAllDrugsOfTheDay(myDay);
+        this.dailyDrugs = medDAO.getAllDrugsOfTheDay();
     }
     public static ConcreteLocalSource getInstance(Context context){
         if (localSource == null){
@@ -58,8 +58,8 @@ public class ConcreteLocalSource implements LocalSourceInterface{
         return storedDrugs;
     }
     @Override
-    public LiveData<List<Drug>> getAllDrugsOfTheDay(String day) {
-        return medDAO.getAllDrugsOfTheDay(day); }
+    public LiveData<List<Drug>> getAllDrugsOfTheDay() {
+        return medDAO.getAllDrugsOfTheDay(); }
 
     public LiveData<Drug> getDrugData(String drugName) {
         return medDAO.getDrugData(drugName);

@@ -25,8 +25,8 @@ public class Drug implements Serializable {
     public String state;
     @ColumnInfo(name = "isDaily")
     public boolean isDaily;
-    @ColumnInfo(name = "days")
-    public ArrayList<String> days;
+    /*@ColumnInfo(name = "days")
+    public ArrayList<String> days;*/
     @ColumnInfo(name = "remindingTimes")
     @Ignore
     public RemindingTimes remindingTimes;

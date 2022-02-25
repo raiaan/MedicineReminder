@@ -8,5 +8,5 @@ import com.example.mymedcine.model.Drug;
 import java.util.List;
 
 public interface HomeFragmentPresenterInterface {
-    void getAllDrugsOfTheDay(LifecycleOwner lifecycleOwner, String day);
+    void getAllDrugsOfTheDay(LifecycleOwner lifecycleOwner);
 }
