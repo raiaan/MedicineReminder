@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.example.mymedcine.R;
 import com.example.mymedcine.database.ConcreteLocalSource;
 import com.example.mymedcine.homescreen.homeFragment.presenter.HomeFragmentPresenter;
 import com.example.mymedcine.homescreen.homeFragment.presenter.HomeFragmentPresenterInterface;
+import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.Repository;
 import com.example.mymedcine.network.FireBaseConnection;
 import com.example.mymedcine.network.FireBaseConnectionInterface;
@@ -25,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarListener;
@@ -82,6 +85,10 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
         });
 
         mainItem = view.findViewById(R.id.mainItemRV);
+        LinearLayoutManager linearLayout = new LinearLayoutManager(getContext());
+        linearLayout.setOrientation(RecyclerView.VERTICAL);
+        mainItem.setLayoutManager(linearLayout);
+        mainItem.setFitsSystemWindows(true);
     }
 
     @Override
@@ -92,5 +99,12 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
     @Override
     public void onFailureResult(String errorMessage) {
 
+    }
+
+    @Override
+    public void desplayDrugs(List<Drug> drugs) {
+        MainItemAdapter adapter = new MainItemAdapter(drugs, getContext(), this);
+        mainItem.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 }

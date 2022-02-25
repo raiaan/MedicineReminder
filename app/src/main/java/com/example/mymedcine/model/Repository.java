@@ -82,7 +82,7 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public void insertDrug(Drug drug) {
-        long[] times = {1526400560, 526405060, 612640560};
+      /*  long[] times = {1526400560, 526405060, 612640560};
       //  ArrayList<Long> times = drug.getHours();
         if (times!= null){
         //    for (int i = 0; i < times.size(); i ++){
@@ -91,7 +91,7 @@ public class Repository implements RepositoryInterface {
                // System.out.println("doaa" + calculateDelay(drug.getHours()) );
             }
             setDrugAlarms(calculateDelay(times));
-        }
+        }*/
         localSource.insert(drug);
     }
 
@@ -107,6 +107,7 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public LiveData<List<Drug>> getAllDrugsForTheDay() {
+        System.out.println("data come form database");
         return localSource.getAllDrugsOfTheDay();
     }
 

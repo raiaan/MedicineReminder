@@ -1,5 +1,9 @@
 package com.example.mymedcine.homescreen.homeFragment.view;
 
-public interface HomeFragmentViewInterface {
+import com.example.mymedcine.model.Drug;
 
+import java.util.List;
+
+public interface HomeFragmentViewInterface {
+    void desplayDrugs(List<Drug> drugs);
 }

@@ -30,16 +30,15 @@ public class HomeFragmentPresenter implements HomeFragmentPresenterInterface{
 
     @Override
     public void getAllDrugsOfTheDay(LifecycleOwner lifecycleOwner) {
+        System.out.println("data is on presenter now");
         LiveData dailyDrugs = repository.getAllDrugsForTheDay();
         dailyDrugs.observe(lifecycleOwner, new Observer<List<Drug>>() {
             @Override
             public void onChanged(List<Drug> drugs) {
-                String[] str = new String[drugs.size()];
-                for(int i = 0; i < drugs.size(); i++){
-                    str[i] = drugs.get(i).getName();
-                    System.out.println(str[i]);
+                System.out.println("data is " + drugs.size() + " rows");
+                view.desplayDrugs(drugs);
                 }
             }
-        });
+        );
     }
 }
