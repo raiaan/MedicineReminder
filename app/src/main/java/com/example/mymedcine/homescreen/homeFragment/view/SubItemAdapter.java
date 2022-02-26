@@ -1,7 +1,6 @@
 package com.example.mymedcine.homescreen.homeFragment.view;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +25,7 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
 
     public SubItemAdapter(List<Drug> drugs, Context context, HomeFragmentViewInterface fragment) {
         this.drugs = drugs;
+        System.out.println(drugs.size());
         this.context = context;
         this.fragment = fragment;
     }
@@ -42,14 +42,15 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
     @Override
     public void onBindViewHolder(@NonNull SubItemViewHolder holder, int position) {
         Drug drug = drugs.get(position);
+        System.out.println(drug.getName());
         holder.txtName.setText(drug.getName());
         holder.txtDetails.setText(drug.getStrongValue() + " " + drug.getStrongUnit());
-        //holder.icon.setImageBitmap();
+        holder.icon.setImageDrawable(IconsFactory.getIcon(context, drug.getType()));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return drugs.size();
     }
 
     class SubItemViewHolder extends RecyclerView.ViewHolder{
@@ -62,10 +63,10 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
         public SubItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            layout = itemView.findViewById(R.id.layoutRowMedication);
-            txtName = itemView.findViewById(R.id.txtMedName);
+            layout = itemView.findViewById(R.id.subItemLayout);
+            txtName = itemView.findViewById(R.id.txtName);
             txtDetails = itemView.findViewById(R.id.txtDetails);
-            icon = itemView.findViewById(R.id.imgMedicationIcon);
+            icon = itemView.findViewById(R.id.imgIcon);
         }
     }
 }

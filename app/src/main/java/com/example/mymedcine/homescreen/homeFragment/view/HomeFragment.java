@@ -18,6 +18,7 @@ import com.example.mymedcine.database.ConcreteLocalSource;
 import com.example.mymedcine.homescreen.homeFragment.presenter.HomeFragmentPresenter;
 import com.example.mymedcine.homescreen.homeFragment.presenter.HomeFragmentPresenterInterface;
 import com.example.mymedcine.model.Drug;
+import com.example.mymedcine.model.DrugsBerDay;
 import com.example.mymedcine.model.Repository;
 import com.example.mymedcine.network.FireBaseConnection;
 import com.example.mymedcine.network.FireBaseConnectionInterface;
@@ -25,6 +26,7 @@ import com.example.mymedcine.network.FirebaseConnectionDelegated;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -39,6 +41,7 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
     HorizontalCalendar horizontalCalendar;
 
     RecyclerView mainItem;
+    MainItemAdapter adapter;
 
     HomeFragmentPresenterInterface presenter;
     FireBaseConnectionInterface fireBaseConnection;
@@ -55,6 +58,7 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
         endDate.add(Calendar.MONTH, 1);
 
         presenter = new HomeFragmentPresenter(getContext(),Repository.getInstance(FireBaseConnection.getInstance(), ConcreteLocalSource.getInstance(getContext()),getContext()),this);
+
 
     }
 
@@ -81,12 +85,16 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
                 String day = date.toString().substring(0,3);
                 Toast.makeText(view.getContext(), day, Toast.LENGTH_SHORT).show();
                 presenter.getAllDrugsOfTheDay(HomeFragment.this);
+
             }
         });
 
         mainItem = view.findViewById(R.id.mainItemRV);
         LinearLayoutManager linearLayout = new LinearLayoutManager(getContext());
         linearLayout.setOrientation(RecyclerView.VERTICAL);
+        adapter  = new MainItemAdapter(new ArrayList<DrugsBerDay>(),getContext(),this);
+        mainItem.setAdapter(adapter);
+        presenter.getAllDrugsOfTheDay(this);
         mainItem.setLayoutManager(linearLayout);
         mainItem.setFitsSystemWindows(true);
     }
@@ -103,8 +111,16 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
 
     @Override
     public void desplayDrugs(List<Drug> drugs) {
-        MainItemAdapter adapter = new MainItemAdapter(drugs, getContext(), this);
+        List<DrugsBerDay> items = new ArrayList<>();
+        System.out.println(drugs.size());
+        for(int i = 0; i < drugs.size(); i ++){
+            System.out.println(drugs.get(i).getName());
+        }
+        items.add(new DrugsBerDay("0:00", drugs));
+        items.add(new DrugsBerDay("1:00", drugs));
+        items.add(new DrugsBerDay("2:00", drugs));
+        adapter = new MainItemAdapter(items, getContext(), this);
         mainItem.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+       // adapter.notifyDataSetChanged();
     }
 }

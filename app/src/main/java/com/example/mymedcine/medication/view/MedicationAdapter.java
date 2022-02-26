@@ -76,10 +76,10 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Vi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            layout = itemView.findViewById(R.id.layoutRowMedication);
-            imgMed = itemView.findViewById(R.id.imgMedicationIcon);
+            layout = itemView.findViewById(R.id.subItemLayout);
+            imgMed = itemView.findViewById(R.id.imgIcon);
             imgOnline = itemView.findViewById(R.id.imgOnlineIcon);
-            txtMedName = itemView.findViewById(R.id.txtMedName);
+            txtMedName = itemView.findViewById(R.id.txtName);
             txtMedDosage = itemView.findViewById(R.id.txtDosage);
             txtMedDetail = itemView.findViewById(R.id.txtDetails);
         }
