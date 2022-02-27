@@ -16,8 +16,9 @@ public interface RepositoryInterface {
     LiveData<List<Drug>> getAllDrugsForTheDay();
     void signup(User user, FirebaseConnectionDelegated delegated);
     void login(User user, FirebaseConnectionDelegated delegated);
-    boolean resetPassword(String email, FirebaseConnectionDelegated delegated);
+    void resetPassword(String email, FirebaseConnectionDelegated delegated);
     boolean isUserSignedUp();
     LiveData<Drug> getDrug(String name);
     void updateData(Drug drug);
+    LiveData<List<Drug>> getDummyData();
 }

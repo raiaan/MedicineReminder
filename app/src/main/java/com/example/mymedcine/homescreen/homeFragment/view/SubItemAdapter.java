@@ -25,7 +25,7 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
 
     public SubItemAdapter(List<Drug> drugs, Context context, HomeFragmentViewInterface fragment) {
         this.drugs = drugs;
-        System.out.println(drugs.size());
+      //  System.out.println(drugs.size());
         this.context = context;
         this.fragment = fragment;
     }
@@ -42,7 +42,7 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
     @Override
     public void onBindViewHolder(@NonNull SubItemViewHolder holder, int position) {
         Drug drug = drugs.get(position);
-        System.out.println(drug.getName());
+       // System.out.println(drug.getName());
         holder.txtName.setText(drug.getName());
         holder.txtDetails.setText(drug.getStrongValue() + " " + drug.getStrongUnit());
         holder.icon.setImageDrawable(IconsFactory.getIcon(context, drug.getType()));

@@ -1,12 +1,15 @@
 package com.example.mymedcine.database;
 
 import android.content.Context;
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import com.example.mymedcine.model.Drug;
 import java.util.List;
 
 public class ConcreteLocalSource implements LocalSourceInterface{
     MedDAO medDAO;
+    String TAG = "TAG";
     static ConcreteLocalSource localSource = null;
     LiveData<List<Drug>> storedDrugs;
 
@@ -63,6 +66,12 @@ public class ConcreteLocalSource implements LocalSourceInterface{
 
     public LiveData<Drug> getDrugData(String drugName) {
         return medDAO.getDrugData(drugName);
+    }
+
+    @Override
+    public LiveData<List<Drug>> getDummyData() {
+        Log.i(TAG, "getDummyData:  we are in repo");
+        return medDAO.getDummyData();
     }
 
 }

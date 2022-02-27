@@ -39,8 +39,8 @@ public class LoginPresenter implements  LoginPresenterInterface{
     }
 
     @Override
-    public boolean resetPassword(String email, FirebaseConnectionDelegated delegated) {
-        return repository.resetPassword(email, delegated);
+    public void resetPassword(String email, FirebaseConnectionDelegated delegated) {
+        repository.resetPassword(email, delegated);
     }
 
     @Override

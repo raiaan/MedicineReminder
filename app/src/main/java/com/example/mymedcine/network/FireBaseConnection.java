@@ -96,7 +96,7 @@ public class FireBaseConnection implements FireBaseConnectionInterface{
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                delegated.onFailureResult(e.getLocalizedMessage());
+                delegated.onFailureResult("filed to login \nplease check your credentials");
             }
         });
     }
@@ -126,21 +126,17 @@ public class FireBaseConnection implements FireBaseConnectionInterface{
 //    }
 
     @Override
-    public boolean resetPassword(String email, FirebaseConnectionDelegated delegated) {
-        final int[] isSuccess = {0};
-        mAuth.sendPasswordResetEmail(email)
-            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        isSuccess[0] =1;
-                    }})
-                .addOnFailureListener(new OnFailureListener() {
+    public void resetPassword(String email, FirebaseConnectionDelegated delegated) {
+            mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onFailure(@NonNull Exception e) {
-                delegated.onFailureResult(e.getMessage());
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    delegated.onCompleteResultSuccess(null);
+                } else {
+                    delegated.onFailureResult("An error accrued while sending the email, please try once more");
+                }
             }
         });
-        return (isSuccess[0]==1);
     }
 
     public void addUser(User user, FirebaseConnectionDelegated delegated){

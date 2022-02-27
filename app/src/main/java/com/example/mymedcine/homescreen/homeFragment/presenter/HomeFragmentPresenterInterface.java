@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface HomeFragmentPresenterInterface {
     void getAllDrugsOfTheDay(LifecycleOwner lifecycleOwner);
+    void getDummyData(LifecycleOwner lifecycleOwner);
 }

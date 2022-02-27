@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.ActionMode;
 import android.view.InflateException;
@@ -36,6 +37,7 @@ import com.example.mymedcine.network.FirebaseConnectionDelegated;
 import com.example.mymedcine.signup.view.SignupActivity;
 import com.example.mymedcine.splashScreen.SplashScreen;
 import com.example.mymedcine.utils.SharedPreferencesUtils;
+import com.google.android.gms.auth.TokenData;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.zip.Inflater;
@@ -44,6 +46,9 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
 
     LoginPresenterInterface loginPresenterInterface;
     RepositoryInterface repository;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     String email, password;
     TextView txtRegister, txtRestPassword;
@@ -58,6 +63,9 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
 
         repository = Repository.getInstance(FireBaseConnection.getInstance(), ConcreteLocalSource.getInstance(this),this);
         loginPresenterInterface = new LoginPresenter(this, this, repository);
+
+        sharedPreferences = getSharedPreferences(SharedPreferencesUtils.FILE_NAME, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         edtxtEmail = findViewById(R.id.edtxtEmail);
         edtxtPassword = findViewById(R.id.edtxtPassword);
@@ -89,10 +97,10 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
         });
     }
 
-    @Override
+   @Override
     protected void onStart() {
         super.onStart();
-        if (loginPresenterInterface.isUserSignedUp()){
+        if (sharedPreferences.getBoolean(SharedPreferencesUtils.LOGIN_KEY,false)){
             Intent intent=new Intent(this, HomeActivity.class);
             startActivity(intent);
             finish();
@@ -105,6 +113,80 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
             loginPB.setVisibility(VISIBLE);
             loginPresenterInterface.login(email, password, this);
         }
+    }
+
+    @Override
+    public void onCompleteResultSuccess(FirebaseUser user) {
+        loginPB.setVisibility(View.GONE);
+        if (user != null){
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            editor.putString(SharedPreferencesUtils.USERNAME_KEY, user.getDisplayName());
+            editor.putString(SharedPreferencesUtils.EMAIL_KEY, user.getEmail());
+            editor.putBoolean(SharedPreferencesUtils.LOGIN_KEY, true);
+            editor.commit();
+            Log.i("TAG", "onCompleteResultSuccess: " + sharedPreferences.getBoolean(SharedPreferencesUtils.LOGIN_KEY, false));
+            finish();
+        } else {
+            Toast.makeText(this, "Email sent successfully, please check your email", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    public void onFailureResult(String errorMessage) {
+        loginPB.setVisibility(View.GONE);
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    public void showDialog(){
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            final View dialogView = inflater.inflate(R.layout.reset_password_layout, null);
+            dialogBuilder.setView(dialogView);
+
+            final EditText edt = (EditText) dialogView.findViewById(R.id.edtxtResetPassword);
+
+            dialogBuilder.setIcon(R.drawable.email_icon);
+            dialogBuilder.setTitle("Enter your email");
+
+            dialogBuilder.setPositiveButton("Send",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    if(checkEmail(edt)){
+                                        loginPB.setVisibility(VISIBLE);
+                                        loginPresenterInterface.resetPassword(email, LoginActivity.this);
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Please, Enter a valid email", Toast.LENGTH_SHORT).show();
+                                        showDialog();
+                                    }
+                                }
+                            });
+            dialogBuilder.setNegativeButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+            AlertDialog b = dialogBuilder.create();
+            b.show();
+        }
+
+    public boolean checkEmail(EditText editText){
+        boolean result = true;
+        email = editText.getText().toString().trim();
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            editText.setError(getString(R.string.invalidEmailError));
+            editText.requestFocus();
+            result = false;
+        }
+        if(email.isEmpty()) {
+            editText.setError(getString(R.string.emptyEmailError));
+            editText.requestFocus();
+            result = false;
+        }
+            return result;
     }
 
     private boolean checkPassword() {
@@ -122,68 +204,5 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
             result = false;
         }
         return result;
-    }
-
-    @Override
-    public void onCompleteResultSuccess(FirebaseUser user) {
-        loginPB.setVisibility(View.GONE);
-        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-        finish();
-    }
-
-    @Override
-    public void onFailureResult(String errorMessage) {
-        loginPB.setVisibility(View.GONE);
-        Toast.makeText(this, "filed to login \nplease check your credentials", Toast.LENGTH_SHORT).show();
-    }
-
-
-    public void showDialog(){
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-            LayoutInflater inflater = this.getLayoutInflater();
-            final View dialogView = inflater.inflate(R.layout.reset_password_layout, null);
-            dialogBuilder.setView(dialogView);
-
-            final EditText edt = (EditText) dialogView.findViewById(R.id.edtxtResetPassword);
-
-            dialogBuilder.setIcon(R.drawable.email_icon);
-            dialogBuilder.setTitle("Enter your email");
-
-            dialogBuilder.setPositiveButton("OK",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    if(checkEmail(edt)){
-                                        if(loginPresenterInterface.resetPassword(email, LoginActivity.this)){
-                                            Toast.makeText(LoginActivity.this, "Check your email, please", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-
-                                }
-                            });
-            dialogBuilder.setNegativeButton("Cancel",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                }
-                            });
-            AlertDialog b = dialogBuilder.create();
-            b.show();
-        }
-    public boolean checkEmail(EditText editText){
-        boolean result = true;
-        email = editText.getText().toString().trim();
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            editText.setError(getString(R.string.invalidEmailError));
-            editText.requestFocus();
-            result = false;
-        }
-        if(email.isEmpty()) {
-            editText.setError(getString(R.string.emptyEmailError));
-            editText.requestFocus();
-            result = false;
-        }
-            return result;
     }
 }

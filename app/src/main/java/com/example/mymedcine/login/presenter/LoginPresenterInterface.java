@@ -9,7 +9,7 @@ public interface LoginPresenterInterface {
     void login(String emil, String Password, FirebaseConnectionDelegated delegated);
 
 
-    boolean resetPassword(String email, FirebaseConnectionDelegated delegated);
+    void resetPassword(String email, FirebaseConnectionDelegated delegated);
 
     boolean isUserSignedUp();
 }

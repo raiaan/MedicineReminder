@@ -47,5 +47,8 @@ public interface MedDAO {
     @Query("SELECT * FROM drugTable WHERE is_chronic LIKE 1 ")
     LiveData<List<Drug>> getAllDrugsOfTheDay();
 
+    @Query("SELECT * FROM drugTable WHERE instructions LIKE '%Before eating%'")
+    LiveData<List<Drug>> getDummyData();
+
 }
 

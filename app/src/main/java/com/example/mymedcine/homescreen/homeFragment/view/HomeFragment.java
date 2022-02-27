@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,8 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
 
     RecyclerView mainItem;
     MainItemAdapter adapter;
+
+    final String TAG = "TAG";
 
     HomeFragmentPresenterInterface presenter;
     FireBaseConnectionInterface fireBaseConnection;
@@ -85,6 +88,8 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
                 String day = date.toString().substring(0,3);
                 Toast.makeText(view.getContext(), day, Toast.LENGTH_SHORT).show();
                 presenter.getAllDrugsOfTheDay(HomeFragment.this);
+                presenter.getDummyData(HomeFragment.this);
+
 
             }
         });
@@ -112,7 +117,7 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
     @Override
     public void desplayDrugs(List<Drug> drugs) {
         List<DrugsBerDay> items = new ArrayList<>();
-        System.out.println(drugs.size());
+       // System.out.println(drugs.size());
         for(int i = 0; i < drugs.size(); i ++){
             System.out.println(drugs.get(i).getName());
         }
@@ -121,6 +126,12 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
         items.add(new DrugsBerDay("2:00", drugs));
         adapter = new MainItemAdapter(items, getContext(), this);
         mainItem.setAdapter(adapter);
-       // adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void desplayDummyData(List<Drug> drugs) {
+        System.out.println(drugs.size());
+        Log.i(TAG, "desplayDummyData: " +  drugs.size() );
     }
 }

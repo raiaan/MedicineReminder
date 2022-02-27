@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface HomeFragmentViewInterface {
     void desplayDrugs(List<Drug> drugs);
+    void desplayDummyData(List<Drug> drugs);
+
 }

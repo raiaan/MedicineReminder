@@ -13,5 +13,5 @@ public interface FireBaseConnectionInterface {
    // void firebaseAuthWithGoogle(Activity activity, Task<GoogleSignInAccount> task, FirebaseConnectionDelegated firebaseConnectionDelegated) ;
 
     boolean isUserSignIn();
-    boolean resetPassword(String email, FirebaseConnectionDelegated delegated) ;
+    void resetPassword(String email, FirebaseConnectionDelegated delegated) ;
 }

@@ -82,16 +82,16 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public void insertDrug(Drug drug) {
-      /*  long[] times = {1526400560, 526405060, 612640560};
-      //  ArrayList<Long> times = drug.getHours();
+       // long[] times = {1526400560, 526405060, 612640560};
+        ArrayList<Long> times = drug.getHours();
         if (times!= null){
-        //    for (int i = 0; i < times.size(); i ++){
-            for (int i = 0; i < times.length; i ++){
+            for (int i = 0; i < times.size(); i ++){
+           // for (int i = 0; i < times.length; i ++){
                 System.out.println(calculateDelay(times));
-               // System.out.println("doaa" + calculateDelay(drug.getHours()) );
+                System.out.println("doaa" + calculateDelay(drug.getHours()) );
             }
             setDrugAlarms(calculateDelay(times));
-        }*/
+        }
         localSource.insert(drug);
     }
 
@@ -122,8 +122,8 @@ public class Repository implements RepositoryInterface {
     }
 
     @Override
-    public boolean resetPassword(String email, FirebaseConnectionDelegated delegated) {
-        return fireBaseConnection.resetPassword(email,delegated);
+    public void resetPassword(String email, FirebaseConnectionDelegated delegated) {
+        fireBaseConnection.resetPassword(email,delegated);
     }
 
     @Override
@@ -140,12 +140,17 @@ public class Repository implements RepositoryInterface {
         localSource.update(drug);
     }
 
-    private long[] calculateDelay(long[] times){
-        long[] delays = new long[times.length];
+    @Override
+    public LiveData<List<Drug>> getDummyData() {
+        return localSource.getDummyData();
+    }
+
+    private long[] calculateDelay(List<Long> times){
+        long[] delays = new long[times.size()];
         long currentTime = System.currentTimeMillis();
         // time as milliseconds for date and time
-        for(int i = 0; i < times.length; i ++){
-            Date date = new Date(times[i]);
+        for(int i = 0; i < times.size(); i ++){
+            Date date = new Date(times.get(i));
             Long time = date.getTime();
             delays[i] = time - currentTime;
         }

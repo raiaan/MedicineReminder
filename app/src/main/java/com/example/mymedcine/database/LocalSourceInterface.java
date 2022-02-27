@@ -13,4 +13,5 @@ public interface LocalSourceInterface {
     LiveData<List<Drug>> getAllStoredDrugs();
     LiveData<List<Drug>> getAllDrugsOfTheDay();
     LiveData<Drug> getDrugData(String drugName);
+    LiveData<List<Drug>> getDummyData();
 }

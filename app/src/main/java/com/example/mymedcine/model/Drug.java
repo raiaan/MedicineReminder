@@ -215,12 +215,12 @@ public class Drug implements Serializable {
 
 
     public String getInstructions() {
-        String result= null;
+        String result= "";
         if (instructions!=null){
             for (String instruct : instructions){
                 if (instruct == null){
                     result = instruct;
-                }else result +="\n" + instruct;
+                }else result += instruct + " ";
             }
         }
         return result;
