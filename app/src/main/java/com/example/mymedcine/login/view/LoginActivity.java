@@ -4,9 +4,17 @@ import static android.view.View.VISIBLE;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.ActionMode;
+import android.view.InflateException;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,16 +25,28 @@ import android.widget.Toast;
 import com.example.mymedcine.MainActivity;
 import com.example.mymedcine.R;
 
+import com.example.mymedcine.database.ConcreteLocalSource;
 import com.example.mymedcine.homescreen.HomeActivity;
 import com.example.mymedcine.login.presenter.LoginPresenter;
 import com.example.mymedcine.login.presenter.LoginPresenterInterface;
+import com.example.mymedcine.model.Repository;
+import com.example.mymedcine.model.RepositoryInterface;
+import com.example.mymedcine.network.FireBaseConnection;
+import com.example.mymedcine.network.FirebaseConnectionDelegated;
 import com.example.mymedcine.signup.view.SignupActivity;
+import com.example.mymedcine.splashScreen.SplashScreen;
+import com.example.mymedcine.utils.SharedPreferencesUtils;
+import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity implements LoginViewInterface{
+import java.util.zip.Inflater;
+
+public class LoginActivity extends AppCompatActivity implements LoginViewInterface, FirebaseConnectionDelegated {
 
     LoginPresenterInterface loginPresenterInterface;
+    RepositoryInterface repository;
+
     String email, password;
-    TextView txtRegister;
+    TextView txtRegister, txtRestPassword;
     EditText edtxtEmail, edtxtPassword;
     ProgressBar loginPB;
     Button btnLogin;
@@ -36,18 +56,27 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-        loginPresenterInterface = new LoginPresenter(this);
+        repository = Repository.getInstance(FireBaseConnection.getInstance(), ConcreteLocalSource.getInstance(this),this);
+        loginPresenterInterface = new LoginPresenter(this, this, repository);
 
         edtxtEmail = findViewById(R.id.edtxtEmail);
         edtxtPassword = findViewById(R.id.edtxtPassword);
         loginPB = findViewById(R.id.loginPB);
+
+        txtRestPassword = findViewById(R.id.txtResetPassword);
+        txtRestPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
 
         txtRegister = findViewById(R.id.txtRegister);
         txtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+                finish();
             }
         });
 
@@ -60,37 +89,27 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (loginPresenterInterface.isUserSignedUp()){
+            Intent intent=new Intent(this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
     @Override
     public void login() {
-        if (checkUserData()){
+        if (checkPassword() && checkEmail(edtxtEmail)){
             loginPB.setVisibility(VISIBLE);
-            loginPresenterInterface.login(email, password);
+            loginPresenterInterface.login(email, password, this);
         }
     }
 
-    @Override
-    public void showSuccessfulLogin() {
-        loginPB.setVisibility(View.GONE);
-        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-    }
-
-    @Override
-    public void showFailedLogin() {
-        loginPB.setVisibility(View.GONE);
-        Toast.makeText(this, "filed to login \nplease check your credentials", Toast.LENGTH_SHORT).show();
-    }
-
-    private boolean checkUserData() {
+    private boolean checkPassword() {
         password = edtxtPassword.getText().toString().trim();
-        email = edtxtEmail.getText().toString().trim();
         boolean result = true;
-
-        if(email.isEmpty()){
-            edtxtEmail.setError(getString(R.string.emptyEmailError) );
-            edtxtEmail.requestFocus();
-            result = false;
-        }
 
         if (password.isEmpty()) {
             edtxtEmail.setError(getString(R.string.emptyPasswordError));
@@ -102,11 +121,69 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
             edtxtPassword.requestFocus();
             result = false;
         }
+        return result;
+    }
+
+    @Override
+    public void onCompleteResultSuccess(FirebaseUser user) {
+        loginPB.setVisibility(View.GONE);
+        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+        finish();
+    }
+
+    @Override
+    public void onFailureResult(String errorMessage) {
+        loginPB.setVisibility(View.GONE);
+        Toast.makeText(this, "filed to login \nplease check your credentials", Toast.LENGTH_SHORT).show();
+    }
+
+
+    public void showDialog(){
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            final View dialogView = inflater.inflate(R.layout.reset_password_layout, null);
+            dialogBuilder.setView(dialogView);
+
+            final EditText edt = (EditText) dialogView.findViewById(R.id.edtxtResetPassword);
+
+            dialogBuilder.setIcon(R.drawable.email_icon);
+            dialogBuilder.setTitle("Enter your email");
+
+            dialogBuilder.setPositiveButton("OK",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    if(checkEmail(edt)){
+                                        if(loginPresenterInterface.resetPassword(email, LoginActivity.this)){
+                                            Toast.makeText(LoginActivity.this, "Check your email, please", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                }
+                            });
+            dialogBuilder.setNegativeButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+            AlertDialog b = dialogBuilder.create();
+            b.show();
+        }
+    public boolean checkEmail(EditText editText){
+        boolean result = true;
+        email = editText.getText().toString().trim();
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            edtxtEmail.setError(getString(R.string.invalidEmailError));
-            edtxtPassword.requestFocus();
+            editText.setError(getString(R.string.invalidEmailError));
+            editText.requestFocus();
             result = false;
         }
-        return result;
+        if(email.isEmpty()) {
+            editText.setError(getString(R.string.emptyEmailError));
+            editText.requestFocus();
+            result = false;
+        }
+            return result;
     }
 }

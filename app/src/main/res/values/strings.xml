@@ -94,6 +94,7 @@
     <string name="createAccount">create a new one</string>
     <string name="login">Login</string>
     <string name="registeration">Sign up</string>
+    <string name="resetPassword">Forget your password?</string>
     <string name="save">Save</string>
     <string name="edit_medicine_drug_schdule_label">Schedul</string>
     <string name="edit_medicine_drug_med_icon_label">Med Icon</string>

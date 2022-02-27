@@ -22,6 +22,7 @@ import com.example.mymedcine.add_medecine.presenter.AddDrugPresenter;
 import com.example.mymedcine.add_medecine.presenter.DrugAdder;
 import com.example.mymedcine.database.ConcreteLocalSource;
 import com.example.mymedcine.model.Repository;
+import com.example.mymedcine.network.FireBaseConnection;
 import com.example.mymedcine.utils.IconsFactory;
 import com.example.mymedcine.utils.SimpleSpinnerAdapter;
 import com.example.mymedcine.utils.ViewDrugConvertor;
@@ -51,8 +52,7 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_medecine, container, false);
-        drugAdder = new AddDrugPresenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(getContext())
-                , getContext()));
+        drugAdder = new AddDrugPresenter(this, Repository.getInstance(FireBaseConnection.getInstance(),ConcreteLocalSource.getInstance(getContext()), getContext()));
         return view;
     }
 

@@ -21,6 +21,7 @@ import com.example.mymedcine.drugdetails.presenter.DisplayDrugPresenter;
 import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.Prescription;
 import com.example.mymedcine.model.Repository;
+import com.example.mymedcine.network.FireBaseConnection;
 import com.example.mymedcine.utils.Communator;
 import com.example.mymedcine.utils.IconsFactory;
 
@@ -65,7 +66,7 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_display_drug_details, container, false);
-        presentable = new DisplayDrugPresenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(getContext())
+        presentable = new DisplayDrugPresenter(this, Repository.getInstance(FireBaseConnection.getInstance(),ConcreteLocalSource.getInstance(getContext())
                 , getContext()));
         return view;
     }

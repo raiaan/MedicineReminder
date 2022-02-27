@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import com.example.mymedcine.R;
 
 public class MedicineFragment extends Fragment {
-
     public MedicineFragment() {
         // Required empty public constructor
     }

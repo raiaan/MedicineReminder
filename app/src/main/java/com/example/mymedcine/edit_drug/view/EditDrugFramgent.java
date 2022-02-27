@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.example.mymedcine.edit_drug.presenter.UpdateDrugPresenter;
 import com.example.mymedcine.edit_drug.presenter.UpdateDrugPresenterInterface;
 import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.Repository;
+import com.example.mymedcine.network.FireBaseConnection;
 import com.example.mymedcine.utils.IconsFactory;
 import com.example.mymedcine.utils.SimpleSpinnerAdapter;
 
@@ -48,7 +50,8 @@ public class EditDrugFramgent extends Fragment implements EditDrugInterface{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenterInterface = new UpdateDrugPresenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(getContext())
+        presenterInterface = new UpdateDrugPresenter(this, Repository.getInstance(FireBaseConnection.getInstance()
+                ,ConcreteLocalSource.getInstance(getContext())
                 , getContext()));
         drug = (Drug) getArguments().getSerializable("drug");
         FillDrugDataHelper.fillData(view,drug);

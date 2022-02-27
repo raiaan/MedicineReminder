@@ -65,6 +65,7 @@
     <string name="add_health_taker">Add health taker</string>
     <string name="send">send invitation</string>
     <string name="add_med">Add med</string>
+    <string name="resetPassword">هل نسيت كلمة المرور</string>
     <string name="save">Save</string>
     <string name="edit_medicine_drug_schdule_label">Schedul</string>
     <string name="edit_medicine_drug_med_icon_label">Med Icon</string>

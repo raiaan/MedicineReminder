@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layoutRowMedication"
+    android:id="@+id/subItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/light_gray"
@@ -23,7 +23,7 @@
 
 
     <ImageView
-        android:id="@+id/imgMedicationIcon"
+        android:id="@+id/imgIcon"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
@@ -35,21 +35,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtMedName"
+        android:id="@+id/txtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:textSize="16sp"
         android:textFontWeight="600"
-        app:layout_constraintBottom_toBottomOf="@id/imgMedicationIcon"
-        app:layout_constraintStart_toEndOf="@id/imgMedicationIcon"
+        app:layout_constraintBottom_toBottomOf="@id/imgIcon"
+        app:layout_constraintStart_toEndOf="@id/imgIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtDosage"
-        app:layout_constraintTop_toTopOf="@id/txtMedName"
-        app:layout_constraintBottom_toBottomOf="@id/txtMedName"
-        app:layout_constraintStart_toEndOf="@id/txtMedName"
+        app:layout_constraintTop_toTopOf="@id/txtName"
+        app:layout_constraintBottom_toBottomOf="@id/txtName"
+        app:layout_constraintStart_toEndOf="@id/txtName"
         android:layout_marginStart="8dp"
         android:textSize="16sp"
         android:textFontWeight="600"
@@ -58,8 +58,8 @@
 
     <TextView
         android:id="@+id/txtDetails"
-        app:layout_constraintStart_toStartOf="@id/txtMedName"
-        app:layout_constraintTop_toBottomOf="@id/txtMedName"
+        app:layout_constraintStart_toStartOf="@id/txtName"
+        app:layout_constraintTop_toBottomOf="@id/txtName"
         android:layout_marginTop="8dp"
         android:textSize="16dp"
         android:layout_width="wrap_content"

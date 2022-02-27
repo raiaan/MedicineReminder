@@ -26,6 +26,10 @@ public class Drug implements Serializable {
     public String strongUnit;
     @ColumnInfo(name = "state")
     public String state;
+    @ColumnInfo(name = "isDaily")
+    public boolean isDaily;
+    /*@ColumnInfo(name = "days")
+    public ArrayList<String> days;*/
     @ColumnInfo(name = "remindingTimes")
     @Ignore
     public RemindingTimes remindingTimes;
@@ -242,5 +246,13 @@ public class Drug implements Serializable {
 
     public void setLeft(int left) {
         this.left = left;
+    }
+
+    public boolean isDaily() {
+        return isDaily;
+    }
+
+    public void setDaily(boolean daily) {
+        isDaily = daily;
     }
 }

@@ -15,10 +15,16 @@ import android.widget.Toast;
 
 import com.example.mymedcine.MainActivity;
 import com.example.mymedcine.R;
+import com.example.mymedcine.database.ConcreteLocalSource;
+import com.example.mymedcine.homescreen.HomeActivity;
+import com.example.mymedcine.model.Repository;
+import com.example.mymedcine.network.FireBaseConnection;
+import com.example.mymedcine.network.FirebaseConnectionDelegated;
 import com.example.mymedcine.signup.Presenter.SignupPresenter;
 import com.example.mymedcine.signup.Presenter.SignupPresenterInterface;
+import com.google.firebase.auth.FirebaseUser;
 
-public class SignupActivity extends AppCompatActivity implements SignupViewInterface {
+public class SignupActivity extends AppCompatActivity implements SignupViewInterface, FirebaseConnectionDelegated {
 
     String name, password, email;
     SignupPresenterInterface signupPresenter;
@@ -31,12 +37,15 @@ public class SignupActivity extends AppCompatActivity implements SignupViewInter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.activity_singup);
 
-        signupPresenter = new SignupPresenter(this);
-        singinPB = findViewById(R.id.singinPB);
+        edtxtEmail = findViewById(R.id.edtxtEmail);
+        edtxtPassword = findViewById(R.id.edtxtPassword);
+        edtxtUserName = findViewById(R.id.edtxtPassword);
 
+        signupPresenter = new SignupPresenter(this,this, Repository.getInstance(FireBaseConnection.getInstance(), ConcreteLocalSource.getInstance(this),this));
+
+        singinPB = findViewById(R.id.singinPB);
         btnRegister = findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,28 +60,8 @@ public class SignupActivity extends AppCompatActivity implements SignupViewInter
     public void signup() {
         if (checkUserData()){
             singinPB.setVisibility(VISIBLE);
-            signupPresenter.signup(email, password, name);
+            signupPresenter.signup(email, password, name , this);
         }
-    }
-
-    @Override
-    public void showSuccessfulSignup() {
-        singinPB.setVisibility(View.GONE);
-        Toast.makeText(this, "You have signed up successfully", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public void ShowFiledSignup() {
-        singinPB.setVisibility(View.GONE);
-        Toast.makeText(this, "filed sign up ", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void showTryAgain() {
-        singinPB.setVisibility(View.GONE);
-        Toast.makeText(this, "filed sign up, please try again ", Toast.LENGTH_SHORT).show();
     }
 
     private boolean checkUserData() {
@@ -110,4 +99,18 @@ public class SignupActivity extends AppCompatActivity implements SignupViewInter
         }
         return result;
     }
-   }
+
+    @Override
+    public void onCompleteResultSuccess(FirebaseUser user) {
+        singinPB.setVisibility(View.GONE);
+        Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onFailureResult(String errorMessage) {
+        singinPB.setVisibility(View.GONE);
+        Toast.makeText(this, "filed sign up, please try again ", Toast.LENGTH_SHORT).show();
+    }
+}

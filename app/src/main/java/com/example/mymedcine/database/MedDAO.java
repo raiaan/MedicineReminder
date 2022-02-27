@@ -44,5 +44,8 @@ public interface MedDAO {
     @Update
     void update(Prescription prescription);
 
+    @Query("SELECT * FROM drugTable WHERE is_chronic LIKE 1 ")
+    LiveData<List<Drug>> getAllDrugsOfTheDay();
+
 }
 

@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.example.mymedcine.R;
 
-
 public class TakerFragment extends Fragment {
 
     public TakerFragment() {
