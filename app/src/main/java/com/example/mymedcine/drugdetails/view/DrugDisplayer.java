@@ -9,4 +9,5 @@ public interface DrugDisplayer {
     void navigateToEditDrug(Drug drug);
     void changeStateCallback(Drug drug);
     void addDoseCallback(Drug drug);
+    void changeQTYcallback(int items, int remindnumber);
 }

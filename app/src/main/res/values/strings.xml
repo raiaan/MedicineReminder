@@ -123,4 +123,7 @@
     <string name="edit_drug_refill_reminder_switch">Drug Refill Reminder</string>
     <string name="edit_drug_refill_reminder_notify">How many meds do you want reminding before you get a refill Reminder</string>
     <string name="add_drug_toolbar_Title">Add Medecine</string>
+    <string name="change_drug_qty">Change Drug Quantity</string>
+    <string name="refill_label">Current amount</string>
+    <string name="cancelBtn">Cancel</string>
 </resources>
