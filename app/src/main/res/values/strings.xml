@@ -126,4 +126,6 @@
     <string name="change_drug_qty">Change Drug Quantity</string>
     <string name="refill_label">Current amount</string>
     <string name="cancelBtn">Cancel</string>
+    <string name="add_drug_dose">Add Dose</string>
+    <string name="addDoseBTN">"Add "</string>
 </resources>

@@ -104,4 +104,6 @@
     <string name="edit_drug_refill_reminder_notify">How many meds do you want reminding before you get a refill Reminder</string>
     <string name="refill_label">Current amount</string>
     <string name="cancelBtn">Cancel</string>
+    <string name="add_drug_dose">Add Dose</string>
+    <string name="addDoseBTN">"Add "</string>
 </resources>

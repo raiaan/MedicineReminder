@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mymedcine.R;
+import com.example.mymedcine.add_dose.views.AddDoseDialog;
 import com.example.mymedcine.database.ConcreteLocalSource;
 import com.example.mymedcine.drugdetails.presenter.DisplayDrugPresentable;
 import com.example.mymedcine.drugdetails.presenter.DisplayDrugPresenter;
@@ -40,13 +41,14 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
     TextView drugName ,drugState;
     TextView lastTaken,lastTakenLabel;
     ImageView iconType,editItem , removeItem;
-    Button suspendBTN ,refillBTN;
+    Button suspendBTN ,refillBTN ,addDoseBTN;
     TextView strength;
     TextView occurence,reminders;
     TextView instructions , reasons;
     TextView refills;
     DisplayDrugPresentable presentable;
     RefillDialog refillDialog;
+    AddDoseDialog addDoseDialog;
     public DisplayDrugDetailsFragment() {
         // Required empty public constructor
     }
@@ -88,6 +90,7 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
         removeItem = view.findViewById(R.id.display_drug_details_delete);
         strength = view.findViewById(R.id.display_drug_details_strength);
         refillBTN = view.findViewById(R.id.display_drug_details_refill_btn);
+        addDoseBTN = view.findViewById(R.id.display_drug_add_dose);
     }
 
     @Override
@@ -107,6 +110,7 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
         if(drugName !=null){
             diplayBasicDrugInfo(drug.getName() , drug.getType(),drug.getStrongUnit(),drug.getStrongValue());
             refillDialog = new RefillDialog(getContext(),drug,this);
+            addDoseDialog = new AddDoseDialog(getContext() , drug);
             drugState.setText(" ("+drug.getState()+")");
             if (drug.getLastTime() != null){
                 lastTakenLabel.setVisibility(View.VISIBLE);
@@ -132,9 +136,11 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
             refillBTN.setOnClickListener(subView -> {
                 int width = (int)(getContext().getResources().getDisplayMetrics().widthPixels*0.90);
                 int height = (int)(getContext().getResources().getDisplayMetrics().heightPixels*0.90);
-
                 getActivity().getWindow().setLayout(width, height);
                 refillDialog.show();
+            });
+            addDoseBTN.setOnClickListener(view -> {
+                addDoseDialog.show();
             });
         }
     }
