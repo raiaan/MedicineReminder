@@ -14,4 +14,6 @@ public interface FireBaseConnectionInterface {
 
     boolean isUserSignIn();
     void resetPassword(String email, FirebaseConnectionDelegated delegated) ;
+
+    void logout();
 }

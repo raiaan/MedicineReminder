@@ -85,12 +85,10 @@ public class Repository implements RepositoryInterface {
        // long[] times = {1526400560, 526405060, 612640560};
         ArrayList<Long> times = drug.getHours();
         if (times!= null){
-            for (int i = 0; i < times.size(); i ++){
-           // for (int i = 0; i < times.length; i ++){
-                System.out.println(calculateDelay(times));
-                System.out.println("doaa" + calculateDelay(drug.getHours()) );
-            }
-            setDrugAlarms(calculateDelay(times));
+              //  Log.i(TAG, "insertDrug: " + drug.getRemindingTimes().getHours());
+                Log.i(TAG, "insertDrug: " + times.get(0));
+                setDrugAlarms(calculateDelay(times));
+                Log.i(TAG, "insertDrug: "  + (calculateDelay(times)[0] / 1000) / 60);
         }
         localSource.insert(drug);
     }
@@ -106,9 +104,9 @@ public class Repository implements RepositoryInterface {
     }
 
     @Override
-    public LiveData<List<Drug>> getAllDrugsForTheDay() {
+    public LiveData<List<Drug>> getAllDrugsForTheDay(String day) {
         System.out.println("data come form database");
-        return localSource.getAllDrugsOfTheDay();
+        return localSource.getAllDrugsOfTheDay(day);
     }
 
     @Override
@@ -145,6 +143,11 @@ public class Repository implements RepositoryInterface {
         return localSource.getDummyData();
     }
 
+    @Override
+    public void logout() {
+        fireBaseConnection.logout();
+    }
+
     private long[] calculateDelay(List<Long> times){
         long[] delays = new long[times.size()];
         long currentTime = System.currentTimeMillis();
@@ -166,6 +169,7 @@ public class Repository implements RepositoryInterface {
 
             WorkManager workManager = WorkManager.getInstance(context.getApplicationContext());
             workManager.enqueue(drugAlarm);
+            Log.i(TAG, "setDrugAlarms: " + new Date(delays[i]).getTime());
             System.out.println("alarm set to " + new Date(delays[i]).toString());
         }
     }

@@ -139,6 +139,11 @@ public class FireBaseConnection implements FireBaseConnectionInterface{
         });
     }
 
+    @Override
+    public void logout() {
+        mAuth.signOut();
+    }
+
     public void addUser(User user, FirebaseConnectionDelegated delegated){
         myRef.child(mAuth.getCurrentUser().getUid()).setValue(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

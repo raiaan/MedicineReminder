@@ -8,6 +8,6 @@ import com.example.mymedcine.model.Drug;
 import java.util.List;
 
 public interface HomeFragmentPresenterInterface {
-    void getAllDrugsOfTheDay(LifecycleOwner lifecycleOwner);
+    void getAllDrugsOfTheDay(LifecycleOwner lifecycleOwner, String day);
     void getDummyData(LifecycleOwner lifecycleOwner);
 }

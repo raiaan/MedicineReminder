@@ -50,24 +50,21 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.MainIt
 
     @Override
     public void onBindViewHolder(@NonNull MainItemViewHolder holder, int position) {
+        if(list != null){
+            DrugsBerDay item = list.get(position);
+            LinearLayoutManager linearLayout = new LinearLayoutManager(context);
+            linearLayout.setOrientation(LinearLayoutManager.VERTICAL);
+            holder.subItemRV.setAdapter(new SubItemAdapter(item.getDailyDrugs(), context, fragment));
+            holder.subItemRV.setLayoutManager(linearLayout);
+            holder.subItemRV.setHasFixedSize(true);
+            holder.txtTime.setText(item.getTime());
+        }
 
-        DrugsBerDay item = list.get(position);
-        /*LinearLayoutManager linearLayout = new LinearLayoutManager(context);
-        linearLayout.setOrientation(LinearLayoutManager.VERTICAL);
-        holder.subItemRV.setAdapter(new SubItemAdapter(item.getDailyDrugs(), context, fragment));
-        holder.subItemRV.setLayoutManager(linearLayout);
-        holder.subItemRV.setHasFixedSize(true);*/
-        holder.txtTime.setText(item.getTime());
-        LinearLayoutManager layoutManager = new LinearLayoutManager(
-                holder.subItemRV.getContext(),
-                LinearLayoutManager.VERTICAL,
-                false
-        );
-        layoutManager.setInitialPrefetchItemCount(item.getDailyDrugs().size());
+        /*layoutManager.setInitialPrefetchItemCount(item.getDailyDrugs().size());
         holder.subItemRV.setLayoutManager(layoutManager);
         SubItemAdapter subAdapter = new SubItemAdapter(item.getDailyDrugs(), context , fragment);
         holder.subItemRV.setAdapter(subAdapter);
-        holder.subItemRV.setRecycledViewPool(viewPool);
+        holder.subItemRV.setRecycledViewPool(viewPool);*/
     }
 
     @Override

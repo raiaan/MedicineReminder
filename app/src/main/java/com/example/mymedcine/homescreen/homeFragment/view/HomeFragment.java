@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
     RecyclerView mainItem;
     MainItemAdapter adapter;
 
+    String day;
     final String TAG = "TAG";
 
     HomeFragmentPresenterInterface presenter;
@@ -85,12 +86,8 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Date date, int position) {
-                String day = date.toString().substring(0,3);
+                day = date.toString().substring(0,3);
                 Toast.makeText(view.getContext(), day, Toast.LENGTH_SHORT).show();
-                presenter.getAllDrugsOfTheDay(HomeFragment.this);
-                presenter.getDummyData(HomeFragment.this);
-
-
             }
         });
 
@@ -99,7 +96,7 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
         linearLayout.setOrientation(RecyclerView.VERTICAL);
         adapter  = new MainItemAdapter(new ArrayList<DrugsBerDay>(),getContext(),this);
         mainItem.setAdapter(adapter);
-        presenter.getAllDrugsOfTheDay(this);
+        presenter.getAllDrugsOfTheDay(this, day);
         mainItem.setLayoutManager(linearLayout);
         mainItem.setFitsSystemWindows(true);
     }
@@ -132,6 +129,6 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
     @Override
     public void desplayDummyData(List<Drug> drugs) {
         System.out.println(drugs.size());
-        Log.i(TAG, "desplayDummyData: " +  drugs.size() );
+        Log.i(TAG, "displayDummyData: " +  drugs.size() );
     }
 }

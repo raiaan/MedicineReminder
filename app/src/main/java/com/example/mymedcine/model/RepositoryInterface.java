@@ -13,7 +13,7 @@ public interface RepositoryInterface {
     void insertDrug(Drug drug);
     void deleteDrug(Drug drug);
     LiveData<List<Drug>> getStoredDrugs();
-    LiveData<List<Drug>> getAllDrugsForTheDay();
+    LiveData<List<Drug>> getAllDrugsForTheDay(String day);
     void signup(User user, FirebaseConnectionDelegated delegated);
     void login(User user, FirebaseConnectionDelegated delegated);
     void resetPassword(String email, FirebaseConnectionDelegated delegated);
@@ -21,4 +21,6 @@ public interface RepositoryInterface {
     LiveData<Drug> getDrug(String name);
     void updateData(Drug drug);
     LiveData<List<Drug>> getDummyData();
+
+    void logout();
 }

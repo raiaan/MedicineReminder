@@ -44,8 +44,8 @@ public interface MedDAO {
     @Update
     void update(Prescription prescription);
 
-    @Query("SELECT * FROM drugTable WHERE is_chronic LIKE 1 ")
-    LiveData<List<Drug>> getAllDrugsOfTheDay();
+    @Query("SELECT * FROM drugTable WHERE is_chronic LIKE 1 OR days LIKE '%' + :day + '%' ")
+    LiveData<List<Drug>> getAllDrugsOfTheDay(String day);
 
     @Query("SELECT * FROM drugTable WHERE instructions LIKE '%Before eating%'")
     LiveData<List<Drug>> getDummyData();

@@ -34,17 +34,14 @@ public class HomeFragmentPresenter implements HomeFragmentPresenterInterface{
     }
 
     @Override
-    public void getAllDrugsOfTheDay(LifecycleOwner lifecycleOwner) {
+    public void getAllDrugsOfTheDay(LifecycleOwner lifecycleOwner , String day) {
     //    System.out.println("data is on presenter now");
-        LiveData dailyDrugs = repository.getAllDrugsForTheDay();
+        LiveData dailyDrugs = repository.getAllDrugsForTheDay(day);
         dailyDrugs.observe(lifecycleOwner, new Observer<List<Drug>>() {
             @Override
             public void onChanged(List<Drug> drugs) {
-     //           System.out.println("data is " + drugs.size() + " rows");
-                Log.i(TAG, "onChanged: " + drugs.get(1).getInstructions());
-                Log.i(TAG, "onChanged: " + drugs.get(0).getInstructions());
-                System.out.println(drugs.get(1).getInstructions());
-                System.out.println(drugs.get(0).getInstructions());
+             //   Log.i(TAG, "onChanged: " + drugs.get(1).getInstructions());
+             //   Log.i(TAG, "onChanged: " + drugs.get(0).getInstructions());
                 view.desplayDrugs(drugs);
                 }
             }
@@ -54,12 +51,10 @@ public class HomeFragmentPresenter implements HomeFragmentPresenterInterface{
     @Override
     public void getDummyData(LifecycleOwner lifecycleOwner) {
     //   System.out.println("data is on presenter now");
-        LiveData dailyDrugs = repository.getAllDrugsForTheDay();
+        LiveData dailyDrugs = repository.getDummyData();
         dailyDrugs.observe(lifecycleOwner, new Observer<List<Drug>>() {
                     @Override
                     public void onChanged(List<Drug> drugs) {
-                  //      System.out.println("data is " + drugs.size() + " rows");
-                     //   System.out.println(drugs.get(0).ge);
                         Log.i(TAG, "get dummy data on presenter: " +  drugs.size() );
                         view.desplayDrugs(drugs);
                     }
