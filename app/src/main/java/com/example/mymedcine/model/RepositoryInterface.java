@@ -10,8 +10,9 @@ public interface RepositoryInterface {
     ArrayList<Drug> getAllDrugs();
     void insertDrug(Drug drug);
     void deleteDrug(Drug drug);
+    void updateData(Drug drug);
     LiveData<List<Drug>> getStoredDrugs();
     LiveData<Drug> getDrug(String name);
-    void updateData(Drug drug);
+    LiveData<List<String>> getAllEmails();
 
 }

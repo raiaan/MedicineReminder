@@ -9,6 +9,7 @@ public class ConcreteLocalSource implements LocalSourceInterface{
     MedDAO medDAO;
     static ConcreteLocalSource localSource = null;
     LiveData<List<Drug>> storedDrugs;
+    LiveData<List<String>> storedEmails;
     private ConcreteLocalSource(Context context) {
         AppDataBase db = AppDataBase.getInstance(context.getApplicationContext());
         this.medDAO = db.medDao();
@@ -53,6 +54,12 @@ public class ConcreteLocalSource implements LocalSourceInterface{
     public LiveData<List<Drug>> getAllStoredDrugs() {
         return storedDrugs;
     }
+
+    @Override
+    public LiveData<List<String>> getAllEmails() {
+        return storedEmails;
+    }
+
     @Override
     public LiveData<Drug> getDrugData(String drugName) {
         return medDAO.getDrugData(drugName);

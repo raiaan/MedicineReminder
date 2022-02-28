@@ -11,7 +11,7 @@ import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.Prescription;
 
 @Database(entities = {Drug.class, Prescription.class},
-        version = 5, exportSchema = false)
+        version = 6, exportSchema = false)
 @TypeConverters(Converter.class)
 public abstract class AppDataBase extends RoomDatabase {
 

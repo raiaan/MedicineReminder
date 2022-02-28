@@ -1,8 +1,8 @@
 package com.example.mymedcine.model;
 
 public class User {
-    private String name;
-    private String email;
+    private static String name;
+    private static String email;
     private String password;
 
     public User() {
@@ -14,7 +14,7 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
@@ -22,7 +22,7 @@ public class User {
         this.name = name;
     }
 
-    public String getEmail() {
+    public static String getEmail() {
         return email;
     }
 

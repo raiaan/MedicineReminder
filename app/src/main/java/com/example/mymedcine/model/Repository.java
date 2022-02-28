@@ -41,15 +41,6 @@ public class Repository implements RepositoryInterface {
     @Override
     public ArrayList<Drug> getAllDrugs() {
         ArrayList<Drug> drugs = new ArrayList<>();
-
-//        drugs.add(new Drug("cong","pill","200","g","taken"));
-//        drugs.add(new Drug("cong","pill","200","g","taken"));
-//        drugs.add(new Drug("cong","pill","200","g","taken"));
-//        drugs.add(new Drug("cong","pill","200","g","taken"));
-//        drugs.add(new Drug("cong","pill","200","g","taken"));
-//        drugs.add(new Drug("cong","pill","200","g","taken"));
-//        drugs.add(new Drug("cong","pill","200","g","taken"));
-
         return drugs;
     }
 
@@ -71,6 +62,11 @@ public class Repository implements RepositoryInterface {
     @Override
     public LiveData<Drug> getDrug(String name) {
         return localSource.getDrugData(name);
+    }
+
+    @Override
+    public LiveData<List<String>> getAllEmails() {
+        return localSource.getAllEmails();
     }
 
     @Override

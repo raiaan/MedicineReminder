@@ -1,6 +1,9 @@
 package com.example.mymedcine.medication.view;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,40 +12,25 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.mymedcine.R;
 import com.example.mymedcine.database.ConcreteLocalSource;
-import com.example.mymedcine.homescreen.HomeActivity;
 import com.example.mymedcine.medication.presenter.MedecationInterface;
 import com.example.mymedcine.medication.presenter.MedecationPresenter;
 import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.model.Repository;
 import com.google.android.material.button.MaterialButton;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class MedictionFragment extends Fragment implements OnMedecationInterface {
 
     private final static String TAG = "mohamed";
 
-    RecyclerView recyclerView;
-    MedicationAdapter adapter;
+    private RecyclerView recyclerView;
+    private MedicationAdapter adapter;
     MaterialButton btnAddMed;
     MedecationInterface presenter;
-    List<Drug> drugList;
-
-    Drug drug = new Drug("l9l", "aaaz", "200", "g", "oeoo");
-    Drug drug2 = new Drug("w8w", "aaaa", "200", "g14", "ooor");
-    Drug drug3 = new Drug("llel", "11da", "200", "3g", "oooe");
-    Drug drug4 = new Drug("l3lq", "adaa", "200", "3g", "oood");
-    Drug drug5 = new Drug("lllx", "aaac", "200", "2g", "oooc");
-    Drug drug6 = new Drug("555x", "wewe", "200", "2g", "active");
-    Drug drug7 = new Drug("999x", "aaac", "200", "2g", "active");
-    Drug drug8 = new Drug("koko", "aaac", "200", "2g", "active");
+    private List<Drug> drugList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

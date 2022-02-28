@@ -7,13 +7,17 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.example.mymedcine.database.Converter;
+import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @Entity(tableName = "PrescriptionTable")
 @TypeConverters(Converter.class)
-public class Prescription {
+public class Prescription implements Serializable {
 
+    @Exclude
+    private String key;
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "patient")
@@ -34,6 +38,14 @@ public class Prescription {
     }
 
     public Prescription() {
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getAdmin_mail() {

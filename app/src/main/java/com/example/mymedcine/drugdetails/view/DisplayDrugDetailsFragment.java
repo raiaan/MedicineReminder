@@ -1,13 +1,6 @@
 package com.example.mymedcine.drugdetails.view;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +8,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import com.example.mymedcine.R;
 import com.example.mymedcine.database.ConcreteLocalSource;
 import com.example.mymedcine.drugdetails.presenter.DisplayDrugPresentable;
 import com.example.mymedcine.drugdetails.presenter.DisplayDrugPresenter;
 import com.example.mymedcine.model.Drug;
-import com.example.mymedcine.model.Prescription;
 import com.example.mymedcine.model.Repository;
-import com.example.mymedcine.utils.Communator;
 import com.example.mymedcine.utils.IconsFactory;
-
-import org.w3c.dom.Text;
 
 public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplayer{
 
@@ -103,13 +97,13 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
             if (drug.getReasons() != null){
                 reasons.setText(drug.getReasons());
             }
-            if (drug.getLeft() != null){
+            if (drug.getLeft() > 0){
                 refills.setText(drug.getLeft());
             }
             editItem.setOnClickListener(view -> {
                 navigateToEditDrug(drug);
             });
-            refills.setText(drug.getLeft());
+            //refills.setText(drug.getLeft());
             removeItem.setOnClickListener(view -> presentable.deleteDrug(drug));
         }
     }
