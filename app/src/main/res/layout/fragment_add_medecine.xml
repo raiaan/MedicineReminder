@@ -136,6 +136,17 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/edit_drug_end_date_picker_date"
                         android:visibility="gone"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_drug_weekDays_date"
+                        android:textSize="16dp"
+                        android:id="@+id/edit_drug_week_days_label"
+                        />
+                    <Spinner
+                        android:id="@+id/edit_drug_week_days_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
                     <Spinner
                         android:id="@+id/edit_drug_reminding_hours_per_day"
                         android:layout_width="match_parent"

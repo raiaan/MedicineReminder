@@ -78,7 +78,6 @@
     <string name="every_day">Every Day</string>
     <string name="certain_days_of_the_week">specific days of the week</string>
     <string name="as_needed">only as needed</string>
-    <string name="instructions_mini_text">Should this be taken with food?</string>
     <string name="edit_drug_before_eating">Before eating</string>
     <string name="edit_drug_while_eating">While eating</string>
     <string name="edit_drug_after_eating">After eating</string>
@@ -106,4 +105,6 @@
     <string name="cancelBtn">Cancel</string>
     <string name="add_drug_dose">Add Dose</string>
     <string name="addDoseBTN">"Add "</string>
+    <string name="edit_drug_weekDays_date">Days On Week</string>
+    <string name="change_drug_qty">Change Drug Quantity</string>
 </resources>

@@ -7,16 +7,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Switch;
+
 import com.example.mymedcine.R;
 import com.example.mymedcine.add_medecine.presenter.AddDrugPresenter;
 import com.example.mymedcine.add_medecine.presenter.DrugAdder;
@@ -30,14 +29,13 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.Arrays;
-import java.util.Random;
 
 public class AddMedecineFragment extends Fragment implements AddMedecineInterface{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    Spinner typesSpinner, hoursInDaySpinner,strengthUnitSpinner;
-    ArrayAdapter<CharSequence> hoursInDayAdapter,strengthUnitAdapter;
+    Spinner typesSpinner, hoursInDaySpinner,strengthUnitSpinner , daysInWeekSpinner;
+    ArrayAdapter<CharSequence> hoursInDayAdapter,strengthUnitAdapter , daysOccurenceAdapter;
     MaterialButton addToDB;
     SimpleSpinnerAdapter typesAdapter;
     DrugAdder drugAdder;
@@ -87,6 +85,10 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
         closeBtn = parentView.findViewById(R.id.add_drug_close_btn);
         closeBtn.setOnClickListener(view -> Navigation.findNavController(parentView).popBackStack());
         initStrengthUnitSpinner(parentView);
+        daysInWeekSpinner = parentView.findViewById(R.id.edit_drug_week_days_spinner);
+        daysOccurenceAdapter = ArrayAdapter.createFromResource(getContext(),R.array.recurrency, android.R.layout.simple_spinner_item);
+        daysInWeekSpinner.setAdapter(daysOccurenceAdapter);
+        handleDaysSpinnerChange(parentView);
     }
 
     private void initTypeSpinner(View view){
@@ -123,6 +125,24 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
             }
         });
     }
+
+    private void handleDaysSpinnerChange(View parentView){
+        daysInWeekSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (adapterView.getSelectedItem().toString()){
+                    case "Every Day":
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
     private void showDatePicker(View parentView){
         parentView.findViewById(R.id.edit_drug_end_date).setOnClickListener(view1 -> {
             parentView.findViewById(R.id.edit_drug_end_date_picker_date).setVisibility(View.VISIBLE);
@@ -149,4 +169,5 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
         strengthUnitAdapter = ArrayAdapter.createFromResource(this.getContext(),R.array.units, android.R.layout.simple_spinner_item);
         strengthUnitSpinner.setAdapter(strengthUnitAdapter);
     }
+
 }

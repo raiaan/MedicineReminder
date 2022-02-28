@@ -54,7 +54,12 @@ public class ViewDrugConvertor {
         drug.setStrongValue(((TextView)view.findViewById(R.id.edit_drug_strength_value)).getText().toString());
         Boolean refillActive = ((SwitchMaterial)view.findViewById(R.id.edit_drug_refill_reminder_switch)).isChecked();
         drug.setRemindRefill(refillActive);
-
+        switch ( ((Spinner)view.findViewById(R.id.edit_drug_week_days_spinner)).getSelectedItem().toString()){
+            case "Every Day":
+                drug.weekDays = DaysOfWeek.getDays();
+            case "specific days of the week":
+            case "only as needed":
+        }
         if (refillActive){
 
             drug.setLeft(Integer.valueOf(

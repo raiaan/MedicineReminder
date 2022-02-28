@@ -128,4 +128,5 @@
     <string name="cancelBtn">Cancel</string>
     <string name="add_drug_dose">Add Dose</string>
     <string name="addDoseBTN">"Add "</string>
+    <string name="edit_drug_weekDays_date">Days On Week</string>
 </resources>
