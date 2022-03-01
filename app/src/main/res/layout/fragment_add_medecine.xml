@@ -152,7 +152,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
-                        android:layout_alignParentLeft="true"
                         android:layout_below="@+id/drug_end_date"/>
                     <TimePicker
                         android:layout_width="match_parent"

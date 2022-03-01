@@ -56,6 +56,8 @@ public class Drug implements Serializable {
     public String startDate;
     @ColumnInfo(name = "weekDays")
     public ArrayList<String> weekDays;
+    public String lastTimeTaken ;
+    public String lastTimeDoseGiver;
     public Boolean getRemindRefill() {
         return remindRefill;
     }
@@ -219,7 +221,7 @@ public class Drug implements Serializable {
         String result= null;
         if (instructions!=null){
             for (String instruct : instructions){
-                if (instruct == null){
+                if (result == null){
                     result = instruct;
                 }else result +="\n" + instruct;
             }
