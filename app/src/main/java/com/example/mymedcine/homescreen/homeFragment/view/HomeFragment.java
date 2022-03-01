@@ -27,10 +27,14 @@ import com.example.mymedcine.network.FirebaseConnectionDelegated;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarListener;
@@ -114,7 +118,6 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
     @Override
     public void desplayDrugs(List<Drug> drugs) {
         List<DrugsBerDay> items = new ArrayList<>();
-       // System.out.println(drugs.size());
         for(int i = 0; i < drugs.size(); i ++){
             System.out.println(drugs.get(i).getName());
         }
@@ -131,4 +134,19 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
         System.out.println(drugs.size());
         Log.i(TAG, "displayDummyData: " +  drugs.size() );
     }
+
+    private List<DrugsBerDay> convertDrugsIntoDrugsBerDay(List<Drug> dailyDrugs) {
+        LinkedHashMap<String, List<Drug>> sortedDrugs = new LinkedHashMap<>();
+        //ArrayList<String> drugs = new Drug().getStringHours().split("\n");
+        //.forEach(str -> new Date(toLong));
+        dailyDrugs.forEach(drug -> Arrays.stream(drug.getStringHours().split("\n"))
+                .forEach(newDrug -> sortedDrugs.putIfAbsent(newDrug, new ArrayList<>()).add(drug)));
+
+        return sortedDrugs.entrySet().stream()
+                .map(entry -> new DrugsBerDay(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    // display the millisecond of 2 hours to kown the different between them
+    // and make a switch for time
 }
