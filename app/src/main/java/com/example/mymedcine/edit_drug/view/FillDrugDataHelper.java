@@ -7,12 +7,13 @@ import android.widget.TextView;
 
 import com.example.mymedcine.R;
 import com.example.mymedcine.model.Drug;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 public class FillDrugDataHelper {
     public static void fillData(View parentView, Drug drug){
         ((TextView) parentView.findViewById(R.id.edit_drug_name)).setText(drug.getName());
         ((Spinner) parentView.findViewById(R.id.edit_drug_types)).setSelection(3);
-        ((Switch)parentView.findViewById(R.id.edit_drug_chronic_disease)).setChecked(drug.isChoronic);
+        ((SwitchMaterial)parentView.findViewById(R.id.edit_drug_chronic_disease)).setChecked(drug.isChoronic);
         if (drug.getReasons() != null)
             ((TextView)parentView.findViewById(R.id.edit_drug_condition)).setText(drug.getReasons());
     }

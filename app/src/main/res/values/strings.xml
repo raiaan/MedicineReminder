@@ -125,4 +125,10 @@
     <string name="add_drug_toolbar_Title">Add Medecine</string>
     <string name="logout">Log out</string>
     <string name="Web_API_key">AIzaSyDom-wFiMbpMFRKuTSkp_nHN6mQa7WJXnY</string>
+    <string name="change_drug_qty">Change Drug Quantity</string>
+    <string name="refill_label">Current amount</string>
+    <string name="cancelBtn">Cancel</string>
+    <string name="add_drug_dose">Add Dose</string>
+    <string name="addDoseBTN">"Add "</string>
+    <string name="edit_drug_weekDays_date">Days On Week</string>
 </resources>

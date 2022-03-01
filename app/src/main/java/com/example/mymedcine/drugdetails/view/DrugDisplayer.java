@@ -7,4 +7,7 @@ public interface DrugDisplayer {
     void displayDrugDetails(Drug drug);
     void deleteDrugSuccess();
     void navigateToEditDrug(Drug drug);
+    void changeStateCallback(Drug drug);
+    void addDoseCallback(Drug drug);
+    void changeQTYcallback(int items, int remindnumber);
 }

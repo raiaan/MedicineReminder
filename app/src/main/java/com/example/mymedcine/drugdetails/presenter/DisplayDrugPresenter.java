@@ -23,14 +23,15 @@ public class DisplayDrugPresenter implements DisplayDrugPresentable{
 
 
     @Override
-    public Drug addDose(Drug drug) {
-        return null;
+    public void addDose(Drug drug) {
+        repository.updateData(drug);
     }
 
     @Override
     public void changeState(Drug drug) {
         drug.setState(drug.getState().equals("active")? "suspend":"active");
         repository.updateData(drug);
+        drugDisplayer.changeStateCallback(drug);
     }
 
     @Override
