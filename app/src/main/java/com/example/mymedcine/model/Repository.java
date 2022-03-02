@@ -1,7 +1,11 @@
 package com.example.mymedcine.model;
 
+import static com.google.gson.internal.bind.util.ISO8601Utils.format;
+
 import android.content.Context;
+import android.text.format.Time;
 import android.util.Log;
+import android.view.textservice.TextInfo;
 
 import androidx.lifecycle.LiveData;
 import androidx.work.Data;
@@ -16,6 +20,7 @@ import com.example.mymedcine.network.FirebaseConnectionDelegated;
 import com.example.mymedcine.utils.worker.OneTimeWorker;
 import com.example.mymedcine.utils.worker.PeriodicWorker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -149,15 +154,16 @@ public class Repository implements RepositoryInterface {
 
     private long[] calculateDelay(List<Long> times){
         long[] delays = new long[times.size()];
-        long currentTime = System.currentTimeMillis();
-        // time as milliseconds for date and time
+        long currentTime = System.currentTimeMillis() ;
+        Log.i(TAG, "calculateDelay:  system time" + currentTime);
         for(int i = 0; i < times.size(); i ++){
-            Date date = new Date(times.get(i));
+            /*SimpleDateFormat format =new SimpleDateFormat("hh:mm:SSS");
+            format.format(new Date(times.get(0)));
+            Log.i(TAG, "calculateDelay: format" + format);*/
+            Log.i(TAG, "calculateDelay: time from db " + times.get(i));
+            delays[i] = times.get(i) - currentTime;
+            Log.i(TAG, "calculateDelay: delay " + delays[i]);
 
-            Long time = date.getTime();
-            Log.i(TAG, "calculateDelay: " + time);
-            // devided by 1000 to ignore the date
-            delays[i] = time - currentTime ;
             Log.i(TAG, "calculateDelay: " + delays[i]);
         }
         return delays;

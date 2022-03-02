@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.example.mymedcine.utils.SharedPreferencesUtils;
 
 public class MoreFragment extends Fragment implements MoreFragmentViewInterface {
 
+    final String TAG = "TAG";
     LinearLayout logoutLayout;
     MoreFragmentPresenterInterface presenter;
 
@@ -54,16 +56,15 @@ public class MoreFragment extends Fragment implements MoreFragmentViewInterface 
         sharedPreferences = getActivity().getSharedPreferences(SharedPreferencesUtils.FILE_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
+        Log.i(TAG, "onViewCreated: more fragment" );
         logoutLayout = view.findViewById(R.id.ll_log_out);
         logoutLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i(TAG, "onClick: log out");
                 presenter.logout();
-                editor.remove(SharedPreferencesUtils.USERNAME_KEY);
-                editor.remove(SharedPreferencesUtils.EMAIL_KEY);
-                editor.putBoolean(SharedPreferencesUtils.LOGIN_KEY, false);
+                editor.clear();
                 editor.commit();
-
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 getActivity().finish();
             }

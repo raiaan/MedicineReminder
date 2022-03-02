@@ -1,5 +1,7 @@
 package com.example.mymedcine.add_medecine.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,7 +73,13 @@ public class AddMedecineFragment extends Fragment implements AddMedecineInterfac
     private void initView(View parentView){
         initTypeSpinner(parentView);
         addToDB = parentView.findViewById(R.id.save_drug);
-        addToDB.setOnClickListener(view -> drugAdder.addDrug(ViewDrugConvertor.convertToDrug(parentView)));
+        addToDB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:"+getActivity().getPackageName())));
+                drugAdder.addDrug(ViewDrugConvertor.convertToDrug(parentView));
+            }
+        });
         ( (SwitchMaterial)parentView.findViewById(R.id.edit_drug_chronic_disease) )
                 .setOnCheckedChangeListener((compoundButton, b) -> {
                     if (b){

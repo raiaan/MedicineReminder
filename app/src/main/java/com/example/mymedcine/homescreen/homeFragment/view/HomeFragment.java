@@ -139,12 +139,15 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
         LinkedHashMap<String, List<Drug>> sortedDrugs = new LinkedHashMap<>();
         //ArrayList<String> drugs = new Drug().getStringHours().split("\n");
         //.forEach(str -> new Date(toLong));
+        Log.i(TAG, "convertDrugsIntoDrugsBerDay: " + dailyDrugs.get(0).getStringHours());
         dailyDrugs.forEach(drug -> Arrays.stream(drug.getStringHours().split("\n"))
                 .forEach(newDrug -> sortedDrugs.putIfAbsent(newDrug, new ArrayList<>()).add(drug)));
 
+        Log.i(TAG, "convertDrugsIntoDrugsBerDay: ");
         return sortedDrugs.entrySet().stream()
                 .map(entry -> new DrugsBerDay(entry.getKey(), entry.getValue()))
                 .collect(Collectors.toCollection(ArrayList::new));
+
     }
 
     // display the millisecond of 2 hours to kown the different between them
