@@ -41,7 +41,7 @@ public class SignupActivity extends AppCompatActivity implements SignupViewInter
 
         edtxtEmail = findViewById(R.id.edtxtEmail);
         edtxtPassword = findViewById(R.id.edtxtPassword);
-        edtxtUserName = findViewById(R.id.edtxtPassword);
+        edtxtUserName = findViewById(R.id.edtxtuserName);
 
         signupPresenter = new SignupPresenter(this,this, Repository.getInstance(FireBaseConnection.getInstance(), ConcreteLocalSource.getInstance(this),this));
 

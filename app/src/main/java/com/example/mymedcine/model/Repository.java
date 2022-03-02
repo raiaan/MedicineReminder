@@ -1,6 +1,5 @@
 package com.example.mymedcine.model;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -10,21 +9,16 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
-import com.example.mymedcine.database.AppDataBase;
 import com.example.mymedcine.database.LocalSourceInterface;
 import com.example.mymedcine.database.MedDAO;
-import com.example.mymedcine.network.FireBaseConnection;
 import com.example.mymedcine.network.FireBaseConnectionInterface;
 import com.example.mymedcine.network.FirebaseConnectionDelegated;
-import com.example.mymedcine.utils.MyWorker;
+import com.example.mymedcine.utils.worker.OneTimeWorker;
+import com.example.mymedcine.utils.worker.PeriodicWorker;
 
-import java.sql.SQLOutput;
-import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class Repository implements RepositoryInterface {
@@ -82,13 +76,18 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public void insertDrug(Drug drug) {
-       // long[] times = {1526400560, 526405060, 612640560};
         ArrayList<Long> times = drug.getHours();
         if (times!= null){
-              //  Log.i(TAG, "insertDrug: " + drug.getRemindingTimes().getHours());
-                Log.i(TAG, "insertDrug: " + times.get(0));
-                setDrugAlarms(calculateDelay(times));
-                Log.i(TAG, "insertDrug: "  + (calculateDelay(times)[0] / 1000) / 60);
+            Data data = new Data.Builder()
+                    .putLongArray("delayArray", calculateDelay(drug.getHours()))
+                    .build();
+            OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(OneTimeWorker.class)
+                    .addTag(drug.getName())
+                    .setInitialDelay(calculateDelay(times)[0], TimeUnit.MILLISECONDS)
+                    .setInputData(data)
+                    .build();
+            WorkManager workManager = WorkManager.getInstance(context.getApplicationContext());
+            workManager.enqueue(oneTimeWorkRequest);
         }
         localSource.insert(drug);
     }
@@ -154,23 +153,26 @@ public class Repository implements RepositoryInterface {
         // time as milliseconds for date and time
         for(int i = 0; i < times.size(); i ++){
             Date date = new Date(times.get(i));
+
             Long time = date.getTime();
-            delays[i] = time - currentTime;
+            Log.i(TAG, "calculateDelay: " + time);
+            // devided by 1000 to ignore the date
+            delays[i] = time - currentTime ;
+            Log.i(TAG, "calculateDelay: " + delays[i]);
         }
         return delays;
     }
 
     private void setDrugAlarms(long[] delays){
         for(int i = 0; i < delays.length; i ++){
-            PeriodicWorkRequest drugAlarm = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.DAYS)
+            /*PeriodicWorkRequest drugAlarm = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.DAYS)
                     .addTag(TAG)
                     .setInitialDelay(Duration.ofMillis(delays[i]))
                     .build();
 
             WorkManager workManager = WorkManager.getInstance(context.getApplicationContext());
-            workManager.enqueue(drugAlarm);
+            workManager.enqueue(drugAlarm);*/
             Log.i(TAG, "setDrugAlarms: " + new Date(delays[i]).getTime());
-            System.out.println("alarm set to " + new Date(delays[i]).toString());
         }
     }
 }

@@ -219,9 +219,7 @@ public class Drug implements Serializable {
         String result= "";
         if (instructions!=null){
             for (String instruct : instructions){
-                if (instruct == null){
-                    result = instruct;
-                }else result += instruct + " ";
+                result += instruct + " ";
             }
         }
         return result;
@@ -255,5 +253,19 @@ public class Drug implements Serializable {
 
     public void setDaily(boolean daily) {
         isDaily = daily;
+    }
+
+    public String getWeekDays() {
+        String result= "";
+        if (weekDays!=null){
+            for (String day : weekDays){
+                result += day + " ";
+            }
+        }
+        return result;
+    }
+
+    public void setWeekDays(ArrayList<String> weekDays) {
+        this.weekDays = weekDays;
     }
 }

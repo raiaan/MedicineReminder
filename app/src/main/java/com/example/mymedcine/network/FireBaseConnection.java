@@ -63,7 +63,7 @@ public class FireBaseConnection implements FireBaseConnectionInterface{
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
-                                addUser(user , delegated);
+                             //   addUser(user , delegated);
                                 currentUser = mAuth.getCurrentUser();
                                 delegated.onCompleteResultSuccess(currentUser);
                             } else  {
