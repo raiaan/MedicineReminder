@@ -6,11 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.Spinner;
 
 
 import com.example.mymedcine.R;
@@ -23,11 +27,15 @@ import com.example.mymedcine.network.FireBaseConnection;
 import com.example.mymedcine.utils.IconsFactory;
 import com.example.mymedcine.utils.SimpleSpinnerAdapter;
 
+import java.util.Arrays;
+
 public class EditDrugFramgent extends Fragment implements EditDrugInterface{
 
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private SimpleSpinnerAdapter typesAdapter;
+
     private UpdateDrugPresenterInterface presenterInterface;
 
     // TODO: Rename and change types of parameters
@@ -44,6 +52,11 @@ public class EditDrugFramgent extends Fragment implements EditDrugInterface{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_medecine, container, false);
+        typesAdapter = new SimpleSpinnerAdapter(this.getActivity(),R.layout.custome_types_spinner, Arrays.asList(IconsFactory.getDrugIconsNames()));
+        ((Spinner)view.findViewById(R.id.edit_drug_strength_unit)).setAdapter(
+                ArrayAdapter.createFromResource(getContext(),R.array.units, android.R.layout.simple_spinner_item)
+        );
+        ((Spinner) view.findViewById(R.id.edit_drug_types)).setAdapter(typesAdapter);
         return view;
     }
 
@@ -54,7 +67,9 @@ public class EditDrugFramgent extends Fragment implements EditDrugInterface{
                 ,ConcreteLocalSource.getInstance(getContext())
                 , getContext()));
         drug = (Drug) getArguments().getSerializable("drug");
+        ((ImageView)view.findViewById(R.id.add_drug_close_btn)).setOnClickListener(view1 -> Navigation.findNavController(view1).popBackStack());
         FillDrugDataHelper.fillData(view,drug);
+
     }
 
     @Override
