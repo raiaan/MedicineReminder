@@ -78,7 +78,7 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
         iconType = view.findViewById(R.id.display_drug_details_icon);
         drugName = view.findViewById(R.id.display_drug_details_title);
         lastTaken = view.findViewById(R.id.display_drug_details_last_taken);
-        lastTaken = view.findViewById(R.id.display_drug_details_last_taken_label);
+        lastTakenLabel = view.findViewById(R.id.display_drug_details_last_taken_label);
         drugState = view.findViewById(R.id.display_drug_details_state);
         suspendBTN = view.findViewById(R.id.display_drug_details_change);
         occurence = view.findViewById(R.id.display_drug_details_occurence);
@@ -110,12 +110,12 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
         if(drugName !=null){
             diplayBasicDrugInfo(drug.getName() , drug.getType(),drug.getStrongUnit(),drug.getStrongValue());
             refillDialog = new RefillDialog(getContext(),drug,this);
-            addDoseDialog = new AddDoseDialog(getContext() , drug);
+            addDoseDialog = new AddDoseDialog(getContext() , drug,this);
             drugState.setText(" ("+drug.getState()+")");
-            if (drug.getLastTime() != null){
+            if (drug.lastTimeTaken != null){
                 lastTakenLabel.setVisibility(View.VISIBLE);
                 lastTaken.setVisibility(View.VISIBLE);
-                lastTaken.setText(drug.getLastTime().toString());
+                lastTaken.setText(drug.lastTimeTaken+" By "+drug.lastTimeDoseGiver);
             }
             if (drug.getHours()!= null){
                 reminders.setText(new SimpleDateFormat("mm:ss:SSS").format(new Date(drug.getHours().get(0))));
@@ -164,7 +164,7 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
 
     @Override
     public void addDoseCallback(Drug drug) {
-
+        displayDrugDetails(drug);
     }
 
     private void changeStateUi(Drug drug){

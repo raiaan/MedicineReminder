@@ -56,6 +56,8 @@ public class Drug implements Serializable {
     public String startDate;
     @ColumnInfo(name = "weekDays")
     public ArrayList<String> weekDays;
+    public String lastTimeTaken ;
+    public String lastTimeDoseGiver;
     public Boolean getRemindRefill() {
         return remindRefill;
     }
