@@ -140,12 +140,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/edit_drug_weekDays_date"
+                        android:visibility="gone"
                         android:textSize="16dp"
                         android:id="@+id/edit_drug_week_days_label"
                         />
                     <Spinner
                         android:id="@+id/edit_drug_week_days_spinner"
                         android:layout_width="match_parent"
+                        android:visibility="gone"
                         android:layout_height="wrap_content" />
                     <Spinner
                         android:id="@+id/edit_drug_reminding_hours_per_day"

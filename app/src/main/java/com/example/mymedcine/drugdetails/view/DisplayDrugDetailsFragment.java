@@ -118,7 +118,7 @@ public class DisplayDrugDetailsFragment extends Fragment implements DrugDisplaye
                 lastTaken.setText(drug.lastTimeTaken+" By "+drug.lastTimeDoseGiver);
             }
             if (drug.getHours()!= null){
-                reminders.setText(new SimpleDateFormat("mm:ss:SSS").format(new Date(drug.getHours().get(0))));
+                reminders.setText(new SimpleDateFormat("hh:mm:ss").format(new Date(drug.getHours().get(0))));
             }
             if (drug.getInstructions()!= null){
                 instructions.setText(drug.getInstructions());

@@ -37,7 +37,11 @@
     <fragment
         android:id="@+id/editDrugFramgent"
         android:name="com.example.mymedcine.edit_drug.view.EditDrugFramgent"
-        android:label="EditDrugFramgent" />
+        android:label="EditDrugFramgent" >
+        <action
+            android:id="@+id/action_editDrugFramgent_to_displayDrugDetailsFragment"
+            app:destination="@id/displayDrugDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addMedecineFragment"
         android:name="com.example.mymedcine.add_medecine.view.AddMedecineFragment"
