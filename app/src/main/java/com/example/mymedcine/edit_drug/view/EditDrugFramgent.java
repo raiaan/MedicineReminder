@@ -57,6 +57,9 @@ public class EditDrugFramgent extends Fragment implements EditDrugInterface{
                 ArrayAdapter.createFromResource(getContext(),R.array.units, android.R.layout.simple_spinner_item)
         );
         ((Spinner) view.findViewById(R.id.edit_drug_types)).setAdapter(typesAdapter);
+        ((Spinner)view.findViewById(R.id.edit_drug_reminding_hours_per_day)).setAdapter(
+                ArrayAdapter.createFromResource(getContext(),R.array.reminding_times_of_hours, android.R.layout.simple_spinner_item)
+        );
         return view;
     }
 
