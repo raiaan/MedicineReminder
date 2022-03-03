@@ -24,7 +24,7 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
     Context context;
     HomeFragmentViewInterface fragment;
 
-    public SubItemAdapter(List<Drug> drugs, Context context, HomeFragmentViewInterface fragment) {
+    public SubItemAdapter(List<Drug> drugs, Context context, HomeFragmentViewInterface fragment ) {
         this.drugs = drugs;
       //  System.out.println(drugs.size());
         this.context = context;
@@ -49,6 +49,7 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
         holder.icon.setImageDrawable(IconsFactory.getIcon(context, drug.getType()));
         holder.onlineIcon.setVisibility(View.GONE);
         holder.txtDosage.setVisibility(View.GONE);
+
     }
 
     @Override

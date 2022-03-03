@@ -115,4 +115,7 @@
     <string name="notificationTitle">/موعد الدواء</string>
     <string name="notificationText">لقد حان الوقت لتتناول </string>
     <string name="goToLogin">لديك حساب بالفعل ؟</string>
+    <string name="reschedule">reschedule</string>
+    <string name="take">Take</string>
+    <string name="skip">Skip</string>
 </resources>
