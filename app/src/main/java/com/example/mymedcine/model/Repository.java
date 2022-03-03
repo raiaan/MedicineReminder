@@ -85,6 +85,8 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public void deleteDrug(Drug drug) {
+        WorkManager workManager = WorkManager.getInstance(context.getApplicationContext());
+        workManager.cancelAllWorkByTag(drug.getName());
         localSource.delete(drug);
     }
 
@@ -124,6 +126,9 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public void updateData(Drug drug) {
+        WorkManager workManager = WorkManager.getInstance(context.getApplicationContext());
+        workManager.cancelAllWorkByTag(drug.getName());
+        createWorkRequest(drug);
         createRefillWorker(drug);
         localSource.update(drug);
     }
