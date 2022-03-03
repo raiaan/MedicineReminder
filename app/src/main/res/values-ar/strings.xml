@@ -114,4 +114,5 @@
     <string name="notificationChannelDescription">Notification Channel Description</string>
     <string name="notificationTitle">/موعد الدواء</string>
     <string name="notificationText">لقد حان الوقت لتتناول </string>
+    <string name="goToLogin">لديك حساب بالفعل ؟</string>
 </resources>

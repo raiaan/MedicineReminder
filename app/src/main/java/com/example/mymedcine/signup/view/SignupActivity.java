@@ -13,12 +13,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mymedcine.MainActivity;
 import com.example.mymedcine.R;
 import com.example.mymedcine.database.ConcreteLocalSource;
 import com.example.mymedcine.homescreen.HomeActivity;
+import com.example.mymedcine.login.view.LoginActivity;
 import com.example.mymedcine.model.Repository;
 import com.example.mymedcine.network.FireBaseConnection;
 import com.example.mymedcine.network.FirebaseConnectionDelegated;
@@ -37,6 +39,7 @@ public class SignupActivity extends AppCompatActivity implements SignupViewInter
 
     Button btnRegister;
     ProgressBar singinPB;
+    TextView txtLogin;
     EditText edtxtUserName, edtxtEmail, edtxtPassword;
 
     @Override
@@ -48,6 +51,14 @@ public class SignupActivity extends AppCompatActivity implements SignupViewInter
         edtxtEmail = findViewById(R.id.edtxtEmail);
         edtxtPassword = findViewById(R.id.edtxtPassword);
         edtxtUserName = findViewById(R.id.edtxtuserName);
+        txtLogin = findViewById(R.id.txtLogin);
+        txtLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                finish();
+            }
+        });
 
         sharedPreferences = getSharedPreferences(SharedPreferencesUtils.FILE_NAME, MODE_PRIVATE);
         editor = sharedPreferences.edit();

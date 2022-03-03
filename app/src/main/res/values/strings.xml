@@ -135,4 +135,5 @@
     <string name="notificationChannelDescription">Notification Channel Description</string>
     <string name="notificationTitle">Medicine Time</string>
     <string name="notificationText">It\'s time to take</string>
+    <string name="goToLogin">Already have an account ? </string>
 </resources>
