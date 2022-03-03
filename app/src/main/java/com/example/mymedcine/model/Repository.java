@@ -160,6 +160,7 @@ public class Repository implements RepositoryInterface {
                      //   .putLong(DataUtils.delayKey, delays[i])
                         .putString(DataUtils.nameKey, drug.getName())
                         .putString(DataUtils.typeKey, drug.getType())
+                        .putBoolean(DataUtils.refillFlag, false)
                         .build();
                 OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(OneTimeWorker.class)
                         .addTag(drug.getName())

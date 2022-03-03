@@ -10,9 +10,11 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
@@ -34,47 +36,23 @@ public class OneTimeWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
+        Log.i("TAG", "doWork: " );
+        if (getInputData().getBoolean(DataUtils.refillFlag, false)){
 
-        createNotificationChannel();
-        /*Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Intent snoozeIntent = new Intent(this, MyBroadcastReceiver.class);
-        snoozeIntent.setAction(ACTION_SNOOZE);
-        snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
-        PendingIntent snoozePendingIntent =
-                PendingIntent.getBroadcast(this, 0, snoozeIntent, 0);
-*/
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "app");
-        builder.setContentTitle(String.valueOf(R.string.notificationTitle))
-                .setContentText(String.valueOf(R.string.notificationText))
-               // .setLargeIcon(IconsFactory.getIcon(getApplicationContext(), getInputData().getString(DataUtils.typeKey)))
-                .setSmallIcon(R.drawable.ic_pills)
-                .setColor(0xFFC06014)
-              //  .setSound(alarmSound)
-                .setAutoCancel(true)
-                .setAutoCancel(true)
-                //.setContentIntent(peNotification)
-
-                ;
-
-        Notification notification = builder.build();
-        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(1, notification);
-
-        //The next work request
-        Data output = getInputData();
-        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(OneTimeWorker.class)
-                .addTag(output.getString(DataUtils.nameKey))
-                .setInitialDelay(24, TimeUnit.HOURS)
-                .setInputData(output)
-                .build();
-        WorkManager workManager = WorkManager.getInstance(getApplicationContext());
-        workManager.enqueue(oneTimeWorkRequest);
-
+        }else{
+            sendRemenddingNotification();
+            Data data = getInputData();
+            OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(OneTimeWorker.class)
+                    .addTag(data.getString(DataUtils.nameKey))
+                    .setInitialDelay(24, TimeUnit.HOURS)
+                    .setInputData(data)
+                    .build();
+        }
         return null;
     }
 
-
     private void createNotificationChannel() {
+        Log.i("TAG", "createNotificationChannel: ");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String id = String.valueOf(R.string.notificationChannelID);
             String description = String.valueOf(R.string.notificationChannelDescription);
@@ -85,5 +63,23 @@ public class OneTimeWorker extends Worker {
             NotificationManager notificationManager = getApplicationContext().getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+    }
+
+    private void sendRemenddingNotification() {
+
+        createNotificationChannel();
+
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(getApplicationContext(),0,intent,0);
+        //1
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),"CHANNEL_ID");
+        builder.setContentTitle("Medicine Time")
+                .setContentText("It\'s time to take " + getInputData().getString(DataUtils.nameKey))
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pi)
+                .setSmallIcon(R.drawable.ic_pills);
+
+        NotificationManagerCompat nmc = NotificationManagerCompat.from(getApplicationContext());
+        nmc.notify(1,builder.build());
     }
 }
