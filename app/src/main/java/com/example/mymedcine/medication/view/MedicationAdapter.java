@@ -46,7 +46,7 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Vi
         holder.txtMedDetail.setText(drug.getType());
         holder.txtMedName.setText(drug.getName());
         holder.txtMedDosage.setText(drug.getStrongUnit());
-        if (drug.getState().equals("non-active")){
+        if (!drug.getState().equals("active")){
             holder.imgOnline.setColorFilter(Color.RED);
         }
         holder.imgOnline.setImageResource(R.drawable.ic_online);
