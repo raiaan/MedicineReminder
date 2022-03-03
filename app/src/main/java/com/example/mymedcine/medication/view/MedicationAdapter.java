@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mymedcine.R;
 import com.example.mymedcine.model.Drug;
+import com.example.mymedcine.utils.IconsFactory;
 
 import java.util.List;
 
@@ -45,11 +46,11 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Vi
         holder.txtMedDetail.setText(drug.getType());
         holder.txtMedName.setText(drug.getName());
         holder.txtMedDosage.setText(drug.getStrongUnit());
-        if (drug.getState()=="active"){
+        if (drug.getState().equals("non-active")){
             holder.imgOnline.setColorFilter(Color.RED);
         }
         holder.imgOnline.setImageResource(R.drawable.ic_online);
-        holder.imgMed.setImageResource(R.drawable.nurse);
+        holder.imgMed.setImageDrawable(IconsFactory.getIcon(context , drug.getType()));
         //Glide.with(context).load(movieModel.getImage()).override(120,120).into(holder.img);
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
