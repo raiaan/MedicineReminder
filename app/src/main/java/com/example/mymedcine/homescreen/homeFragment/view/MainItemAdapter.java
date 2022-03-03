@@ -54,7 +54,7 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.MainIt
             DrugsBerDay item = list.get(position);
             LinearLayoutManager linearLayout = new LinearLayoutManager(context);
             linearLayout.setOrientation(LinearLayoutManager.VERTICAL);
-            holder.subItemRV.setAdapter(new SubItemAdapter(item.getDailyDrugs(), context, fragment));
+            holder.subItemRV.setAdapter(new SubItemAdapter(item.getDailyDrugs(), context, fragment,item.getTime()));
             holder.subItemRV.setLayoutManager(linearLayout);
             holder.subItemRV.setHasFixedSize(true);
             holder.txtTime.setText(item.getTime());

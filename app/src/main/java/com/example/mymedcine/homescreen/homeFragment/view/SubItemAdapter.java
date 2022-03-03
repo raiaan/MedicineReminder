@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mymedcine.R;
 import com.example.mymedcine.model.Drug;
+import com.example.mymedcine.notification_dialoug.views.NotificationDialog;
 import com.example.mymedcine.utils.IconsFactory;
 
 import java.util.List;
@@ -23,12 +24,13 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
     List<Drug> drugs;
     Context context;
     HomeFragmentViewInterface fragment;
-
-    public SubItemAdapter(List<Drug> drugs, Context context, HomeFragmentViewInterface fragment ) {
+    NotificationDialog notificationDialog;
+    String time;
+    public SubItemAdapter(List<Drug> drugs, Context context, HomeFragmentViewInterface fragment ,String time) {
         this.drugs = drugs;
-      //  System.out.println(drugs.size());
         this.context = context;
         this.fragment = fragment;
+        this.time = time;
     }
 
     @NonNull
@@ -37,11 +39,12 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.medication_row, parent, false);
         SubItemViewHolder viewHolder = new SubItemViewHolder(view);
+
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SubItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SubItemViewHolder holder, int position ) {
         Drug drug = drugs.get(position);
        // System.out.println(drug.getName());
         holder.txtName.setText(drug.getName());
@@ -49,7 +52,13 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
         holder.icon.setImageDrawable(IconsFactory.getIcon(context, drug.getType()));
         holder.onlineIcon.setVisibility(View.GONE);
         holder.txtDosage.setVisibility(View.GONE);
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                notificationDialog = new NotificationDialog(context,drug ,"");
+                notificationDialog.show();
+            }
+        });
     }
 
     @Override
@@ -68,7 +77,6 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
 
         public SubItemViewHolder(@NonNull View itemView) {
             super(itemView);
-
             layout = itemView.findViewById(R.id.subItemLayout);
             txtName = itemView.findViewById(R.id.txtName);
             txtDetails = itemView.findViewById(R.id.txtDetails);
