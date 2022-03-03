@@ -131,4 +131,8 @@
     <string name="add_drug_dose">Add Dose</string>
     <string name="addDoseBTN">"Add "</string>
     <string name="edit_drug_weekDays_date">Days On Week</string>
+    <string name="notificationChannelID">Notification Channel ID</string>
+    <string name="notificationChannelDescription">Notification Channel Description</string>
+    <string name="notificationTitle">Medicine Time</string>
+    <string name="notificationText">It\'s time to take</string>
 </resources>

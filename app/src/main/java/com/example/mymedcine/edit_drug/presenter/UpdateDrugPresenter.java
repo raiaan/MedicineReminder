@@ -14,6 +14,7 @@ public class UpdateDrugPresenter implements UpdateDrugPresenterInterface{
     }
     @Override
     public void updateDrug(Drug drug) {
+        editDrug.updateView(drug);
         repository.updateData(drug);
     }
 

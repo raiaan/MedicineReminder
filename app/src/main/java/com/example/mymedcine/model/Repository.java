@@ -17,6 +17,7 @@ import com.example.mymedcine.database.LocalSourceInterface;
 import com.example.mymedcine.database.MedDAO;
 import com.example.mymedcine.network.FireBaseConnectionInterface;
 import com.example.mymedcine.network.FirebaseConnectionDelegated;
+import com.example.mymedcine.utils.worker.DataUtils;
 import com.example.mymedcine.utils.worker.OneTimeWorker;
 import com.example.mymedcine.utils.worker.PeriodicWorker;
 
@@ -81,19 +82,7 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public void insertDrug(Drug drug) {
-        ArrayList<Long> times = drug.getHours();
-        if (times!= null){
-            Data data = new Data.Builder()
-                    .putLongArray("delayArray", calculateDelay(drug.getHours()))
-                    .build();
-            OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(OneTimeWorker.class)
-                    .addTag(drug.getName())
-                    .setInitialDelay(calculateDelay(times)[0], TimeUnit.MILLISECONDS)
-                    .setInputData(data)
-                    .build();
-            WorkManager workManager = WorkManager.getInstance(context.getApplicationContext());
-            workManager.enqueue(oneTimeWorkRequest);
-        }
+        createWorkRequest(drug);
         localSource.insert(drug);
     }
 
@@ -109,7 +98,6 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public LiveData<List<Drug>> getAllDrugsForTheDay(String day) {
-        System.out.println("data come form database");
         return localSource.getAllDrugsOfTheDay(day);
     }
 
@@ -157,28 +145,30 @@ public class Repository implements RepositoryInterface {
         long currentTime = System.currentTimeMillis() ;
         Log.i(TAG, "calculateDelay:  system time" + currentTime);
         for(int i = 0; i < times.size(); i ++){
-            /*SimpleDateFormat format =new SimpleDateFormat("hh:mm:SSS");
-            format.format(new Date(times.get(0)));
-            Log.i(TAG, "calculateDelay: format" + format);*/
             Log.i(TAG, "calculateDelay: time from db " + times.get(i));
             delays[i] = times.get(i) - currentTime;
             Log.i(TAG, "calculateDelay: delay " + delays[i]);
-
-            Log.i(TAG, "calculateDelay: " + delays[i]);
         }
         return delays;
     }
 
-    private void setDrugAlarms(long[] delays){
-        for(int i = 0; i < delays.length; i ++){
-            /*PeriodicWorkRequest drugAlarm = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.DAYS)
-                    .addTag(TAG)
-                    .setInitialDelay(Duration.ofMillis(delays[i]))
-                    .build();
-
-            WorkManager workManager = WorkManager.getInstance(context.getApplicationContext());
-            workManager.enqueue(drugAlarm);*/
-            Log.i(TAG, "setDrugAlarms: " + new Date(delays[i]).getTime());
+    public void createWorkRequest(Drug drug){
+        if(drug.getHours() != null){
+            long[] delays = calculateDelay(drug.getHours());
+            for (int i = 0; i < delays.length; i ++){
+                Data data = new Data.Builder()
+                     //   .putLong(DataUtils.delayKey, delays[i])
+                        .putString(DataUtils.nameKey, drug.getName())
+                        .putString(DataUtils.typeKey, drug.getType())
+                        .build();
+                OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(OneTimeWorker.class)
+                        .addTag(drug.getName())
+                        .setInitialDelay(delays[i], TimeUnit.MILLISECONDS)
+                        .setInputData(data)
+                        .build();
+                WorkManager workManager = WorkManager.getInstance(context.getApplicationContext());
+                workManager.enqueue(oneTimeWorkRequest);
+            }
         }
     }
 }
