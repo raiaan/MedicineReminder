@@ -4,22 +4,22 @@
     android:id="@+id/subItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/light_gray"
-    android:elevation="@dimen/elevation_size"
-    android:layout_marginTop="4dp"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginBottom="16dp">
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@color/blue_light"
+    android:elevation="@dimen/elevation_size"
+    app:cornerRadius="30dp">
 
     <ImageView
         android:id="@+id/imgOnlineIcon"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="32dp"
         android:layout_marginTop="32dp"
-        android:src="@drawable/ic_online" />
-
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/ic_online"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView
@@ -28,9 +28,9 @@
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
         android:src="@drawable/nurse"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,29 +39,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:textSize="16sp"
         android:textFontWeight="600"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/imgIcon"
         app:layout_constraintStart_toEndOf="@id/imgIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtDosage"
-        app:layout_constraintTop_toTopOf="@id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textFontWeight="600"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/txtName"
         app:layout_constraintStart_toEndOf="@id/txtName"
-        android:layout_marginStart="8dp"
-        android:textSize="16sp"
-        android:textFontWeight="600"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toTopOf="@id/txtName" />
 
     <TextView
         android:id="@+id/txtDetails"
-        app:layout_constraintStart_toStartOf="@id/txtName"
-        app:layout_constraintTop_toBottomOf="@id/txtName"
-        android:layout_marginTop="8dp"
-        android:textSize="16dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/txtName"
+        app:layout_constraintTop_toBottomOf="@id/txtName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

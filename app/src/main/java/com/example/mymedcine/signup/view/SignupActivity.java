@@ -5,7 +5,9 @@ import static android.view.View.VISIBLE;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -22,12 +24,16 @@ import com.example.mymedcine.network.FireBaseConnection;
 import com.example.mymedcine.network.FirebaseConnectionDelegated;
 import com.example.mymedcine.signup.Presenter.SignupPresenter;
 import com.example.mymedcine.signup.Presenter.SignupPresenterInterface;
+import com.example.mymedcine.utils.SharedPreferencesUtils;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SignupActivity extends AppCompatActivity implements SignupViewInterface, FirebaseConnectionDelegated {
 
     String name, password, email;
     SignupPresenterInterface signupPresenter;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     Button btnRegister;
     ProgressBar singinPB;
@@ -43,6 +49,8 @@ public class SignupActivity extends AppCompatActivity implements SignupViewInter
         edtxtPassword = findViewById(R.id.edtxtPassword);
         edtxtUserName = findViewById(R.id.edtxtuserName);
 
+        sharedPreferences = getSharedPreferences(SharedPreferencesUtils.FILE_NAME, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         signupPresenter = new SignupPresenter(this,this, Repository.getInstance(FireBaseConnection.getInstance(), ConcreteLocalSource.getInstance(this),this));
 
         singinPB = findViewById(R.id.singinPB);
@@ -104,6 +112,11 @@ public class SignupActivity extends AppCompatActivity implements SignupViewInter
     public void onCompleteResultSuccess(FirebaseUser user) {
         singinPB.setVisibility(View.GONE);
         Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
+        editor.putString(SharedPreferencesUtils.USERNAME_KEY, user.getDisplayName());
+        editor.putString(SharedPreferencesUtils.EMAIL_KEY, user.getEmail());
+        editor.putBoolean(SharedPreferencesUtils.LOGIN_KEY, true);
+        editor.commit();
+        Log.i("TAG", "onCompleteResultSuccess: " + sharedPreferences.getBoolean(SharedPreferencesUtils.LOGIN_KEY, false));
         startActivity(intent);
         finish();
     }

@@ -11,6 +11,7 @@ import com.example.mymedcine.database.Converter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Entity(tableName = "drugTable")
 public class Drug implements Serializable {
@@ -269,5 +270,15 @@ public class Drug implements Serializable {
 
     public void setWeekDays(ArrayList<String> weekDays) {
         this.weekDays = weekDays;
+    }
+
+    public String[] getHoursAsTimes(){
+        String[] times = new String[getHours().size()];
+        for(int i = 0; i < times.length; i ++){
+            long millis = getHours().get(i);
+            Date dete = new Date(millis);
+            times[i] = dete.toString().substring(11,16);
+        }
+        return times;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.mymedcine.homescreen.homeFragment.view;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,8 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
         holder.txtName.setText(drug.getName());
         holder.txtDetails.setText(drug.getStrongValue() + " " + drug.getStrongUnit());
         holder.icon.setImageDrawable(IconsFactory.getIcon(context, drug.getType()));
+        holder.onlineIcon.setVisibility(View.GONE);
+        holder.txtDosage.setVisibility(View.GONE);
     }
 
     @Override
@@ -58,7 +61,9 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
         ConstraintLayout layout;
         TextView txtName;
         ImageView icon;
+        ImageView onlineIcon;
         TextView txtDetails;
+        TextView txtDosage;
 
         public SubItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,6 +72,8 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
             txtName = itemView.findViewById(R.id.txtName);
             txtDetails = itemView.findViewById(R.id.txtDetails);
             icon = itemView.findViewById(R.id.imgIcon);
+            txtDosage = itemView.findViewById(R.id.txtDosage);
+            onlineIcon = itemView.findViewById(R.id.imgOnlineIcon);
         }
     }
 }

@@ -34,6 +34,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
@@ -116,14 +117,23 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
     }
 
     @Override
-    public void desplayDrugs(List<Drug> drugs) {
-        List<DrugsBerDay> items = new ArrayList<>();
-        for(int i = 0; i < drugs.size(); i ++){
-            System.out.println(drugs.get(i).getName());
-        }
+    public void desplayDrugs(List<DrugsBerDay> items) {
+        /*List<DrugsBerDay> items = convertDrugsIntoDrugsBerDay(drugs);
         items.add(new DrugsBerDay("0:00", drugs));
         items.add(new DrugsBerDay("1:00", drugs));
         items.add(new DrugsBerDay("2:00", drugs));
+        for(int i = 0; i < drugs.size(); i ++){
+            String[] times =  items.get(i).getDailyDrugs().get(i).getStringHours().split("\n");
+            for (int j = 0; j < times.length; j ++){
+                Log.i(TAG, "desplayDrugs: drug " + i + " time " + j + " is " + times[j]);
+                Date date = new Date(Long.parseLong(times[j]));
+                Log.i(TAG, "desplayDrugs: Date is " + date.toString().substring(11,16));
+                Log.i(TAG, "desplayDrugs: time is " + date.getTime());
+            }
+        }*/
+
+      //  List<DrugsBerDay> items = convertDrugsIntoDrugsBerDay(drugs);
+        Log.i(TAG, "desplayDrugs: items  "  + items.size());
         adapter = new MainItemAdapter(items, getContext(), this);
         mainItem.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -134,22 +144,5 @@ public class HomeFragment extends Fragment implements HomeFragmentViewInterface,
         System.out.println(drugs.size());
         Log.i(TAG, "displayDummyData: " +  drugs.size() );
     }
-
-    private List<DrugsBerDay> convertDrugsIntoDrugsBerDay(List<Drug> dailyDrugs) {
-        LinkedHashMap<String, List<Drug>> sortedDrugs = new LinkedHashMap<>();
-        //ArrayList<String> drugs = new Drug().getStringHours().split("\n");
-        //.forEach(str -> new Date(toLong));
-        Log.i(TAG, "convertDrugsIntoDrugsBerDay: " + dailyDrugs.get(0).getStringHours());
-        dailyDrugs.forEach(drug -> Arrays.stream(drug.getStringHours().split("\n"))
-                .forEach(newDrug -> sortedDrugs.putIfAbsent(newDrug, new ArrayList<>()).add(drug)));
-
-        Log.i(TAG, "convertDrugsIntoDrugsBerDay: ");
-        return sortedDrugs.entrySet().stream()
-                .map(entry -> new DrugsBerDay(entry.getKey(), entry.getValue()))
-                .collect(Collectors.toCollection(ArrayList::new));
-
-    }
-
-    // display the millisecond of 2 hours to kown the different between them
-    // and make a switch for time
 }
+
