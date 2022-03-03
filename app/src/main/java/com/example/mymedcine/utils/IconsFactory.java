@@ -33,6 +33,34 @@ public class IconsFactory {
         }
         return icon;
     }
+
+    public static int getIconID(String type){
+        int icon = 0;
+        switch (type){
+            case "pill":
+                icon = R.drawable.ic_pills;
+                break;
+            case "vaccine":
+                icon = R.drawable.vaccine;
+                break;
+            case "transfusion":
+                icon = R.drawable.transfusion;
+                break;
+            case "spoon":
+                icon = R.drawable.spoon;
+                break;
+            case "respirator":
+                icon = R.drawable.respirator;
+                break;
+            case "ointment":
+                icon = R.drawable.ointment;
+                break;
+            case"dropper":
+                icon = R.drawable.ic_water_drop_black_24dp;
+                break;
+        }
+        return icon;
+    }
     public static String [] getDrugIconsNames(){
         return new String[]{"pill","vaccine","transfusion","spoon","respirator","ointment","dropper"};
     }

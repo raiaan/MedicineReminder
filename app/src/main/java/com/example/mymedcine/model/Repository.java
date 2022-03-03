@@ -45,7 +45,7 @@ public class Repository implements RepositoryInterface {
 
     public Repository(Context context) {
         this.context = context;
-   }
+    }
 /*
     public Repository(Activity activity) {
         AppDataBase medData = AppDataBase.getInstance(activity.getApplicationContext());
@@ -54,12 +54,9 @@ public class Repository implements RepositoryInterface {
     }*/
 
 
-
-
-
-    public static Repository getInstance(FireBaseConnectionInterface fireBaseConnection,LocalSourceInterface localSource, Context context) {
+    public static Repository getInstance(FireBaseConnectionInterface fireBaseConnection, LocalSourceInterface localSource, Context context) {
         if (repository == null) {
-            repository = new Repository(context, localSource,fireBaseConnection);
+            repository = new Repository(context, localSource, fireBaseConnection);
         }
         return repository;
     }
@@ -113,7 +110,7 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public void resetPassword(String email, FirebaseConnectionDelegated delegated) {
-        fireBaseConnection.resetPassword(email,delegated);
+        fireBaseConnection.resetPassword(email, delegated);
     }
 
     @Override
@@ -127,6 +124,7 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public void updateData(Drug drug) {
+        createRefillWorker(drug);
         localSource.update(drug);
     }
 
@@ -140,11 +138,11 @@ public class Repository implements RepositoryInterface {
         fireBaseConnection.logout();
     }
 
-    private long[] calculateDelay(List<Long> times){
+    private long[] calculateDelay(List<Long> times) {
         long[] delays = new long[times.size()];
-        long currentTime = System.currentTimeMillis() ;
+        long currentTime = System.currentTimeMillis();
         Log.i(TAG, "calculateDelay:  system time" + currentTime);
-        for(int i = 0; i < times.size(); i ++){
+        for (int i = 0; i < times.size(); i++) {
             Log.i(TAG, "calculateDelay: time from db " + times.get(i));
             delays[i] = times.get(i) - currentTime;
             Log.i(TAG, "calculateDelay: delay " + delays[i]);
@@ -152,12 +150,12 @@ public class Repository implements RepositoryInterface {
         return delays;
     }
 
-    public void createWorkRequest(Drug drug){
-        if(drug.getHours() != null){
+    public void createWorkRequest(Drug drug) {
+        if (drug.getHours() != null) {
             long[] delays = calculateDelay(drug.getHours());
-            for (int i = 0; i < delays.length; i ++){
+            for (int i = 0; i < delays.length; i++) {
                 Data data = new Data.Builder()
-                     //   .putLong(DataUtils.delayKey, delays[i])
+                        //   .putLong(DataUtils.delayKey, delays[i])
                         .putString(DataUtils.nameKey, drug.getName())
                         .putString(DataUtils.typeKey, drug.getType())
                         .putBoolean(DataUtils.refillFlag, false)
@@ -169,6 +167,27 @@ public class Repository implements RepositoryInterface {
                         .build();
                 WorkManager workManager = WorkManager.getInstance(context.getApplicationContext());
                 workManager.enqueue(oneTimeWorkRequest);
+            }
+        }
+    }
+
+    public void createRefillWorker(Drug drug) {
+        if (drug.getRemindRefill()) {
+
+            if (drug.getRefillRemindCount() <= drug.getLeft()) {
+                Data data = new Data.Builder()
+                        .putBoolean(DataUtils.refillFlag, true)
+                        .putString(DataUtils.typeKey, drug.getType())
+                        .putString(DataUtils.nameKey, drug.getName())
+                        .build();
+                OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(OneTimeWorker.class)
+                        .addTag(drug.getName())
+                        .setInitialDelay(2000, TimeUnit.MILLISECONDS)
+                        .setInputData(data)
+                        .build();
+                WorkManager workManager = WorkManager.getInstance(context.getApplicationContext());
+                workManager.enqueue(oneTimeWorkRequest);
+
             }
         }
     }

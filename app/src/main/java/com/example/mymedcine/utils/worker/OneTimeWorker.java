@@ -23,6 +23,7 @@ import androidx.work.WorkerParameters;
 
 import com.example.mymedcine.R;
 import com.example.mymedcine.homescreen.HomeActivity;
+import com.example.mymedcine.model.Drug;
 import com.example.mymedcine.utils.IconsFactory;
 
 import java.util.concurrent.TimeUnit;
@@ -38,9 +39,9 @@ public class OneTimeWorker extends Worker {
     public Result doWork() {
         Log.i("TAG", "doWork: " );
         if (getInputData().getBoolean(DataUtils.refillFlag, false)){
-
+            sendRefillNotification();
         }else{
-            sendRemenddingNotification();
+            sendRemindingNotification();
             Data data = getInputData();
             OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(OneTimeWorker.class)
                     .addTag(data.getString(DataUtils.nameKey))
@@ -65,7 +66,7 @@ public class OneTimeWorker extends Worker {
         }
     }
 
-    private void sendRemenddingNotification() {
+    private void sendRemindingNotification() {
 
         createNotificationChannel();
 
@@ -77,9 +78,30 @@ public class OneTimeWorker extends Worker {
                 .setContentText("It\'s time to take " + getInputData().getString(DataUtils.nameKey))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pi)
-                .setSmallIcon(R.drawable.ic_pills);
+                .setSmallIcon(IconsFactory.getIconID(getInputData().getString(DataUtils.typeKey)));
 
         NotificationManagerCompat nmc = NotificationManagerCompat.from(getApplicationContext());
         nmc.notify(1,builder.build());
     }
-}
+
+    private void sendRefillNotification() {
+
+        //here if the sdk version is >=26 I need Notification channel ... else I don't
+        createNotificationChannel();
+
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(getApplicationContext(),0,intent,0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),"CHANNEL_ID");
+        builder.setContentTitle("refill this drug")
+                .setContentText(getInputData().getString(DataUtils.nameKey))
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pi)
+                .setSmallIcon(IconsFactory.getIconID(getInputData().getString(DataUtils.typeKey)));
+
+        NotificationManagerCompat nmc = NotificationManagerCompat.from(getApplicationContext());
+        nmc.notify(1,builder.build());
+    }
+
+    }
+
